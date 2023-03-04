@@ -1,0 +1,22 @@
+.loading{
+    position: relative;
+    width: 100%;
+    
+    left: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: black; */
+  }
+  
+  .loading img{
+    width: 5%;
+  }
+
+  @media (max-width: 700px){
+    .loading img{
+        width: 20%;
+      }
+  }
+  

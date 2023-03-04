@@ -1,0 +1,174 @@
+.dash_cursos{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10%;
+    row-gap: 100px;
+}
+
+.detalhe_imagem_dash{
+  background: url("https://images8.alphacoders.com/987/987256.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 200px;
+  top: 70px;
+  border-radius: 0 0 0 800px;
+
+}
+
+.voltar_para_home{
+  text-decoration: none;
+  color: #FAFAFA;
+  transition: 0.3s;
+}
+.voltar_para_home:hover{
+  color: #ff5400;
+}
+
+
+
+.boas_vindas_cursos{
+    width: 100%;
+    color: #fafafa;
+    padding:100px;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    padding-left: 5%;
+}
+.boas_vindas_cursos h1{
+    font-size: 42px;
+}
+
+a{
+
+    text-decoration: none;
+}
+.card_cursos {
+    position: relative;
+  width: 40%;
+  left: 5%;
+  border-radius: 50px;
+  background: none;
+  box-shadow: 8px 8px 0px #9e3400, -8px -8px 0px #ff7400;
+  overflow: hidden;
+}
+
+.textos_cursos {
+    text-align: center;
+    color: #ff5400;
+    padding: 20px 20px;
+    
+    
+}
+
+
+.textos_cursos a {
+  text-decoration: none;
+  color: #ff5400;
+  font-size: 36px;
+  font-weight: 800;
+}
+.textos_cursos p {
+  font-size: 16px;
+  /* color: #313131; */
+  color: #fafafa;
+
+  margin-top: 20px;
+}
+
+
+
+@media (max-width: 500px){
+    
+.boas_vindas_cursos{
+    width: 100%;
+    color: #fafafa;
+    padding:10px;
+    padding-left: 5%;
+    margin-top: 50px;
+}
+.boas_vindas_cursos h1{
+    font-size: 24px;
+}
+.boas_vindas_cursos p{
+    font-size: 14px;
+}
+
+.card_cursos {
+  width: 90%;
+  left: 5%;
+  border-radius: 30px;
+
+}
+
+.textos_cursos {
+    text-align: center;
+    color: #ff5400;
+    padding: 20px 20px;
+    
+    
+}
+
+
+.textos_cursos a {
+  
+  font-size: 20px;
+}
+.textos_cursos p {
+  font-size: 12px;
+}
+
+.dash_cursos{
+    row-gap: 40px;
+    margin-top: 50px;
+}
+
+  
+  }
+  
+  @media (min-width: 500px) and (max-width: 800px) {
+    .boas_vindas_cursos{
+        width: 100%;
+        color: #fafafa;
+        padding:10px;
+        padding-left: 5%;
+        margin-top: 50px;
+    }
+    .boas_vindas_cursos h1{
+        font-size: 26px;
+    }
+    .boas_vindas_cursos p{
+        font-size: 16px;
+    }
+    
+    .card_cursos {
+      width: 90%;
+      left: 5%;
+    }
+    
+    .textos_cursos {
+        text-align: center;
+        color: #ff5400;
+        padding: 20px 20px;
+        
+        
+    }
+    
+    
+    .textos_cursos a {
+      
+      font-size: 20px;
+    }
+    .textos_cursos p {
+      font-size: 12px;
+    }
+    
+    .dash_cursos{
+        row-gap: 40px;
+        margin-top: 50px;
+    }
+  }
+  
+
+
