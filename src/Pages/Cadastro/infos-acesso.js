@@ -51,7 +51,7 @@ function InfosAcesso({aoEnviar}) {
     <div>
       <div className="body">
         <div className="card-cadastro">
-      <img src={logo_pilulas} alt="" className="logo_pilulas" />
+      {/* <img src={logo_pilulas} alt="" className="logo_pilulas" /> */}
           <h1>Informações de acesso</h1>
           <p>Um prazer conhecer você. Agora precisamos dos seus dados de acesso.</p>
 

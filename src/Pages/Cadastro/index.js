@@ -4,6 +4,8 @@ import { Container, Typography } from "@material-ui/core";
 import Axios, * as others from 'axios';
 import "./index.css"
 import Swal from 'sweetalert2'
+import logo_pilulas from "../../Assets/imgs/logo_pilulas.png";
+
 
 
 

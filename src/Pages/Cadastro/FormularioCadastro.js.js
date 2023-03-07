@@ -6,6 +6,8 @@ import InfosAcesso from "./infos-acesso";
 import "./index.css"
 import { Navigate } from "react-router-dom";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
+import logo_pilulas from "../../Assets/imgs/logo_pilulas.png";
+
 
 
 function FormularioCadastro({ aoEnviar }) {
@@ -37,6 +39,8 @@ function FormularioCadastro({ aoEnviar }) {
   }
   return (
     <div className="card-cadastro-novo">
+      <img src={logo_pilulas} alt="" className="logo_pilulas" />
+
       <Stepper activeStep={etapaAtual} alternativeLabel className="stepper">
         <Step className="step">
           <StepLabel className="stepLabel"></StepLabel>

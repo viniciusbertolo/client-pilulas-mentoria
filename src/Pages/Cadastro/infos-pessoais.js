@@ -749,7 +749,7 @@ function InfosPessoais({aoEnviar}) {
     <div>
       <div className="body">
         <div className="card-cadastro">
-      <img src={logo_pilulas} alt="" className="logo_pilulas" />
+      {/* <img src={logo_pilulas} alt="" className="logo_pilulas" /> */}
           <h1>Informações pessoais</h1>
           <p>Primeiro de tudo, vamos nos conhecer. Nos diga, quem é você? </p>
           
