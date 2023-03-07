@@ -5,12 +5,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../Components/Navbar";
 import "./index.css";
 import Swal from 'sweetalert2'
+import Loading from "../../Components/Loading";
 
 export default function Pergunta() {
 
   const { id } = useParams();
   const { idCurso } = useParams();
   const user = JSON.parse(localStorage.getItem("@user"));
+
+  const [removeLoadin, setRemoveLoading] = useState(false)
+
 
   console.log(id);
   console.log("ID DO CURSO:" + idCurso);
@@ -31,6 +35,7 @@ export default function Pergunta() {
         });
     const respostaJson = await resposta.json();
     setAlternativas(respostaJson[0])
+    setRemoveLoading(true)
   }
   
     async function obterQuestão(){
@@ -159,6 +164,7 @@ export default function Pergunta() {
     <div className="pag_todo">
       <Navbar/>
       <div>
+      {!removeLoadin && <Loading />}
         <h1 className="tituloPergunta">{pergunta.pergunta}</h1>
         
             <div role="group" aria-labelledby="my-radio-group">

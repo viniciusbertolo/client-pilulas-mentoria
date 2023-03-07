@@ -45,7 +45,7 @@ export default function VideoCurso() {
             
         <div className="boas_vindas_cursos videos_texto">
           <h1>Pílula Número {id}</h1>
-          <p>Assista o vídeo até o fim e nos mostre o que você aprendeu! Você será redicerionado para pergunta</p>
+          <p>Assista o vídeo até o fim e nos mostre o que você aprendeu! Você será redirecionado para pergunta</p>
         </div>
         <div className="video_curso">
 

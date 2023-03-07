@@ -181,21 +181,25 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 @media (max-width: 950px) {
   .logo_pilulas {
+    position: fixed;
+    top: 20px;
+    left: 20px;
     width: 160px;
     z-index: 999999;
+    margin: 0;
   }
   .card-cadastro-novo {
     position: absolute;
     left: 0;
     top: 0;
-    width: 90%;
-    left: 5%;
+    width: 96%;
+    left: 2%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 30px 35px;
-    padding-top: 120px;
+    padding-top: 100px;
     background: rgba(0, 0, 0, 0.64);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
