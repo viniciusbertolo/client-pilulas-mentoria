@@ -60,7 +60,7 @@ function InfosLocalizacao({aoEnviar}) {
     <div>
       <div className="body">
         <div className="card-cadastro">
-      <img src={logo_pilulas} alt="" className="logo_pilulas" />
+      {/* <img src={logo_pilulas} alt="" className="logo_pilulas" /> */}
           <h1>Informações de localização</h1>
           <p>Estamos quase lá. Agora só falta cadastrar o seu endereço.</p>
 
