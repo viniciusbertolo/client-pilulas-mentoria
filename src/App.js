@@ -9,6 +9,7 @@ import PoliticasPrivacidade from "./Pages/PoliticasPrivacidade";
 import VideoCurso from "./Pages/VideoCurso";
 import Pergunta from "./Pages/Pergunta";
 import Error from "./Pages/404";
+import LpGirandoChave from "./Pages/Lp-girando-chave";
 
 const user = localStorage.getItem('@user');
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/videoCurso/:idCurso/:id" element={user ? <VideoCurso/> : <Login/>} />
           <Route path="/pergunta/:idCurso/:id" element={user ? <Pergunta/> : <Login/>} />
           <Route path="/cadastro" element={user ? <Navigate to="/"/> : <Cadastro/>} />
+          <Route path="/girando-a-chave" element={<LpGirandoChave/>} />
           <Route path="*" element={<Error/>} />
       </Routes>
     </Router>
