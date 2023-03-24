@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../Components/Navbar";
 import "./index.css";
+import fotoCapa from "../../Assets/imgs/evento1.webp"
 
 export default function Home(props) {
   return (
@@ -14,7 +15,7 @@ export default function Home(props) {
         style={{
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundImage: `url(http://alexborn.com.br/img/evento1.webp)`,
+          backgroundImage: `url(${fotoCapa})`,
         }}
       >
         <div className="featured--vertical">
