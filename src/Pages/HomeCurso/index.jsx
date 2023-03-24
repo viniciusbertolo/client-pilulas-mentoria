@@ -128,10 +128,8 @@ export default function HomeCurso() {
         {fases.map((value, key) =>
           value.NRO <= faseEspecifica ? (
             <div class="timeline" key={key}>
-              <Link
-                to={`/videoCurso/${id}/${value.NRO}`}
-                class="timeline-content"
-              >
+              <div  class="timeline-content">
+
                 <span class="timeline-year">{value.NRO}</span>
                 <div class="timeline-icon">
                   <i class="fa fa-rocket" aria-hidden="true"></i>
@@ -139,8 +137,18 @@ export default function HomeCurso() {
                 <div class="content">
                   <h3 class="title">{value.nome}</h3>
                   <p class="description">{value.descricao}</p>
-                </div>
+                  <Link
+                to={`/videoCurso/${id}/${value.NRO}`}
+                class="botao-video"
+              >
+
+                  <h3 class="title">Clique aqui e assista o video</h3>
               </Link>
+              
+                </div>
+              </div>
+
+              
             </div>
           ) : (
             <div class="timeline-off">

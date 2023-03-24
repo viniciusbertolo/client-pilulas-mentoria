@@ -6,9 +6,42 @@ import "./index.css";
 
 export default function Home(props) {
   return (
-    <div className="pag_todo">
+    <div className="pag_todo_featured">
       <Navbar />
-      <div className="detalhe_imagem_home"></div>
+
+      <section
+        className="featured"
+        style={{
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundImage: `url(http://alexborn.com.br/img/evento1.webp)`,
+        }}
+      >
+        <div className="featured--vertical">
+          <div className="featured--horizontal">
+            <div className="featured--name">
+              Bem-vindo ao Pilulas de Mentoria
+            </div>
+
+            <div className="featured--description">
+              Aqui você conhecerá sua maior jornada para a evolução e o
+              conhecimento, em trilhas de aprendizado com aulas rápidas e
+              diferenciadas, muitas vezes, provocativas e impactantes, que
+              apresentam quizzes, jogos, testes, muitos materiais de apoio e em
+              todas, você terá exemplos de como usar na prática, lhe
+              proporcionando maior retenção do que está sendo estudado. Agora é
+              só escolher sua trilha e começar essa jornada de puro sucesso!
+            </div>
+            <br></br>
+            <div className="featured--buttons">
+              <Link to="/cursos" className="featured--watchbutton">
+                Cursos
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* <div className="detalhe_imagem_home"></div>
       <div className="texto_home_div">
         <Link to="/cursos" className="link_to_cursos">
           Ir para os cursos
@@ -35,7 +68,7 @@ export default function Home(props) {
             Clique aqui e bora começar...
           </Link>
         </h1>
-      </div>
+      </div> */}
     </div>
   );
 }

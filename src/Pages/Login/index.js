@@ -86,13 +86,13 @@ function Login() {
               <button className="button" type="submit">
                 ENTRAR
               </button>
-              <p class="termos">
+              {/* <p class="termos">
                   Ainda não faz parte do Pílulas de Mentoria? 
                   <Link to={'/cadastro'} className="link_termos">
                   &nbsp;Clique aqui para se cadastrar!&nbsp;
                     </Link>
                     
-                  </p>
+                  </p> */}
             </Form>
           </Formik>
         </div>

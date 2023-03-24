@@ -88,13 +88,17 @@ export default function Dashboard(props) {
                 width="100%"
               />
             </div>
-            <Link to={`/cursos/${value.ID_CURSO}`}>
               <div
                 className="textos_cursos"
                 // onClick={() => obterEtapaAtual(value.ID_CURSO)}
               >
                 <h1>{value.nome}</h1>
                 <p>{value.descricao}</p>
+              </div>
+            <Link to={`/cursos/${value.ID_CURSO}`}>
+              <div className="botao_cursos">
+                
+              <h2>Ir para o curso</h2>
               </div>
             </Link>
           </div>
