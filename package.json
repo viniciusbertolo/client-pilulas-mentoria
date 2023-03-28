@@ -38,8 +38,8 @@
     "node": "16.x"
   },
   "scripts": {
-    "start": "npm install --force",
-    "build": "CI='' npm run build"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
