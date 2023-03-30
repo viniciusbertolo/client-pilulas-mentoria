@@ -29,6 +29,7 @@ class Cadastro extends Component {
     Axios.post("https://backend-pilulas-mentoria.herokuapp.com/register", {
       email: dados.email,
       password: dados.senha,
+      empresa: dados.empresa,
       profissao: dados.profissao,
       nome: dados.nomeCompleto,
       phone: dados.phone,
