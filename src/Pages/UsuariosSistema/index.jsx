@@ -95,7 +95,7 @@ export default function UsuariosSistema() {
             </tr>
             <tr>
               <th>Profissão</th>
-              <td>{value.profissão}</td>
+              <td>{value.profissao}</td>
             </tr>
             <tr>
               <th>Empresa</th>
