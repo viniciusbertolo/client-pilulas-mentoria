@@ -16,7 +16,7 @@ export default function Controle() {
   useEffect(() => {
     async function obterFasesPessoas() {
       const response = await fetch(
-        `http://localhost:3001/caminho-concluido/${id}`,
+        `https://backend-pilulas-mentoria.herokuapp.com/caminho-concluido/${id}`,
         {
           method: "GET",
           headers: { "Content-type": "application/json" },

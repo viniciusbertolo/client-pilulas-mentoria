@@ -16,7 +16,7 @@ export default function UsuariosSistema() {
   useEffect(() => {
     async function obterDetalhesUsuario() {
       const response = await fetch(
-        `http://localhost:3001/detalhes-usuario/${email}`,
+        `https://backend-pilulas-mentoria.herokuapp.com/detalhes-usuario/${email}`,
         {
           method: "GET",
           headers: { "Content-type": "application/json" },

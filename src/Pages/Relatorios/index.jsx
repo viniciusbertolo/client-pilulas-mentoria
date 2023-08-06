@@ -14,7 +14,7 @@ export default function Relatorios() {
   const [cursos, setCursos] = useState([]);
 
   async function obterUsuarios() {
-    const response = await fetch(`http://localhost:3001/usuarios`, {
+    const response = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/usuarios`, {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });
@@ -26,7 +26,7 @@ export default function Relatorios() {
 
   useEffect(() => {
     async function obterCursos() {
-      const resposta = await fetch(`http://localhost:3001/cursos`, {
+      const resposta = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/cursos`, {
         method: "GET",
         headers: { "Content-type": "application/json" },
       });
