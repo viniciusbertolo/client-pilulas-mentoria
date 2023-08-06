@@ -5,11 +5,12 @@ import Axios from "axios";
 import { Link } from 'react-router-dom';
 import logo_pilulas from "../../Assets/imgs/logo_pilulas.png";
 import Swal from 'sweetalert2'
-import React, { Component }  from 'react';
+import React, { Component, useState }  from 'react';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 function Login() {
   const handleLogin = (values) => {
-    Axios.post("https://backend-pilulas-mentoria.herokuapp.com/login", {
+    Axios.post("http://localhost:3001/login", {
       email: values.email,
       password: values.password,
     }).then((response) => {
@@ -43,6 +44,12 @@ function Login() {
       .required("A senha é obrigatória"),
   });
 
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+
 
   return (
     <div className="body">
@@ -72,9 +79,11 @@ function Login() {
 
               {/*Outro campo*/}
 
-              <div className="form-group">
                 <label form="email">Senha</label>
-                <Field name="password" type='password' className="form-field" placeholder="Senha" />
+              <div className="form-group-2">
+                <Field type={passwordShown ? "text" : "password"} name="password" className="form-field" placeholder="Senha" />
+                <VisibilityIcon className="icon_eye" onClick={togglePassword}>Show Password</VisibilityIcon>
+
 
                 <ErrorMessage
                   component="span"

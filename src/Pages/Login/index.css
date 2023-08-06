@@ -5,6 +5,16 @@
   margin-bottom: 40px;
 }
 
+.form-group-2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+ 
+
+}
+
 .card-login {
   position: absolute;
   bottom: 0;

@@ -1,0 +1,48 @@
+/* .tabela-detalhes-pessoa{
+    border: 2px solid red;
+} */
+
+.tabela-detalhes-pessoa {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    color: white;
+}
+
+/* .styled-table th {
+
+    background-color: #ff5400;
+    color: #ffffff;
+    text-align: left;
+    
+} */
+
+.tabela-detalhes-pessoa th,
+.tabela-detalhes-pessoa td {
+    
+    padding: 12px 15px;
+  
+}
+
+.tabela-detalhes-pessoa tr {
+    border-bottom: 1px solid #ff5400;
+}
+
+/* .styled-table tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+} */
+
+/* .styled-table tr:last-of-type {
+    border-bottom: 5px solid #ff5400;
+} */
+
+
+.controle_pessoas{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}

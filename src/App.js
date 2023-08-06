@@ -11,8 +11,11 @@ import Pergunta from "./Pages/Pergunta";
 import Error from "./Pages/404";
 import LpGirandoChave from "./Pages/Lp-girando-chave";
 import Relatorios from "./Pages/Relatorios";
+import Controle from "./Pages/Controle";
+import UsuariosSistema from "./Pages/UsuariosSistema";
 
 const user = localStorage.getItem('@user');
+
 function App() {
   return (
     <Router>
@@ -26,7 +29,9 @@ function App() {
           <Route path="/pergunta/:idCurso/:id" element={user ? <Pergunta/> : <Login/>} />
           <Route path="/seja-um-membro" element={user ? <Navigate to="/"/> : <Cadastro/>} />
           <Route path="/girando-a-chave" element={<LpGirandoChave/>} />
-          <Route path="/relatorios" element={<Relatorios/>} />
+          <Route path="/relatorios" element={user ? <Relatorios/> : <Navigate to="/login"/>} />
+          <Route path="/controlePessoas/:id" element={user ? <Controle/> : <Navigate to="/login"/>} />
+          <Route path="/usuarios-sistema/:email" element={user ? <UsuariosSistema/> : <Navigate to="/login"/>} />
           <Route path="*" element={<Error/>} />
       </Routes>
     </Router>

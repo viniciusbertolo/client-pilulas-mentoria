@@ -1,0 +1,15 @@
+.detalhes_pessoas_button{
+    color: #ff5400;
+    text-align: center;
+}
+.detalhes_pessoas_button:hover{
+    color: #ffffff;
+}
+
+.titulo_curso_adm{
+    color: #ffffff;
+}
+
+.controle_pessoas{
+    padding-top: 100px;
+}
