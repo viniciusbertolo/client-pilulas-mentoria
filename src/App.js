@@ -13,6 +13,7 @@ import LpGirandoChave from "./Pages/Lp-girando-chave";
 import Relatorios from "./Pages/Relatorios";
 import Controle from "./Pages/Controle";
 import UsuariosSistema from "./Pages/UsuariosSistema";
+import CadastroInternacional from "./Pages/Cadastro-internacional";
 
 const user = localStorage.getItem('@user');
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/videoCurso/:idCurso/:id" element={user ? <VideoCurso/> : <Login/>} />
           <Route path="/pergunta/:idCurso/:id" element={user ? <Pergunta/> : <Login/>} />
           <Route path="/seja-um-membro" element={user ? <Navigate to="/"/> : <Cadastro/>} />
+          <Route path="/seja-um-membro-internacional" element={user ? <Navigate to="/"/> : <CadastroInternacional/>} />
           <Route path="/girando-a-chave" element={<LpGirandoChave/>} />
           <Route path="/relatorios" element={user ? <Relatorios/> : <Navigate to="/login"/>} />
           <Route path="/controlePessoas/:id" element={user ? <Controle/> : <Navigate to="/login"/>} />
