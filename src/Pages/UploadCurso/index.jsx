@@ -12,17 +12,25 @@ function UploadCurso() {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await Axios.post("https://backend-pilulas-mentoria.herokuapp.com/upload-curso", {
-        nome: values.nome,
-        descricao: values.descricao,
-        urlVideoPreview: values.urlVideoPreview,
+      const response = await fetch("https://backend-pilulas-mentoria.herokuapp.com/upload-curso", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nome: values.nome,
+          descricao: values.descricao,
+          urlVideoPreview: values.urlVideoPreview,
+        }),
       });
   
-      if (response.status === 200) {
+      const responseData = await response.json();
+  
+      if (response.ok) {
         Swal.fire({
           icon: 'success',
           title: 'Cadastrado com sucesso!',
-          text: `${response.data.msg}!`,
+          text: `${responseData.msg}!`,
         });
   
         window.location.href = '/cursos'; // Redireciona para a página de cursos
@@ -30,7 +38,7 @@ function UploadCurso() {
         Swal.fire({
           icon: 'error',
           title: 'Erro ao cadastrar',
-          text: `${response.data.msg}!`,
+          text: `${responseData.msg}!`,
         });
       }
     } catch (error) {
@@ -42,6 +50,7 @@ function UploadCurso() {
       });
     }
   };
+  
   
 
   const validationsRegister = yup.object().shape({
