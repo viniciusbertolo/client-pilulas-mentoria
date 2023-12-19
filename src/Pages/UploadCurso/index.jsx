@@ -3,56 +3,35 @@ import * as yup from "yup";
 import { ErrorMessage, Formik, Form, Field } from "formik";
 import { useState } from "react";
 import Swal from 'sweetalert2';
+import { Axios } from "axios";
 
 function UploadCurso() {
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
   const [urlVideoPreview, setUrlVideoPreview] = useState('');
 
-  const handleSubmit = async (values) => {
-    console.log('Nome:', values.nome);
-    console.log('Descrição:', values.descricao);
-    console.log('URL do Video Preview:', values.urlVideoPreview);
+  const handleSubmit = (values) => {
 
-    try {
-      const response = await fetch('https://backend-pilulas-mentoria.herokuapp.com/upload-curso', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          nome: values.nome,
-          descricao: values.descricao,
-          urlVideoPreview: values.urlVideoPreview,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        // Sucesso
-        Swal.fire({
-          icon: 'success',
-          title: 'Cadastrado com sucesso!',
-          text: `${data.msg}!`,
-        });
-
-        // Redirecione para a página desejada (por exemplo, a home)
-        window.location.href = '/home'; // Altere a URL conforme necessário
-      } else {
-        // Erro
-        Swal.fire({
-          icon: 'error',
-          title: 'Erro ao cadastrar',
-          text: `${data.msg}!`,
-        });
-      }
-    } catch (error) {
-      console.error('Erro ao enviar a requisição:', error);
-      // Trate o erro conforme necessário
-    }
-  };
-
+    Axios.post("https://backend-pilulas-mentoria.herokuapp.com/upload-curso", {
+        nome: values.nome,
+        descricao: values.descricao,
+        urlVideoPreview: values.urlVideoPreview,
+    }).then((response) => {
+      // alert(response.data.msg);
+      Swal.fire({
+        icon: 'success',
+        title: 'Cadastrado com sucesso!',
+        text: `${response.data.msg}!`,
+      })
+      console.log(response);
+      setTimeout(() => {
+        
+        window.location.href = '/cursos'; // Altere a URL conforme necessário
+      }, 2000);
+     
+    });
+};
+  
   const validationsRegister = yup.object().shape({
     nome: yup.string().required("Qual é o título do curso?"),
     descricao: yup.string().required("Nos diga qual é o conteúdo que iremos ver no curso"),
@@ -67,11 +46,7 @@ function UploadCurso() {
           <p>Primeiro de tudo, vamos cadastrar o curso</p>
 
           <Formik
-            initialValues={{
-              nome: nome,
-              descricao: descricao,
-              urlVideoPreview: urlVideoPreview,
-            }}
+            initialValues={{}}
             onSubmit={handleSubmit}
             validationSchema={validationsRegister}
           >
