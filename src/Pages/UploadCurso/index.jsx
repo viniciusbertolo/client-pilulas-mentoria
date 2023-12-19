@@ -18,7 +18,7 @@ function UploadCurso() {
 
   const handleSubmit = (values) => {
 
-    Axios.post("http://localhost:3001/upload-curso", {
+    Axios.post("https://backend-pilulas-mentoria.herokuapp.com/upload-curso", {
         nome: values.nome,
         descricao: values.descricao,
         urlVideoPreview: values.urlVideoPreview,

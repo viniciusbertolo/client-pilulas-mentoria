@@ -22,7 +22,7 @@ function UploadRespostas() {
 
   useEffect(() => {
     async function obterCursos() {
-      const response = await fetch(`http://localhost:3001/cursos`, {
+      const response = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/cursos`, {
         method: "GET",
         headers: { "Content-type": "application/json" },
       });
@@ -42,7 +42,7 @@ function UploadRespostas() {
     console.log(values.alternativa3);
     console.log(values.alternativa4);
     console.log(values.correta);
-    Axios.post("http://localhost:3001/upload-respostas", {
+    Axios.post("https://backend-pilulas-mentoria.herokuapp.com/upload-respostas", {
       numeroFase: values.numeroFase,
       idCurso: values.idCurso,
       alternativa1: values.alternativa1,
