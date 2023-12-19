@@ -3,7 +3,7 @@ import * as yup from "yup";
 import { ErrorMessage, Formik, Form, Field } from "formik";
 import { useState } from "react";
 import Swal from 'sweetalert2';
-import { Axios } from "axios";
+import Axios from "axios";
 
 function UploadCurso() {
   const [nome, setNome] = useState('');
@@ -17,20 +17,16 @@ function UploadCurso() {
         descricao: values.descricao,
         urlVideoPreview: values.urlVideoPreview,
       });
-
-      // Se a resposta for bem-sucedida (status 200)
+  
       if (response.status === 200) {
-        // Sucesso
         Swal.fire({
           icon: 'success',
           title: 'Cadastrado com sucesso!',
           text: `${response.data.msg}!`,
         });
-
-        // Redirecione para a página de cursos
-        window.location.href = '/cursos'; // Altere a URL conforme necessário
+  
+        window.location.href = '/cursos'; // Redireciona para a página de cursos
       } else {
-        // Exibir mensagem de erro
         Swal.fire({
           icon: 'error',
           title: 'Erro ao cadastrar',
@@ -39,9 +35,14 @@ function UploadCurso() {
       }
     } catch (error) {
       console.error('Erro ao enviar a requisição:', error);
-      // Trate o erro conforme necessário
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro ao cadastrar',
+        text: 'Ocorreu um erro ao cadastrar o curso. Tente novamente mais tarde.',
+      });
     }
   };
+  
 
   const validationsRegister = yup.object().shape({
     nome: yup.string().required("Qual é o título do curso?"),
