@@ -33,6 +33,7 @@ function UploadAula() {
     obterCursos();
   }, []);
 
+  
   const handleSubmit = (values) => {
     console.log(values.numero);
     console.log(values.idCurso);
@@ -41,27 +42,49 @@ function UploadAula() {
     console.log(values.url);
     console.log(values.pergunta);
     console.log(values.material);
-    Axios.post("https://backend-pilulas-mentoria.herokuapp.com/upload-fase", {
-      numero: values.numero,
-      idCurso: values.idCurso,
-      nome: values.nome,
-      descricao: values.descricao,
-      url: values.url,
-      pergunta: values.pergunta,
-      material: values.material,
-    }).then((response) => {
-      // alert(response.data.msg);
-      Swal.fire({
-        icon: "success",
-        title: "Cadastrado com sucesso!",
-        text: `${response.data.msg}!`,
+  
+    fetch('https://backend-pilulas-mentoria.herokuapp.com/upload-fase', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        numero: values.numero,
+        idCurso: values.idCurso,
+        nome: values.nome,
+        descricao: values.descricao,
+        url: values.url,
+        pergunta: values.pergunta,
+        material: values.material,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Sucesso
+          Swal.fire({
+            icon: 'success',
+            title: 'Cadastrado com sucesso!',
+            text: `${data.msg}!`,
+          });
+  
+          // Redirecionar para a página desejada (por exemplo, a home)
+          window.location.href = '/home'; // Altere a URL conforme necessário
+        } else {
+          // Erro
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro ao cadastrar',
+            text: `${data.msg}!`,
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Erro ao enviar a requisição:', error);
+        // Trate o erro conforme necessário
       });
-      console.log(response);
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    });
   };
+  
 
   const validationsRegister = yup.object().shape({
     nome: yup.string().required("Qual é o titulo da fase ?"),

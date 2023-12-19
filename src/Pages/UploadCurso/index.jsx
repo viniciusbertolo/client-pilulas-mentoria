@@ -16,28 +16,51 @@ function UploadCurso() {
   const[descricao, setDescricao] = useState('');
   const[urlVideoPreview, setUrlVideoPreview] = useState('');
 
-  const handleSubmit = (values) => {
 
-    Axios.post("https://backend-pilulas-mentoria.herokuapp.com/upload-curso", {
+  const handleSubmit = (values) => {
+    console.log('Nome:', values.nome);
+console.log('Descrição:', values.descricao);
+console.log('URL do Video Preview:', values.urlVideoPreview);
+
+    fetch('https://backend-pilulas-mentoria.herokuapp.com/upload-curso', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
         nome: values.nome,
         descricao: values.descricao,
         urlVideoPreview: values.urlVideoPreview,
-    }).then((response) => {
-      // alert(response.data.msg);
-      Swal.fire({
-        icon: 'success',
-        title: 'Cadastrado com sucesso!',
-        text: `${response.data.msg}!`,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Sucesso
+          Swal.fire({
+            icon: 'success',
+            title: 'Cadastrado com sucesso!',
+            text: `${data.msg}!`,
+          });
+  
+          // Redirecione para a página desejada (por exemplo, a home)
+          window.location.href = '/home'; // Altere a URL conforme necessário
+        } else {
+          // Erro
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro ao cadastrar',
+            text: `${data.msg}!`,
+          });
+        }
       })
-      console.log(response);
-      setTimeout(() => {
-        
-        window.location.reload();
-      }, 2000);
-     
-    });
-};
+      .catch(error => {
+        console.error('Erro ao enviar a requisição:', error);
+        // Trate o erro conforme necessário
+      });
+  };
 
+ 
 
 
 

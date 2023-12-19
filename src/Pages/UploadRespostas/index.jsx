@@ -34,35 +34,61 @@ function UploadRespostas() {
     obterCursos();
   }, []);
 
+
+
   const handleSubmit = (values) => {
-    console.log(values.numeroFase);
-    console.log(values.idCurso);
-    console.log(values.alternativa1);
-    console.log(values.alternativa2);
-    console.log(values.alternativa3);
-    console.log(values.alternativa4);
-    console.log(values.correta);
-    Axios.post("https://backend-pilulas-mentoria.herokuapp.com/upload-respostas", {
-      numeroFase: values.numeroFase,
-      idCurso: values.idCurso,
-      alternativa1: values.alternativa1,
-      alternativa2: values.alternativa2,
-      alternativa3: values.alternativa3,
-      alternativa4: values.alternativa4,
-      correta: values.correta,
-    }).then((response) => {
-      // alert(response.data.msg);
-      Swal.fire({
-        icon: "success",
-        title: "Cadastrado com sucesso!",
-        text: `${response.data.msg}!`,
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        numeroFase: values.numeroFase,
+        idCurso: values.idCurso,
+        alternativa1: values.alternativa1,
+        alternativa2: values.alternativa2,
+        alternativa3: values.alternativa3,
+        alternativa4: values.alternativa4,
+        correta: values.correta,
+      }),
+    };
+  
+    fetch('https://backend-pilulas-mentoria.herokuapp.com/upload-respostas', requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Sucesso
+          Swal.fire({
+            icon: 'success',
+            title: 'Cadastrado com sucesso!',
+            text: `${data.msg}!`,
+          });
+  
+          // Limpe os campos
+        //   setFieldValue('numeroFase', '');
+        //   setFieldValue('idCurso', '');
+        //   setFieldValue('alternativa1', '');
+        //   setFieldValue('alternativa2', '');
+        //   setFieldValue('alternativa3', '');
+        //   setFieldValue('alternativa4', '');
+        //   setFieldValue('correta', '');
+        } else {
+          // Erro
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro ao cadastrar',
+            text: `${data.msg}!`,
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Erro ao enviar a requisição:', error);
+        // Trate o erro conforme necessário
       });
-      console.log(response);
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    });
   };
+  
+
+  
 
   const validationsRegister = yup.object().shape({
     correta: yup.string().required("Qual é a resposta da fase ?"),
