@@ -3,6 +3,7 @@ import * as yup from "yup";
 import { ErrorMessage, Formik, Form, Field } from "formik";
 import { useState } from "react";
 import Swal from 'sweetalert2';
+import { Axios } from "axios";
 
 function UploadCurso() {
   const [nome, setNome] = useState('');
