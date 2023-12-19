@@ -3,35 +3,45 @@ import * as yup from "yup";
 import { ErrorMessage, Formik, Form, Field } from "formik";
 import { useState } from "react";
 import Swal from 'sweetalert2';
-import { Axios } from "axios";
 
 function UploadCurso() {
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
   const [urlVideoPreview, setUrlVideoPreview] = useState('');
 
-  const handleSubmit = (values) => {
-
-    Axios.post("https://backend-pilulas-mentoria.herokuapp.com/upload-curso", {
+  const handleSubmit = async (values) => {
+    try {
+      const response = await Axios.post("https://backend-pilulas-mentoria.herokuapp.com/upload-curso", {
         nome: values.nome,
         descricao: values.descricao,
         urlVideoPreview: values.urlVideoPreview,
-    }).then((response) => {
-      // alert(response.data.msg);
-      Swal.fire({
-        icon: 'success',
-        title: 'Cadastrado com sucesso!',
-        text: `${response.data.msg}!`,
-      })
-      console.log(response);
-      setTimeout(() => {
-        
+      });
+
+      // Se a resposta for bem-sucedida (status 200)
+      if (response.status === 200) {
+        // Sucesso
+        Swal.fire({
+          icon: 'success',
+          title: 'Cadastrado com sucesso!',
+          text: `${response.data.msg}!`,
+        });
+
+        // Redirecione para a página de cursos
         window.location.href = '/cursos'; // Altere a URL conforme necessário
-      }, 2000);
-     
-    });
-};
-  
+      } else {
+        // Exibir mensagem de erro
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro ao cadastrar',
+          text: `${response.data.msg}!`,
+        });
+      }
+    } catch (error) {
+      console.error('Erro ao enviar a requisição:', error);
+      // Trate o erro conforme necessário
+    }
+  };
+
   const validationsRegister = yup.object().shape({
     nome: yup.string().required("Qual é o título do curso?"),
     descricao: yup.string().required("Nos diga qual é o conteúdo que iremos ver no curso"),
@@ -46,7 +56,11 @@ function UploadCurso() {
           <p>Primeiro de tudo, vamos cadastrar o curso</p>
 
           <Formik
-            initialValues={{}}
+            initialValues={{
+              nome: nome,
+              descricao: descricao,
+              urlVideoPreview: urlVideoPreview,
+            }}
             onSubmit={handleSubmit}
             validationSchema={validationsRegister}
           >
