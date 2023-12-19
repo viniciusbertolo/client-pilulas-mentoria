@@ -35,7 +35,7 @@
     "yup": "^0.32.11"
   },
   "engines": {
-    "node": "20.x"
+    "node": "18.x"
   },
   "scripts": {
     "start": "react-scripts start",
