@@ -117,6 +117,7 @@ function UploadAula() {
 
                 <label form="idCurso">Curso</label>
                 <Field as="select" name="idCurso" className="form-field">
+                <option value="" key="null">Selecione um curso</option>
                   {cursos.map((value, key) => (
                     <option value={value.ID_CURSO} key={key}>
                       {value.nome}
