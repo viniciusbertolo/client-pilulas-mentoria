@@ -16,15 +16,18 @@ function UploadAula() {
   useEffect(() => {
     async function obterCursos() {
       try {
-        const response = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/cursos`, {
-          method: "GET",
-          headers: { "Content-type": "application/json" },
-        });
+        const response = await fetch(
+          `https://backend-pilulas-mentoria.herokuapp.com/cursos`,
+          {
+            method: "GET",
+            headers: { "Content-type": "application/json" },
+          }
+        );
 
         const respostaJson = await response.json();
         setCursos(respostaJson);
       } catch (error) {
-        console.error('Erro ao obter cursos:', error);
+        console.error("Erro ao obter cursos:", error);
         // Trate o erro conforme necessário
       }
     }
@@ -33,46 +36,56 @@ function UploadAula() {
   }, []);
 
   const handleSubmit = async (values) => {
+    console.log(values.numero);
+    console.log(values.idCusro);
+    console.log(values.nome);
+    console.log(values.descricao);
+    console.log(values.url);
+    console.log(values.pergunta);
+    console.log(values.material);
     try {
-      const response = await fetch("https://backend-pilulas-mentoria.herokuapp.com/upload-fase", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          numero: values.numero,
-          idCusro: values.idCusro,
-          nome: values.nome,
-          descricao: values.descricao,
-          url: values.url,
-          pergunta: values.pergunta,
-          material: values.material,
-        }),
-      });
-  
+      const response = await fetch(
+        "https://backend-pilulas-mentoria.herokuapp.com/upload-fase",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            numero: values.numero,
+            idCusro: values.idCusro,
+            nome: values.nome,
+            descricao: values.descricao,
+            url: values.url,
+            pergunta: values.pergunta,
+            material: values.material,
+          }),
+        }
+      );
+
       const responseData = await response.json();
-  
+
       if (response.ok) {
         Swal.fire({
-          icon: 'success',
-          title: 'Cadastrado com sucesso!',
+          icon: "success",
+          title: "Cadastrado com sucesso!",
           text: `${responseData.msg}!`,
         });
-  
-        window.location.href = '/cursos'; // Redireciona para a página de cursos
+
+        window.location.href = "/cursos"; // Redireciona para a página de cursos
       } else {
         Swal.fire({
-          icon: 'error',
-          title: 'Erro ao cadastrar',
+          icon: "error",
+          title: "Erro ao cadastrar",
           text: `${responseData.msg}!`,
         });
       }
     } catch (error) {
-      console.error('Erro ao enviar a requisição:', error);
+      console.error("Erro ao enviar a requisição:", error);
       Swal.fire({
-        icon: 'error',
-        title: 'Erro ao cadastrar',
-        text: 'Ocorreu um erro ao cadastrar o curso. Tente novamente mais tarde.',
+        icon: "error",
+        title: "Erro ao cadastrar",
+        text: "Ocorreu um erro ao cadastrar a fase. Tente novamente mais tarde.",
       });
     }
   };
@@ -105,7 +118,8 @@ function UploadAula() {
             }}
             onSubmit={handleSubmit}
             validationSchema={validationsRegister}
-            render={({ isValid, setFieldValue }) => (
+          >
+            {({ isValid, setFieldValue }) => (
               <Form className="login-form">
                 <label form="numero">Número da fase:</label>
                 <Field
@@ -117,7 +131,9 @@ function UploadAula() {
 
                 <label form="idCurso">Curso</label>
                 <Field as="select" name="idCurso" className="form-field">
-                <option value="" key="null">Selecione um curso</option>
+                  <option value="" key="null">
+                    Selecione um curso
+                  </option>
                   {cursos.map((value, key) => (
                     <option value={value.ID_CURSO} key={key}>
                       {value.nome}
@@ -188,7 +204,7 @@ function UploadAula() {
                 </button>
               </Form>
             )}
-          />
+          </Formik>
         </div>
       </div>
     </div>
