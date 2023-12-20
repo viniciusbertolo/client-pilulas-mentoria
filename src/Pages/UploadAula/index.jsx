@@ -60,6 +60,7 @@ function UploadAula() {
             pergunta: values.pergunta,
             material: values.material,
           }),
+          mode: 'no-cors',
         }
       );
 
