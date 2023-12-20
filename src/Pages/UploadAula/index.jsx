@@ -37,7 +37,7 @@ function UploadAula() {
 
   const handleSubmit = async (values) => {
     console.log(values.numero);
-    console.log(values.idCusro);
+    console.log(values.idCurso);
     console.log(values.nome);
     console.log(values.descricao);
     console.log(values.url);
@@ -53,7 +53,7 @@ function UploadAula() {
           },
           body: JSON.stringify({
             numero: values.numero,
-            idCusro: values.idCusro,
+            idCusro: values.idCurso,
             nome: values.nome,
             descricao: values.descricao,
             url: values.url,
