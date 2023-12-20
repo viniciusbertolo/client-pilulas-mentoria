@@ -1,11 +1,6 @@
-import "./index.css";
+import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import { ErrorMessage, Formik, Form, Field } from "formik";
-import Axios from "axios";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import logo_pilulas from "../../Assets/imgs/logo_pilulas.png";
-import React, { Component } from "react";
 import Swal from "sweetalert2";
 
 function UploadAula() {
@@ -16,89 +11,86 @@ function UploadAula() {
   const [url, setUrl] = useState("");
   const [pergunta, setPergunta] = useState("");
   const [material, setMaterial] = useState("");
-
   const [cursos, setCursos] = useState([]);
 
   useEffect(() => {
     async function obterCursos() {
-      const response = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/cursos`, {
-        method: "GET",
-        headers: { "Content-type": "application/json" },
-      });
+      try {
+        const response = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/cursos`, {
+          method: "GET",
+          headers: { "Content-type": "application/json" },
+        });
 
-      const respostaJson = await response.json();
-      setCursos(respostaJson);
+        const respostaJson = await response.json();
+        setCursos(respostaJson);
+      } catch (error) {
+        console.error('Erro ao obter cursos:', error);
+        // Trate o erro conforme necessário
+      }
     }
 
     obterCursos();
   }, []);
 
-  
-  const handleSubmit = (values) => {
-    console.log(values.numero);
-    console.log(values.idCurso);
-    console.log(values.nome);
-    console.log(values.descricao);
-    console.log(values.url);
-    console.log(values.pergunta);
-    console.log(values.material);
-  
-    fetch('https://backend-pilulas-mentoria.herokuapp.com/upload-fase', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        numero: values.numero,
-        idCurso: values.idCurso,
-        nome: values.nome,
-        descricao: values.descricao,
-        url: values.url,
-        pergunta: values.pergunta,
-        material: values.material,
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          // Sucesso
-          Swal.fire({
-            icon: 'success',
-            title: 'Cadastrado com sucesso!',
-            text: `${data.msg}!`,
-          });
-  
-          // Redirecionar para a página desejada (por exemplo, a home)
-          window.location.href = '/home'; // Altere a URL conforme necessário
-        } else {
-          // Erro
-          Swal.fire({
-            icon: 'error',
-            title: 'Erro ao cadastrar',
-            text: `${data.msg}!`,
-          });
-        }
-      })
-      .catch(error => {
-        console.error('Erro ao enviar a requisição:', error);
-        // Trate o erro conforme necessário
+  const handleSubmit = async (values) => {
+    try {
+      const response = await fetch('https://backend-pilulas-mentoria.herokuapp.com/upload-fase', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          numero: values.numero,
+          idCurso: values.idCurso,
+          nome: values.nome,
+          descricao: values.descricao,
+          url: values.url,
+          pergunta: values.pergunta,
+          material: values.material,
+        }),
       });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Cadastrado com sucesso!',
+          text: `${data.msg}!`,
+        });
+
+        window.location.href = '/home'; // Redireciona para a página desejada
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro ao cadastrar',
+          text: `${data.msg}!`,
+        });
+      }
+    } catch (error) {
+      console.error('Erro ao enviar a requisição:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro ao cadastrar',
+        text: 'Ocorreu um erro ao cadastrar a fase. Tente novamente mais tarde.',
+      });
+    }
   };
-  
 
   const validationsRegister = yup.object().shape({
-    nome: yup.string().required("Qual é o titulo da fase ?"),
-    descricao: yup
-      .string()
-      .required("Nos diga qual é o conteúdo que iremos ver na fase"),
-    url: yup.string().required("Qual é a URL do video ?"),
+    numero: yup.string().required("Informe o número da fase"),
+    idCurso: yup.string().required("Selecione o curso"),
+    nome: yup.string().required("Informe o nome da fase"),
+    descricao: yup.string().required("Informe a descrição da fase"),
+    url: yup.string().required("Informe a URL do vídeo"),
+    pergunta: yup.string().required("Informe a pergunta da fase"),
+    material: yup.string().required("Informe o material da fase"),
   });
 
   return (
     <div className="fundo-cadastro-cursos">
       <div className="body">
         <div className="card-cadastro">
-          {/* <img src={logo_pilulas} alt="" className="logo_pilulas" /> */}
           <h1>Cadastrando uma fase</h1>
           <p>Vamos cadastrar as fases </p>
 
@@ -109,30 +101,28 @@ function UploadAula() {
             render={({ isValid, setFieldValue }) => (
               <Form className="login-form">
                 <label form="numero">Número da fase:</label>
-
                 <Field
                   name="numero"
                   type="text"
                   className="form-field"
-                  placeholder="numero da fase"
+                  placeholder="Número da fase"
                 />
 
                 <label form="idCurso">Curso</label>
                 <Field as="select" name="idCurso" className="form-field">
                   {cursos.map((value, key) => (
-                      <option value={value.ID_CURSO} key={key}>
-                        {value.nome}
-                      </option>
-                    ))}
+                    <option value={value.ID_CURSO} key={key}>
+                      {value.nome}
+                    </option>
+                  ))}
                 </Field>
 
                 <label form="nome">Nome:</label>
-
                 <Field
                   name="nome"
                   type="text"
                   className="form-field"
-                  placeholder="Nome do curso"
+                  placeholder="Nome da fase"
                 />
                 <ErrorMessage
                   component="span"
@@ -146,7 +136,7 @@ function UploadAula() {
                   name="descricao"
                   type="text"
                   className="form-field"
-                  placeholder="O que veremos no curso ?"
+                  placeholder="Descrição da fase"
                 />
                 <ErrorMessage
                   component="span"
@@ -160,7 +150,7 @@ function UploadAula() {
                   name="url"
                   type="text"
                   className="form-field"
-                  placeholder="URL do video"
+                  placeholder="URL do vídeo"
                 />
                 <ErrorMessage
                   component="span"
