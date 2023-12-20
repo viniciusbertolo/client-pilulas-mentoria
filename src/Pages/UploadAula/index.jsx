@@ -53,14 +53,14 @@ function UploadAula() {
           },
           body: JSON.stringify({
             numero: values.numero,
-            idCusro: values.idCurso,
+            idCurso: values.idCurso,
             nome: values.nome,
             descricao: values.descricao,
             url: values.url,
             pergunta: values.pergunta,
             material: values.material,
           }),
-          mode: 'no-cors',
+          
         }
       );
 
