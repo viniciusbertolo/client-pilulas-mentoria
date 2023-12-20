@@ -16,16 +16,18 @@ function UploadRespostas() {
   const [alternativa3, setAlternativa3] = useState("");
   const [alternativa4, setAlternativa4] = useState("");
   const [correta, setCorreta] = useState("");
-  
 
   const [cursos, setCursos] = useState([]);
 
   useEffect(() => {
     async function obterCursos() {
-      const response = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/cursos`, {
-        method: "GET",
-        headers: { "Content-type": "application/json" },
-      });
+      const response = await fetch(
+        `https://backend-pilulas-mentoria.herokuapp.com/cursos`,
+        {
+          method: "GET",
+          headers: { "Content-type": "application/json" },
+        }
+      );
 
       const respostaJson = await response.json();
       setCursos(respostaJson);
@@ -34,82 +36,69 @@ function UploadRespostas() {
     obterCursos();
   }, []);
 
-
-
-  const handleSubmit = (values) => {
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        numeroFase: values.numeroFase,
-        idCurso: values.idCurso,
-        alternativa1: values.alternativa1,
-        alternativa2: values.alternativa2,
-        alternativa3: values.alternativa3,
-        alternativa4: values.alternativa4,
-        correta: values.correta,
-      }),
-    };
-  
-    fetch('https://backend-pilulas-mentoria.herokuapp.com/upload-respostas', requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          // Sucesso
-          Swal.fire({
-            icon: 'success',
-            title: 'Cadastrado com sucesso!',
-            text: `${data.msg}!`,
-          });
-  
-          // Limpe os campos
-        //   setFieldValue('numeroFase', '');
-        //   setFieldValue('idCurso', '');
-        //   setFieldValue('alternativa1', '');
-        //   setFieldValue('alternativa2', '');
-        //   setFieldValue('alternativa3', '');
-        //   setFieldValue('alternativa4', '');
-        //   setFieldValue('correta', '');
-        } else {
-          // Erro
-          Swal.fire({
-            icon: 'error',
-            title: 'Erro ao cadastrar',
-            text: `${data.msg}!`,
-          });
+  const handleSubmit = async (values) => {
+    console.log(values.numeroFase);
+    console.log(values.idCurso);
+    console.log(values.alternativa1);
+    console.log(values.alternativa2);
+    console.log(values.alternativa3);
+    console.log(values.alternativa4);
+    console.log(values.correta);
+    try {
+      const response = await fetch(
+        "https://backend-pilulas-mentoria.herokuapp.com/upload-respostas",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            numeroFase: values.numeroFase,
+            idCurso: values.idCurso,
+            alternativa1: values.alternativa1,
+            alternativa2: values.alternativa2,
+            alternativa3: values.alternativa3,
+            alternativa4: values.alternativa4,
+            correta: values.correta,
+          }),
         }
-      })
-      .catch(error => {
-        console.error('Erro ao enviar a requisição:', error);
-        // Trate o erro conforme necessário
-      });
-  };
-  
+      );
 
-  
+      const responseData = await response.json();
+
+      if (response.ok) {
+        Swal.fire({
+          icon: "success",
+          title: "Cadastrado com sucesso!",
+          text: `${responseData.msg}!`,
+        });
+
+        window.location.href = "/cursos"; // Redireciona para a página de cursos
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Erro ao cadastrar",
+          text: `${responseData.msg}!`,
+        });
+      }
+    } catch (error) {
+      console.error("Erro ao enviar a requisição:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Erro ao cadastrar",
+        text: "Ocorreu um erro ao cadastrar a resposta. Tente novamente mais tarde.",
+      });
+    }
+  };
 
   const validationsRegister = yup.object().shape({
     correta: yup.string().required("Qual é a resposta da fase ?"),
-    alternativa1: yup
-      .string()
-      .required("Digite a alternativa 1"),
-    alternativa2: yup
-      .string()
-      .required("Digite a alternativa 2"),
-    alternativa3: yup
-      .string()
-      .required("Digite a alternativa 3"),
-    alternativa4: yup
-      .string()
-      .required("Digite a alternativa 4"),
-    correta: yup
-      .string()
-      .required("Digite a alternativa correta"),
-    idCurso: yup
-      .string()
-      .required("Campo obrigatorio"),
+    alternativa1: yup.string().required("Digite a alternativa 1"),
+    alternativa2: yup.string().required("Digite a alternativa 2"),
+    alternativa3: yup.string().required("Digite a alternativa 3"),
+    alternativa4: yup.string().required("Digite a alternativa 4"),
+    correta: yup.string().required("Digite a alternativa correta"),
+    idCurso: yup.string().required("Campo obrigatorio"),
   });
 
   return (
@@ -121,10 +110,19 @@ function UploadRespostas() {
           <p>Vamos cadastrar as respostas das fases </p>
 
           <Formik
-            initialValues={{}}
+            initialValues={{
+              numeroFase: numeroFase,
+              idCurso: idCurso,
+              alternativa1: alternativa1,
+              alternativa2: alternativa2,
+              alternativa3: alternativa3,
+              alternativa4: alternativa4,
+              correta: correta,
+            }}
             onSubmit={handleSubmit}
             validationSchema={validationsRegister}
-            render={({ isValid, setFieldValue }) => (
+          >
+            {({ isValid, setFieldValue }) => (
               <Form className="login-form">
                 <label form="numeroFase">Número da fase:</label>
 
@@ -137,11 +135,14 @@ function UploadRespostas() {
 
                 <label form="idCurso">Curso</label>
                 <Field as="select" name="idCurso" className="form-field">
+                <option value="" key="null">
+                    Selecione um curso
+                  </option>
                   {cursos.map((value, key) => (
-                      <option value={value.ID_CURSO} key={key}>
-                        {value.nome}
-                      </option>
-                    ))}
+                    <option value={value.ID_CURSO} key={key}>
+                      {value.nome}
+                    </option>
+                  ))}
                 </Field>
                 <ErrorMessage
                   component="span"
@@ -214,22 +215,20 @@ function UploadRespostas() {
                   placeholder="Correta"
                 />
 
-<ErrorMessage
+                <ErrorMessage
                   component="span"
                   name="correta"
                   className="form-error"
                 />
-                
-                <br></br>
 
-                
+                <br></br>
 
                 <button className="button" type="submit">
                   CADASTRAR
                 </button>
               </Form>
             )}
-          />
+          </Formik>
         </div>
       </div>
     </div>
