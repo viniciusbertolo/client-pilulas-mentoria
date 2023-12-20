@@ -109,7 +109,7 @@ function UploadAula() {
 
           <Formik
             initialValues={{
-              numeroFase: numero,
+              numero: numero,
               idCurso: idCurso,
               nome: nome,
               descricao: descricao,
