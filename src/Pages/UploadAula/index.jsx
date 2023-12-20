@@ -34,14 +34,14 @@ function UploadAula() {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await fetch('https://backend-pilulas-mentoria.herokuapp.com/upload-fase', {
+      const response = await fetch("https://backend-pilulas-mentoria.herokuapp.com/upload-fase", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          numero: values.numero,
-          idCurso: values.idCurso,
+          numeroFase: values.numero,
+          idCusro: values.idCusro,
           nome: values.nome,
           descricao: values.descricao,
           url: values.url,
@@ -49,22 +49,22 @@ function UploadAula() {
           material: values.material,
         }),
       });
-
-      const data = await response.json();
-
+  
+      const responseData = await response.json();
+  
       if (response.ok) {
         Swal.fire({
           icon: 'success',
           title: 'Cadastrado com sucesso!',
-          text: `${data.msg}!`,
+          text: `${responseData.msg}!`,
         });
-
-        window.location.href = '/home'; // Redireciona para a página desejada
+  
+        window.location.href = '/cursos'; // Redireciona para a página de cursos
       } else {
         Swal.fire({
           icon: 'error',
           title: 'Erro ao cadastrar',
-          text: `${data.msg}!`,
+          text: `${responseData.msg}!`,
         });
       }
     } catch (error) {
@@ -72,11 +72,10 @@ function UploadAula() {
       Swal.fire({
         icon: 'error',
         title: 'Erro ao cadastrar',
-        text: 'Ocorreu um erro ao cadastrar a fase. Tente novamente mais tarde.',
+        text: 'Ocorreu um erro ao cadastrar o curso. Tente novamente mais tarde.',
       });
     }
   };
-
   const validationsRegister = yup.object().shape({
     numero: yup.string().required("Informe o número da fase"),
     idCurso: yup.string().required("Selecione o curso"),
@@ -95,7 +94,15 @@ function UploadAula() {
           <p>Vamos cadastrar as fases </p>
 
           <Formik
-            initialValues={{}}
+            initialValues={{
+              numeroFase: numero,
+              idCurso: idCurso,
+              nome: nome,
+              descricao: descricao,
+              url: url,
+              pergunta: pergunta,
+              material: material,
+            }}
             onSubmit={handleSubmit}
             validationSchema={validationsRegister}
             render={({ isValid, setFieldValue }) => (
