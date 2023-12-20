@@ -40,7 +40,7 @@ function UploadAula() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          numeroFase: values.numero,
+          numero: values.numero,
           idCusro: values.idCusro,
           nome: values.nome,
           descricao: values.descricao,
