@@ -32,7 +32,7 @@ function UploadCurso() {
           text: `${responseData.msg}!`,
         });
   
-        window.location.href = '/cursos'; // Redireciona para a página de cursos
+        window.location.href = '/uploads'; // Redireciona para a página de cursos
       } else {
         Swal.fire({
           icon: 'error',

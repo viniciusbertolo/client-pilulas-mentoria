@@ -16,6 +16,7 @@ import UsuariosSistema from "./Pages/UsuariosSistema";
 import UploadCurso from "./Pages/UploadCurso";
 import UploadAula from "./Pages/UploadAula";
 import UploadRespostas from "./Pages/UploadRespostas";
+import Uploads from "./Pages/Uploads";
 
 const user = localStorage.getItem('@user');
 
@@ -39,6 +40,7 @@ function App() {
           <Route path="/upload-aula" element={user ? <UploadAula/> : <Navigate to="/login"/>} />
           <Route path="*" element={<Error/>} />
           <Route path="/upload-resposta" element={user ? <UploadRespostas/> : <Navigate to="/login"/>} />
+          <Route path="/uploads" element={user ? <Uploads/> : <Navigate to="/login"/>} />
           <Route path="*" element={<Error/>} />
       </Routes>
     </Router>
