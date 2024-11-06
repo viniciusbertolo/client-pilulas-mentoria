@@ -1,6 +1,8 @@
 import { Link } from '@mui/material';
 import { Navigate, redirect, useNavigate, useParams } from 'react-router-dom';
 import './index.css'
+import React from 'react';
+
 
 export default function LpGirandoChave() {
     return(

@@ -16,6 +16,9 @@ export default function Dashboard(props) {
   const [relacionamento, setRelacionamento] = useState({});
   const [responseFaseAtual, setResponseFaseAtual] = useState({});
 
+
+  const [cursosDoUsuario, setCursosDoUsuario] = useState([]);
+
   useEffect(() => {
     async function obterCursos() {
       const resposta = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/cursos`, {
@@ -28,6 +31,28 @@ export default function Dashboard(props) {
     }
     obterCursos();
   }, []);
+
+
+
+  useEffect(() => {
+    // Obter cursos do usuário específico
+    async function obterCursosDoUsuario() {
+      const resposta = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/usuario-curso/${user.email}`, {
+        method: "GET",
+        headers: { "Content-type": "application/json" },
+      });
+      const respostaJson = await resposta.json();
+      const cursosUsuario = respostaJson.map((curso) => curso.ID_CURSO);
+      setCursosDoUsuario(cursosUsuario);
+
+      // setCursosDoUsuario(respostaJson.ID_CURSO);
+    }
+    obterCursosDoUsuario();
+  }, []);
+
+  console.log(user.email);
+  console.log("Cursos:", cursos);
+  console.log("Cursos do usuário:", cursosDoUsuario); // Verificar os cursos do usuário
 
   // function obterEtapaAtual(id) {
   //   const response = fetch(
@@ -63,46 +88,48 @@ export default function Dashboard(props) {
     <div className="pag_todo">
       <Navbar />
       <div className="detalhe_imagem_dash">
-          
-        </div>
+
+      </div>
 
       <div className="boas_vindas_cursos">
         <h1>Olá, Bem-Vindo aos cursos do Pilulas de Mentoria</h1>
         <p>Selecione um curso e comece o aprendizado</p>
-        <Link to="/" className="voltar_para_home"><NavigateBeforeIcon/>Voltar</Link>
+        <Link to="/" className="voltar_para_home"><NavigateBeforeIcon />Voltar</Link>
       </div>
 
-      
+
 
       {!removeLoadin && <Loading />}
 
       <div className="dash_cursos">
-        {cursos.map((value, key) => (
-          <div className="card_cursos" key={key}>
-            <div className="video_preview_curso">
-              <ReactPlayer
-                className="video_player"
-                url={value.URL_VIDEO_PREVIW}
-                controls
-                onEnded={() => alert("teste")}
-                width="100%"
-              />
-            </div>
+        {cursos
+          .filter((curso) => cursosDoUsuario.includes(curso.ID_CURSO))  // Filtra os cursos que estão na lista de cursosDoUsuario
+          .map((value, key) => (
+            <div className="card_cursos" key={key}>
+              <div className="video_preview_curso">
+                <ReactPlayer
+                  className="video_player"
+                  url={value.URL_VIDEO_PREVIW}
+                  controls
+                  onEnded={() => alert("teste")}
+                  width="100%"
+                />
+              </div>
               <div
                 className="textos_cursos"
-                // onClick={() => obterEtapaAtual(value.ID_CURSO)}
+              // onClick={() => obterEtapaAtual(value.ID_CURSO)}
               >
                 <h1>{value.nome}</h1>
                 <p>{value.descricao}</p>
               </div>
-            <Link to={`/cursos/${value.ID_CURSO}`}>
-              <div className="botao_cursos">
-                
-              <h2>Ir para o curso</h2>
-              </div>
-            </Link>
-          </div>
-        ))}
+              <Link to={`/cursos/${value.ID_CURSO}`}>
+                <div className="botao_cursos">
+
+                  <h2>Ir para o curso</h2>
+                </div>
+              </Link>
+            </div>
+          ))}
       </div>
     </div>
   );
