@@ -103,16 +103,16 @@ export default function TodosCursos(props) {
       showCancelButton: true,
       confirmButtonText: "Adicionar aos meus cursos",
       showLoaderOnConfirm: true,
-      preConfirm: async (codigoDigitado) => {
+      preConfirm: async (codigo) => {
         try {
           // Verifica se o código está na lista de códigos válidos para o curso
-          if (!codigosPorCurso[ID_CURSO] || !codigosPorCurso[ID_CURSO].includes(codigoDigitado)) {
+          if (!codigosPorCurso[ID_CURSO] || !codigosPorCurso[ID_CURSO].includes(codigo)) {
             return Swal.showValidationMessage(`Código inválido para o curso selecionado.`);
           }
   
           // Aqui, você pode fazer a requisição para o backend para inserir os dados no banco
-          const emailUsuario = user;  // Este é um exemplo. Substitua com o email do usuário da sessão.
-          const response = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/liberar-curso/${user.email}/${ID_CURSO}/${codigoDigitado}`, {
+          const email_usuario = user.email;  // Este é um exemplo. Substitua com o email do usuário da sessão.
+          const response = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/liberar-curso/${email_usuario}/${ID_CURSO}/${codigo}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -124,7 +124,7 @@ export default function TodosCursos(props) {
             throw new Error('Erro ao inserir no banco de dados');
             console.log(user)
             console.log(ID_CURSO)
-            console.log(codigoDigitado)
+            console.log(codigo)
           }
   
            // Se a inserção for bem-sucedida, você pode mostrar uma confirmação
