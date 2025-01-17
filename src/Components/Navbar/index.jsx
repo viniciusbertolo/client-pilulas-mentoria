@@ -7,7 +7,7 @@ import logo from "../../Assets/imgs/logo_pilulas.png"
 import Swal from 'sweetalert2'
 
 
-export default function Navbar({black}) {
+export default function Navbar({ black }) {
   const [isTimeout, setIsTimeout] = useState(false);
   useEffect(() => {
     const timer = new IdleTimer({
@@ -47,11 +47,11 @@ export default function Navbar({black}) {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.clear();
-    window.location.reload();
-    console.log("SAINDO");
+        window.location.reload();
+        console.log("SAINDO");
       }
     })
-    
+
   };
 
   return (
@@ -61,16 +61,22 @@ export default function Navbar({black}) {
 
 
 
-<header className={black ? 'black' : ''}>
-            <div className="header--logo">
-                <Link to="/">
-                    <img alt="Pilulas de Mentoria" src={logo}></img>
-                </Link>
-            </div>
-            <div className="header--user">
-                    <img src="https://i.pinimg.com/564x/b6/77/cd/b677cd1cde292f261166533d6fe75872.jpg" alt="Usuario" />
-                    <LogoutIcon className="logoutIcon" onClick={logout}></LogoutIcon>
-            </div>
-        </header>
+    <header className={black ? 'black' : ''}>
+      <div className="header--logo">
+        <Link to="/">
+          <img alt="Pilulas de Mentoria" src={logo}></img>
+        </Link>
+      </div>
+      <div className="direita--header">
+
+        <Link to="/cursos">
+          <p>Meus cursos</p>
+        </Link>
+      <div className="header--user">
+          <img src="https://i.pinimg.com/564x/b6/77/cd/b677cd1cde292f261166533d6fe75872.jpg" alt="Usuario" />
+          <LogoutIcon className="logoutIcon" onClick={logout}></LogoutIcon>
+      </div>
+      </div>
+    </header>
   )
 }

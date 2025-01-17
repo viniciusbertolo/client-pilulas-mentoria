@@ -35,7 +35,7 @@ export default function Home(props) {
             </div>
             <br></br>
             <div className="featured--buttons">
-              <Link to="/cursos" className="featured--watchbutton">
+              <Link to="/todos-cursos" className="featured--watchbutton">
                 Cursos
               </Link>
             </div>

@@ -32,8 +32,21 @@ header.black {
 
 }
 
+.direita--header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    height: 100%;
+}
 .header--user{
     height:35px;
+   
+}
+.direita--header p{
+    color: #FAFAFA;
+    margin-bottom: 0;
+
 }
 .header--user img{
     height:100%;

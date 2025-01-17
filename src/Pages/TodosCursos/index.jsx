@@ -6,8 +6,9 @@ import ReactPlayer from "react-player/youtube";
 import { Axios } from "axios";
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import Loading from "../../Components/Loading";
+import Swal from 'sweetalert2'
 
-export default function Dashboard(props) {
+export default function TodosCursos(props) {
   const [cursos, setCursos] = useState([]);
   const user = JSON.parse(localStorage.getItem("@user"));
 
@@ -84,6 +85,67 @@ export default function Dashboard(props) {
 
   console.log(cursos);
 
+
+
+  const codigosPorCurso = {
+    1: ['codigo1', 'codigo2', 'codigo3'],  // Códigos para o curso com ID 1
+    2: ['codigo4', 'codigo5', 'codigo6'],  // Códigos para o curso com ID 2
+    3: ['codigo7', 'codigo8', 'codigo9']   // Códigos para o curso com ID 3
+  };
+  
+  const codigo = (ID_CURSO) => {
+    Swal.fire({
+      title: "Adicione o código do curso",
+      input: "text",
+      inputAttributes: {
+        autocapitalize: "off"
+      },
+      showCancelButton: true,
+      confirmButtonText: "Adicionar aos meus cursos",
+      showLoaderOnConfirm: true,
+      preConfirm: async (codigoDigitado) => {
+        try {
+          // Verifica se o código está na lista de códigos válidos para o curso
+          if (!codigosPorCurso[ID_CURSO] || !codigosPorCurso[ID_CURSO].includes(codigoDigitado)) {
+            return Swal.showValidationMessage(`Código inválido para o curso selecionado.`);
+          }
+  
+          // Aqui, você pode fazer a requisição para o backend para inserir os dados no banco
+          const emailUsuario = user;  // Este é um exemplo. Substitua com o email do usuário da sessão.
+          const response = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/liberar-curso/${user.email}/${ID_CURSO}/${codigoDigitado}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            mode: 'no-cors'
+          });
+  
+          if (!response.ok) {
+            throw new Error('Erro ao inserir no banco de dados');
+            console.log(user)
+            console.log(ID_CURSO)
+            console.log(codigoDigitado)
+          }
+  
+           // Se a inserção for bem-sucedida, você pode mostrar uma confirmação
+        Swal.fire({
+            title: 'Sucesso!',
+            text: 'O código foi adicionado ao seu curso.',
+            icon: 'success'
+          }).then(() => {
+            // Redireciona para a página de cursos após a confirmação
+            window.location.href = '/cursos';
+          });
+  
+        } catch (error) {
+          return Swal.showValidationMessage(`Erro: ${error.message}`);
+        }
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    });
+  };
+  
+
   return (
     <div className="pag_todo">
       <Navbar />
@@ -92,8 +154,8 @@ export default function Dashboard(props) {
       </div>
 
       <div className="boas_vindas_cursos">
-        <h1>Olá, Bem-Vindo aos Meus cursos</h1>
-        <p>Selecione o curso e continue a sua evolução</p>
+        <h1>Olá, Bem-Vindo aos cursos do Pilulas de Mentoria</h1>
+        <p>Selecione um curso e comece o aprendizado</p>
         <Link to="/" className="voltar_para_home"><NavigateBeforeIcon />Voltar</Link>
       </div>
 
@@ -103,7 +165,6 @@ export default function Dashboard(props) {
 
       <div className="dash_cursos">
         {cursos
-          .filter((curso) => cursosDoUsuario.includes(curso.ID_CURSO))  // Filtra os cursos que estão na lista de cursosDoUsuario
           .map((value, key) => (
             <div className="card_cursos" key={key}>
               <div className="video_preview_curso">
@@ -122,12 +183,12 @@ export default function Dashboard(props) {
                 <h1>{value.nome}</h1>
                 <p>{value.descricao}</p>
               </div>
-              <Link to={`/cursos/${value.ID_CURSO}`}>
-                <div className="botao_cursos">
+              {/* <Link to={`/cursos/${value.ID_CURSO}`}> */}
+                <div className="botao_cursos" onClick={() => codigo(value.ID_CURSO)}>
 
                   <h2>Ir para o curso</h2>
                 </div>
-              </Link>
+              {/* </Link> */}
             </div>
           ))}
       </div>

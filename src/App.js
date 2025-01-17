@@ -17,6 +17,7 @@ import UploadCurso from "./Pages/UploadCurso";
 import UploadAula from "./Pages/UploadAula";
 import UploadRespostas from "./Pages/UploadRespostas";
 import Uploads from "./Pages/Uploads";
+import TodosCursos from "./Pages/TodosCursos";
 
 const user = localStorage.getItem('@user');
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={user ? <Home/>: <Navigate to="/login"/>} />
           <Route path="/politicas" element={<PoliticasPrivacidade/>} />
           <Route path="/login" element={user ? <Navigate to="/"/> : <Login/>} />
+          <Route path="/todos-cursos" element={user ? <TodosCursos/> : <Navigate to="/login"/>} />
           <Route path="/cursos" element={user ? <Dashboard/> : <Navigate to="/login"/>} />
           <Route path="/cursos/:id" element={user ? <HomeCurso/> : <Login/>} />
           <Route path="/videoCurso/:idCurso/:id" element={user ? <VideoCurso/> : <Login/>} />
