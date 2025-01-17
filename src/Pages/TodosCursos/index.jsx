@@ -90,7 +90,7 @@ export default function TodosCursos(props) {
   const codigosPorCurso = {
     1: ['codigo1', 'codigo2', 'codigo3'],  // Códigos para o curso com ID 1
     2: ['codigo4', 'codigo5', 'codigo6'],  // Códigos para o curso com ID 2
-    3: ['codigo7', 'codigo8', 'codigo9']   // Códigos para o curso com ID 3
+    74: ['codigo7', 'codigo8', 'codigo9']   // Códigos para o curso com ID 3
   };
   
   const codigo = (ID_CURSO) => {
@@ -120,12 +120,12 @@ export default function TodosCursos(props) {
             mode: 'no-cors'
           });
   
-          if (!response.ok) {
-            throw new Error('Erro ao inserir no banco de dados');
-            console.log(user)
-            console.log(ID_CURSO)
-            console.log(codigo)
-          }
+        //   if (!response.ok) {
+        //     throw new Error('Erro ao inserir no banco de dados');
+        //     console.log(user)
+        //     console.log(ID_CURSO)
+        //     console.log(codigo)
+        //   }
   
            // Se a inserção for bem-sucedida, você pode mostrar uma confirmação
         Swal.fire({
