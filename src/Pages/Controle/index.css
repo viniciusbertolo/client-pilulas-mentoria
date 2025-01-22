@@ -1,4 +1,5 @@
 .styled-table {
+    width: 80%;
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
@@ -24,12 +25,10 @@
 }
 
 .styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #ff5400;
 }
 
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
+
 
 .styled-table tbody tr:last-of-type {
     border-bottom: 2px solid #ff5400;
@@ -41,5 +40,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     margin: 0 auto;
+    padding-top: 20px;
 }

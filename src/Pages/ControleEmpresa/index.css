@@ -1,0 +1,29 @@
+.div_button_export{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 50px;
+}
+
+.export-button{
+    background-color: #ff5400;
+    padding: 8px 24px;
+    color: white;
+    border: none;
+    border-radius: 0px;
+    transition: 0.3s all;
+}
+
+.div_button_export h1{
+    color: #fafafa;
+}
+
+.export-button:hover{
+    background: #ff5400;
+    padding: 8px 24px;
+    color: white;
+    border: none;
+    border-radius: 0px;
+    transform: scale(1.05);
+}
