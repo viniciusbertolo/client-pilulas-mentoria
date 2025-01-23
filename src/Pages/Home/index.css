@@ -1,168 +1,188 @@
-
-  .pag_todo{
-    position: absolute;
-    left: 0;
-    height: auto;
-    min-height: 100vh;
-    padding-bottom: 50px;
-    width: 100%;
-    background-color: #140717;
-    padding-top: 70px;
-  }
-  .pag_todo_featured{
-    position: absolute;
-    left: 0;
-    height: auto;
-    min-height: 100vh;
-    width: 100%;
-    background-color: #140717;
-  }
-
-
-
-
-
-
-
-
-  .featured{
-    /* todo o tamanho do monito do usuario */
-    height: 100vh;
+.pag_todo {
+  position: absolute;
+  left: 0;
+  height: auto;
+  min-height: 100vh;
+  padding-bottom: 50px;
+  width: 100%;
+  background-color: #140717;
+  padding-top: 70px;
 }
 
-.featured--vertical{
-    /* vai herdar o tamanho do anterior */
-    width: inherit;
-    height: inherit;
-    background: linear-gradient(to top, #111 10%, transparent 90%);
-}
-
-.featured--horizontal{
-    /* vai herdar o tamanho do anterior */
-    width: inherit;
-    height: inherit;
-    background: linear-gradient(to right, #111 30%, transparent 70%);
-
-    /* colocar texto no meio */
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left:30px;
-    /* diminuir por causa de subir as listas */
-    padding-bottom: 0px;
-    /* diminuir por conta do cabeçalho */
-    padding-top: 70px;
-
-}
-.featured--name{
-    font-size:60px;
-    font-weight:bold;
-    color: #ff5400;
-}
-.featured--info{
-    font-size:18px;
-    font-weight:bold;
-    margin-top: 15px;
-}
-
-.featured--points, .featured--year, .featured--seasons{
-    display: inline-block;
-    margin-right: 15px;
+.pag_todo_featured {
+  position: absolute;
+  left: 0;
+  height: auto;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #140717;
 }
 
 
-.featured--points{
-    color: #46d369;    
+
+
+
+
+
+
+.featured {
+  /* todo o tamanho do monito do usuario */
+  height: 100vh;
 }
 
-.featured--description{
-    margin-top: 15px;
-    font-size: 20px;
-    color:#999;
-    max-width: 40%;
+.featured--vertical {
+  /* vai herdar o tamanho do anterior */
+  width: inherit;
+  height: inherit;
+  background: linear-gradient(to top, #111 10%, transparent 90%);
 }
 
-.featured--buttons{
-    margin-top: 15px;
+.featured--horizontal {
+  /* vai herdar o tamanho do anterior */
+  width: inherit;
+  height: inherit;
+  background: linear-gradient(to right, #111 30%, transparent 70%);
+
+  /* colocar texto no meio */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 30px;
+  /* diminuir por causa de subir as listas */
+  padding-bottom: 0px;
+  /* diminuir por conta do cabeçalho */
+  padding-top: 70px;
+
+}
+
+.featured--name {
+  font-size: 60px;
+  font-weight: bold;
+  color: #ff5400;
+}
+
+.featured--info {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.featured--points,
+.featured--year,
+.featured--seasons {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+
+.featured--points {
+  color: #46d369;
+}
+
+.featured--description {
+  margin-top: 15px;
+  font-size: 20px;
+  color: #999;
+  max-width: 40%;
+}
+
+.featured--buttons {
+  margin-top: 15px;
+
 
 }
 
 .featured--watchbutton,
-.featured--mylistbutton{
-    display: inline-block;
-    font-size:20px;
-    font-weight:bold;
-    padding: 12px 25px;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-right: 10px;
-    opacity: 1;
-    transition: all 0.2s;
+.featured--mylistbutton {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-right: 10px;
+  opacity: 1;
+  transition: all 0.2s;
 }
 
 .featured--watchbutton:hover,
-.featured--mylistbutton:hover{
+.featured--mylistbutton:hover {
   background-color: #fff;
-    color: #000;
-    opacity: 0.7;
+  color: #000;
+  opacity: 0.7;
 }
 
-.featured--watchbutton{
-    background-color: #fff;
-    color: #000;
+.featured--watchbutton {
+  background-color: #fff;
+  color: #000;
 }
 
-.featured--mylistbutton{
-    background-color: #333;
-    color: #fff;
+.featured--mylistbutton {
+  background-color: #333;
+  color: #fff;
 }
 
-.featured--genres{
-    margin-top: 15px;
-    font-size: 18px;
-    color: #999;
+.featured--genres {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #999;
 }
 
 
-@media screen and (min-width: 900px) and (max-width:1080px){
-  .featured--description{
+@media screen and (min-width: 900px) and (max-width:1080px) {
+  .featured--description {
     margin-top: 15px;
     font-size: 20px;
-    color:#999;
+    color: #999;
     max-width: 80%;
+  }
 }
-}
-@media (max-width:900px){
-  .featured--horizontal{
-    
+
+@media (max-width:900px) {
+  .featured--horizontal {
+
     background: linear-gradient(to right, #111 20%, transparent 120%);
 
-   
 
+
+  }
+
+  .featured {
+    height: 120vh;
+  }
+
+  .featured--name {
+    font-size: 35px;
+    padding: 5px;
+  }
+
+  .featured--info {
+    font-size: 16px;
+  }
+
+  .featured--description {
+    font-size: 14px;
+    max-width: 100%;
+    margin-right: 30px;
+  }
+
+  .featured--buttons {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .featured--watchbutton,
+  .featured--mylistbutton {
+    font-size: 16px;
+  }
+
+  .featured--genres {
+    font-size: 14px;
+  }
 }
-    .featured{
-        height:120vh;
-    }
-    .featured--name{
-        font-size: 35px;
-        padding: 5px;
-    }
-    .featured--info{
-        font-size:16px;
-    }
-    .featured--description{
-        font-size:14px;
-        max-width: 100%;
-        margin-right: 30px;
-    }
-    .featured--watchbutton,
-    .featured--mylistbutton{
-        font-size:16px;
-    }
-    .featured--genres{
-        font-size:14px;
-    }
-}
 
 
 
@@ -174,7 +194,7 @@
 
 
 
-   /* BARRA LATERAL */
+/* BARRA LATERAL */
 
 ::-webkit-scrollbar {
   width: 5px;
@@ -182,117 +202,119 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
+  box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #ff5400; 
+  background: #ff5400;
   border-radius: 7px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #692301; 
+  background: #692301;
 }
 
 /* FIM BARRA LATERAL */
 
 
 
-  
 
-  
 
-  .texto_home_div{
+
+
+.texto_home_div {
+  color: #FAFAFA;
+  padding: 50px;
+  margin-top: 50px;
+
+}
+
+.detalhe_imagem_home {
+  background: url("https://images8.alphacoders.com/987/987256.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 200px;
+  top: 70px;
+  border-radius: 0 0 0 800px;
+
+}
+
+.link_to_cursos {
+  text-decoration: none;
+  color: #FAFAFA;
+  transition: 0.3s;
+  font-size: 24px;
+}
+
+.link_to_cursos:hover {
+  color: #ff5400;
+}
+
+.link_to_cursos_principal:hover {
+  color: #fafafa;
+}
+
+.link_to_cursos_principal {
+  text-decoration: none;
+  color: #FAFAFA;
+  transition: 0.3s;
+}
+
+
+
+
+.texto_home_div .texto_home_titulo:hover {
+  background-color: #9c3502;
+  transform: scale(1.025);
+
+}
+
+.texto_home_div .texto_home_titulo {
+  background-color: #ff5400;
+  padding: 15px;
+  text-align: center;
+  margin-bottom: 50px;
+  border-radius: 0 80px 0 80px;
+  transition: 0.5s all;
+}
+
+.texto_home_div .texto_home {
+  font-size: 24px;
+  text-align: center;
+  margin: 50px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .texto_home_div {
     color: #FAFAFA;
-    padding: 50px;
+    padding: 10px;
     margin-top: 50px;
 
   }
 
-  .detalhe_imagem_home{
-    background: url("https://images8.alphacoders.com/987/987256.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    height: 200px;
-    top: 70px;
-    border-radius: 0 0 0 800px;
+
+  .texto_home_div .texto_home {
+    font-size: 20px;
+    margin: 5px;
+    margin-bottom: 50px;
 
   }
 
-  .link_to_cursos{
-    text-decoration: none;
-    color: #FAFAFA;
-    transition: 0.3s;
-    font-size: 24px;
-  }
-  .link_to_cursos:hover{
-    color: #ff5400;
-  }
-  .link_to_cursos_principal:hover{
-    color: #fafafa;
-  }
-  .link_to_cursos_principal{
-    text-decoration: none;
-    color: #FAFAFA;
-    transition: 0.3s;
-  }
-  
 
 
-
-  .texto_home_div .texto_home_titulo:hover{
-    background-color: #9c3502;
-    transform: scale(1.025);
-
-  }
-
-  .texto_home_div .texto_home_titulo{
+  .texto_home_div .texto_home_titulo {
     background-color: #ff5400;
     padding: 15px;
     text-align: center;
     margin-bottom: 50px;
-    border-radius: 0 80px 0 80px;
-    transition: 0.5s all;
+    border-radius: 0 40px 0 40px;
+    font-size: 22px;
   }
 
-  .texto_home_div .texto_home{
-    font-size: 24px;
-    text-align: center;
-    margin:50px;
-  }
-  
-
-  @media screen and (max-width: 768px){
-    .texto_home_div{
-      color: #FAFAFA;
-      padding: 10px;
-      margin-top: 50px;
-  
-    }
-
-
-    .texto_home_div .texto_home{
-      font-size: 20px;
-      margin: 5px;
-      margin-bottom: 50px;
-
-    }
-   
-
-
-    .texto_home_div .texto_home_titulo{
-      background-color: #ff5400;
-      padding: 15px;
-      text-align: center;
-      margin-bottom: 50px;
-      border-radius: 0 40px 0 40px;
-      font-size: 22px;
-    }
-  
-  }
-  
+}

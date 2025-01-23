@@ -41,6 +41,9 @@ export default function Home(props) {
               <Link to="/cursos" className="featured--watchbutton">
                 Meus Cursos
               </Link>
+              <Link to="/materiais" className="featured--watchbutton">
+                Materiais
+              </Link>
             </div>
           </div>
         </div>
