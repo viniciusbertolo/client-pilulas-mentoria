@@ -89,7 +89,7 @@ export default function TodosCursos(props) {
 
   const codigosPorCurso = {
     1: ['codigo1', 'codigo2', 'codigo3'],  // Códigos para o curso com ID 1
-    2: ['codigo4', 'codigo5', 'codigo6'],  // Códigos para o curso com ID 2
+    2: ['dsm.ptp', 'codigo5', 'codigo6'],  // Códigos para o curso com ID 2
     74: ['agte.agss.01', 'codigo8', 'codigo9']   // Códigos para o curso com ID 3
   };
   
