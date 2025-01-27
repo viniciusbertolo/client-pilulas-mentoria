@@ -4,6 +4,7 @@ import Login from './Pages/Login';
 import Dashboard from './Pages/Dashboard';
 import Home from './Pages/Home';
 import Cadastro from './Pages/Cadastro';
+import CadastroInternacional from './Pages/CadastroInternacional';
 import HomeCurso from "./Pages/HomeCurso";
 import PoliticasPrivacidade from "./Pages/PoliticasPrivacidade";
 import VideoCurso from "./Pages/VideoCurso";
@@ -37,6 +38,7 @@ function App() {
           <Route path="/videoCurso/:idCurso/:id" element={user ? <VideoCurso/> : <Login/>} />
           <Route path="/pergunta/:idCurso/:id" element={user ? <Pergunta/> : <Login/>} />
           <Route path="/seja-um-membro" element={user ? <Navigate to="/"/> : <Cadastro/>} />
+          <Route path="/seja-um-membro-internacional" element={user ? <Navigate to="/"/> : <CadastroInternacional/>} />
           <Route path="/girando-a-chave" element={<LpGirandoChave/>} />
           <Route path="/relatorios" element={user ? <Relatorios/> : <Navigate to="/login"/>} />
           <Route path="/controlePessoas/:id" element={user ? <Controle/> : <Navigate to="/login"/>} />
