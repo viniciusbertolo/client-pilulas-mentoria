@@ -85,12 +85,13 @@ function Login() {
                 <VisibilityIcon className="icon_eye" onClick={togglePassword}>Show Password</VisibilityIcon>
 
 
-                <ErrorMessage
+                {/* <ErrorMessage
                   component="span"
                   name="password"
                   className="form-error"
-                />
+                /> */}
               </div>
+              
 
               <button className="button" type="submit">
                 ENTRAR
@@ -104,6 +105,8 @@ function Login() {
                   </p> */}
             </Form>
           </Formik>
+          <br></br>
+              <Link to="/nova-senha" className="voltar_para_home">Esqueci a minha senha</Link>
         </div>
       </div>
     </div>
