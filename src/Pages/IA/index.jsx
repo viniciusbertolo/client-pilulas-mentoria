@@ -43,7 +43,7 @@ export default function Chat() {
 
             try {
                 setIsLoading(true);
-                const response = await fetch(`http://localhost:3001/api/history/${email}`);
+                const response = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/api/history/${email}`);
                 if (!response.ok) throw new Error(`Erro ${response.status}`);
                 const data = await response.json();
                 setMessages(data || []);
@@ -99,7 +99,7 @@ export default function Chat() {
             setMessages(prev => [...prev, userMessage]);
             setPrompt('');
 
-            const response = await fetch('http://localhost:3001/api/chat', {
+            const response = await fetch('https://backend-pilulas-mentoria.herokuapp.com/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, prompt, messages }),
