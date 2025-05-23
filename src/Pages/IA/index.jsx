@@ -47,6 +47,7 @@ export default function Chat() {
                 if (!response.ok) throw new Error(`Erro ${response.status}`);
                 const data = await response.json();
                 setMessages(data || []);
+                console.log("mes", messages)
             } catch (error) {
                 console.error("Falha ao carregar histórico:", error);
                 setMessages([{
@@ -121,81 +122,85 @@ export default function Chat() {
         }
     };
 
+    console.log("Payload enviado para /api/chat:", { email, prompt, messages });
 
-    
+
 
     const formatAIMessage = (content) => {
+
+        if (typeof content !== 'string') return null;
+
         // Primeiro, normalizamos as quebras de linha
         const normalizedContent = content.replace(/\r\n/g, '\n');
-        
+
         // Dividimos em blocos (parágrafos/listas) considerando múltiplas quebras
         const blocks = normalizedContent.split(/\n\n+/);
-        
+
         return (
-          <div className="ai-message-content">
-            {blocks.map((block, blockIndex) => {
-              if (!block.trim()) return null;
-              
-              const lines = block.split('\n');
-              const isList = lines.every(line => 
-                /^\s*[*\-•]\s|\d+\.\s/.test(line) || 
-                (lines.length > 1 && /^\s*\*\*[^*]+\*\*\s*$/.test(line))
-              );
-      
-              // Processa títulos e subtítulos
-              if (lines.length === 1) {
-                // Título nível 1 (###)
-                if (block.startsWith('### ')) {
-                  return <h3 key={blockIndex}>{block.substring(4)}</h3>;
-                }
-                // Título nível 2 (##)
-                if (block.startsWith('## ')) {
-                  return <h4 key={blockIndex}>{block.substring(3)}</h4>;
-                }
-                // Subtítulo em negrito (linha só com **texto**)
-                if (/^\s*\*\*[^*]+\*\*\s*$/.test(block)) {
-                  return <h4 key={blockIndex} className="bold-subtitle">
-                    {block.replace(/\*\*/g, '')}
-                  </h4>;
-                }
-              }
-      
-              // Processa listas
-              if (isList) {
-                const isOrdered = lines.some(line => /^\d+\.\s/.test(line));
-                
-                const ListTag = isOrdered ? 'ol' : 'ul';
-                
-                return (
-                  <ListTag key={blockIndex} className="ai-list">
-                    {lines.filter(line => line.trim()).map((line, lineIndex) => {
-                      const text = line
-                        .replace(/^\s*[*\-•]\s|\d+\.\s/, '')
+            <div className="ai-message-content">
+                {blocks.map((block, blockIndex) => {
+                    if (!block.trim()) return null;
+
+                    const lines = block.split('\n');
+                    const isList = lines.every(line =>
+                        /^\s*[*\-•]\s|\d+\.\s/.test(line) ||
+                        (lines.length > 1 && /^\s*\*\*[^*]+\*\*\s*$/.test(line))
+                    );
+
+                    // Processa títulos e subtítulos
+                    if (lines.length === 1) {
+                        // Título nível 1 (###)
+                        if (block.startsWith('### ')) {
+                            return <h3 key={blockIndex}>{block.substring(4)}</h3>;
+                        }
+                        // Título nível 2 (##)
+                        if (block.startsWith('## ')) {
+                            return <h4 key={blockIndex}>{block.substring(3)}</h4>;
+                        }
+                        // Subtítulo em negrito (linha só com **texto**)
+                        if (/^\s*\*\*[^*]+\*\*\s*$/.test(block)) {
+                            return <h4 key={blockIndex} className="bold-subtitle">
+                                {block.replace(/\*\*/g, '')}
+                            </h4>;
+                        }
+                    }
+
+                    // Processa listas
+                    if (isList) {
+                        const isOrdered = lines.some(line => /^\d+\.\s/.test(line));
+
+                        const ListTag = isOrdered ? 'ol' : 'ul';
+
+                        return (
+                            <ListTag key={blockIndex} className="ai-list">
+                                {lines.filter(line => line.trim()).map((line, lineIndex) => {
+                                    const text = line
+                                        .replace(/^\s*[*\-•]\s|\d+\.\s/, '')
+                                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                                        .replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+                                    return (
+                                        <li key={lineIndex} dangerouslySetInnerHTML={{ __html: text }} />
+                                    );
+                                })}
+                            </ListTag>
+                        );
+                    }
+
+                    // Processa parágrafos normais
+                    const processedText = block
                         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                        .replace(/\*(.*?)\*/g, '<em>$1</em>');
-                      
-                      return (
-                        <li key={lineIndex} dangerouslySetInnerHTML={{ __html: text }} />
-                      );
-                    })}
-                  </ListTag>
-                );
-              }
-      
-              // Processa parágrafos normais
-              const processedText = block
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                .replace(/`(.*?)`/g, '<code>$1</code>')
-                .replace(/_(.*?)_/g, '<em>$1</em>');
-      
-              return (
-                <p key={blockIndex} dangerouslySetInnerHTML={{ __html: processedText }} />
-              );
-            })}
-          </div>
+                        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                        .replace(/`(.*?)`/g, '<code>$1</code>')
+                        .replace(/_(.*?)_/g, '<em>$1</em>');
+
+                    return (
+                        <p key={blockIndex} dangerouslySetInnerHTML={{ __html: processedText }} />
+                    );
+                })}
+            </div>
         );
-      };
+    };
 
 
     return (
@@ -218,7 +223,7 @@ export default function Chat() {
                     )}
                 </div> */}
 
-                <div className="chat-history" ref={chatHistoryRef}>
+                {/* <div className="chat-history" ref={chatHistoryRef}>
                     {messages.map((msg, i) => (
                         <div key={i} className={`message ${msg.role}`}>
                             {msg.role === 'assistant' ? formatAIMessage(msg.content) : msg.content}
@@ -229,7 +234,28 @@ export default function Chat() {
                             <div className="typing-indicator"></div>
                         </div>
                     )}
+                </div> */}
+
+                <div className="chat-history" ref={chatHistoryRef}>
+                    {messages.length === 0 && !isLoading && (
+                        <div className="message assistant">
+                            Olá! Pode me contar qual medo você está sentindo agora? Estou aqui pra ajudar.
+                        </div>
+                    )}
+
+                    {messages.map((msg, i) => (
+                        <div key={i} className={`message ${msg.role}`}>
+                            {msg.role === 'assistant' ? formatAIMessage(msg.content) : msg.content}
+                        </div>
+                    ))}
+
+                    {isLoading && (
+                        <div className="message assistant">
+                            <div className="typing-indicator"></div>
+                        </div>
+                    )}
                 </div>
+
 
                 <div className="input-area">
                     <textarea
