@@ -88,6 +88,7 @@ import { Link, redirect } from "react-router-dom";
 import IdleTimer from "../../IdleTimer";
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu'; // Importação do ícone de hambúrguer
+import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import SchoolIcon from '@mui/icons-material/School';
 import SourceIcon from '@mui/icons-material/Source';
 import HomeIcon from '@mui/icons-material/Home';
@@ -177,6 +178,7 @@ export default function Navbar({ black }) {
             <div className="item-menu"><HomeIcon className="logoutIcon"/><Link to="/todos-cursos">Todos os cursos</Link></div>
             <div className="item-menu"><SchoolIcon className="logoutIcon"/><Link to="/cursos">Meus cursos</Link></div>
             <div className="item-menu"><SourceIcon className="logoutIcon"/><Link to="/materiais">Materiais</Link></div>
+            <div className="item-menu"><TipsAndUpdatesIcon className="logoutIcon"/><Link to="/ia">IA Pílulas</Link></div>
             <div className="item-menu" onClick={logout}><LogoutIcon className="logoutIcon"/><p>Logout</p></div>
           </div>
         )}

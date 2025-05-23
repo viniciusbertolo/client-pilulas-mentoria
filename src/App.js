@@ -22,6 +22,7 @@ import TodosCursos from "./Pages/TodosCursos";
 import ControleEmpresa from "./Pages/ControleEmpresa";
 import AreaDownload from "./Pages/AreaDownloads";
 import UpdateSenha from "./Pages/UpdateSenha/updateSenha";
+import Chat from "./Pages/IA";
 
 const user = localStorage.getItem('@user');
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/nova-senha" element={<UpdateSenha/>} />
           <Route path="/login" element={user ? <Navigate to="/"/> : <Login/>} />
           <Route path="/materiais" element={user ? <AreaDownload/> : <Navigate to="/login"/>} />
+          <Route path="/ia" element={user ? <Chat/> : <Navigate to="/login"/>} />
           <Route path="/todos-cursos" element={user ? <TodosCursos/> : <Navigate to="/login"/>} />
           <Route path="/cursos" element={user ? <Dashboard/> : <Navigate to="/login"/>} />
           <Route path="/cursos/:id" element={user ? <HomeCurso/> : <Login/>} />
