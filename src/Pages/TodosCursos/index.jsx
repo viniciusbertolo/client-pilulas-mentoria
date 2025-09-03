@@ -86,6 +86,30 @@ export default function TodosCursos(props) {
   console.log(cursos);
 
 
+  async function createCheckout(id) {
+  try {
+    const response = await fetch("http://backend-pilulas-mentoria.herokuapp.com/api/payments/create-checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email_usuario: user.email,
+        ID_CURSO: id,
+        codigo: "TESTEPAGAMENTO",
+      }),
+    });
+
+    const data = await response.json();
+
+    if (data.url) {
+      window.location.href = data.url; // redireciona para Stripe Checkout
+    } else {
+      console.error("Erro:", data);
+    }
+  } catch (err) {
+    console.error("Erro ao criar checkout:", err);
+  }
+}
+
 
   const codigosPorCurso = {
     1: ['codigo1', 'codigo2', 'codigo3'],  // Códigos para o curso com ID 1
@@ -186,7 +210,13 @@ export default function TodosCursos(props) {
               {/* <Link to={`/cursos/${value.ID_CURSO}`}> */}
                 <div className="botao_cursos" onClick={() => codigo(value.ID_CURSO)}>
 
-                  <h2>Ir para o curso</h2>
+                  <h2>Código promocioal</h2>
+                </div>
+              {/* </Link> */}
+              {/* <Link to={`/cursos/${value.ID_CURSO}`}> */}
+                <div className="botao_cursos" onClick={() => createCheckout(value.ID_CURSO)}>
+
+                  <h2>Comprar curso</h2>
                 </div>
               {/* </Link> */}
             </div>
