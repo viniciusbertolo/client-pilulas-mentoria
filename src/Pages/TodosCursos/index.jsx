@@ -88,7 +88,7 @@ export default function TodosCursos(props) {
 
   async function createCheckout(id) {
   try {
-    const response = await fetch("http://backend-pilulas-mentoria.herokuapp.com/api/payments/create-checkout", {
+    const response = await fetch("https://backend-pilulas-mentoria.herokuapp.com/api/payments/create-checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
