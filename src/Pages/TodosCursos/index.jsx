@@ -86,90 +86,90 @@ export default function TodosCursos(props) {
   console.log(cursos);
 
 
-  async function createCheckout(id, valor_curso) {
-  try {
-    const response = await fetch("https://backend-pilulas-mentoria.herokuapp.com/api/payments/create-checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email_usuario: user.email,
-        ID_CURSO: id,
-        codigo: "TESTEPAGAMENTO",
-        valor: valor_curso
-      }),
-    });
+  //   async function createCheckout(id, valor_curso) {
+  //   try {
+  //     const response = await fetch("https://backend-pilulas-mentoria.herokuapp.com/api/payments/create-checkout", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         email_usuario: user.email,
+  //         ID_CURSO: id,
+  //         codigo: "TESTEPAGAMENTO",
+  //         valor: valor_curso
+  //       }),
+  //     });
 
-    const data = await response.json();
+  //     const data = await response.json();
 
-    if (data.url) {
-      window.location.href = data.url; // redireciona para Stripe Checkout
-    } else {
-      console.error("Erro:", data);
-    }
-  } catch (err) {
-    console.error("Erro ao criar checkout:", err);
-  }
-}
+  //     if (data.url) {
+  //       window.location.href = data.url; // redireciona para Stripe Checkout
+  //     } else {
+  //       console.error("Erro:", data);
+  //     }
+  //   } catch (err) {
+  //     console.error("Erro ao criar checkout:", err);
+  //   }
+  // }
 
 
-  const codigosPorCurso = {
-    1: ['codigo1', 'codigo2', 'codigo3'],  // Códigos para o curso com ID 1
-    2: ['dsm.ptp', 'codigo5', 'codigo6'],  // Códigos para o curso com ID 2
-    74: ['agte.agss.01', 'codigo8', 'codigo9']   // Códigos para o curso com ID 3
-  };
-  
-  const codigo = (ID_CURSO) => {
-    Swal.fire({
-      title: "Adicione o código do curso",
-      input: "text",
-      inputAttributes: {
-        autocapitalize: "off"
-      },
-      showCancelButton: true,
-      confirmButtonText: "Adicionar aos meus cursos",
-      showLoaderOnConfirm: true,
-      preConfirm: async (codigo) => {
-        try {
-          // Verifica se o código está na lista de códigos válidos para o curso
-          if (!codigosPorCurso[ID_CURSO] || !codigosPorCurso[ID_CURSO].includes(codigo)) {
-            return Swal.showValidationMessage(`Código inválido para o curso selecionado.`);
-          }
-  
-          // Aqui, você pode fazer a requisição para o backend para inserir os dados no banco
-          const email_usuario = user.email;  // Este é um exemplo. Substitua com o email do usuário da sessão.
-          const response = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/liberar-curso/${email_usuario}/${ID_CURSO}/${codigo}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            mode: 'no-cors'
-          });
-  
-        //   if (!response.ok) {
-        //     throw new Error('Erro ao inserir no banco de dados');
-        //     console.log(user)
-        //     console.log(ID_CURSO)
-        //     console.log(codigo)
-        //   }
-  
-           // Se a inserção for bem-sucedida, você pode mostrar uma confirmação
-        Swal.fire({
-            title: 'Sucesso!',
-            text: 'O código foi adicionado ao seu curso.',
-            icon: 'success'
-          }).then(() => {
-            // Redireciona para a página de cursos após a confirmação
-            window.location.href = '/cursos';
-          });
-  
-        } catch (error) {
-          return Swal.showValidationMessage(`Erro: ${error.message}`);
-        }
-      },
-      allowOutsideClick: () => !Swal.isLoading()
-    });
-  };
-  
+  //   const codigosPorCurso = {
+  //     1: ['codigo1', 'codigo2', 'codigo3'],  // Códigos para o curso com ID 1
+  //     2: ['dsm.ptp', 'codigo5', 'codigo6'],  // Códigos para o curso com ID 2
+  //     74: ['agte.agss.01', 'codigo8', 'codigo9']   // Códigos para o curso com ID 3
+  //   };
+
+  //   const codigo = (ID_CURSO) => {
+  //     Swal.fire({
+  //       title: "Adicione o código do curso",
+  //       input: "text",
+  //       inputAttributes: {
+  //         autocapitalize: "off"
+  //       },
+  //       showCancelButton: true,
+  //       confirmButtonText: "Adicionar aos meus cursos",
+  //       showLoaderOnConfirm: true,
+  //       preConfirm: async (codigo) => {
+  //         try {
+  //           // Verifica se o código está na lista de códigos válidos para o curso
+  //           if (!codigosPorCurso[ID_CURSO] || !codigosPorCurso[ID_CURSO].includes(codigo)) {
+  //             return Swal.showValidationMessage(`Código inválido para o curso selecionado.`);
+  //           }
+
+  //           // Aqui, você pode fazer a requisição para o backend para inserir os dados no banco
+  //           const email_usuario = user.email;  // Este é um exemplo. Substitua com o email do usuário da sessão.
+  //           const response = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/liberar-curso/${email_usuario}/${ID_CURSO}/${codigo}`, {
+  //             method: 'POST',
+  //             headers: {
+  //               'Content-Type': 'application/json'
+  //             },
+  //             mode: 'no-cors'
+  //           });
+
+  //         //   if (!response.ok) {
+  //         //     throw new Error('Erro ao inserir no banco de dados');
+  //         //     console.log(user)
+  //         //     console.log(ID_CURSO)
+  //         //     console.log(codigo)
+  //         //   }
+
+  //            // Se a inserção for bem-sucedida, você pode mostrar uma confirmação
+  //         Swal.fire({
+  //             title: 'Sucesso!',
+  //             text: 'O código foi adicionado ao seu curso.',
+  //             icon: 'success'
+  //           }).then(() => {
+  //             // Redireciona para a página de cursos após a confirmação
+  //             window.location.href = '/cursos';
+  //           });
+
+  //         } catch (error) {
+  //           return Swal.showValidationMessage(`Erro: ${error.message}`);
+  //         }
+  //       },
+  //       allowOutsideClick: () => !Swal.isLoading()
+  //     });
+  //   };
+
 
   return (
     <div className="pag_todo">
@@ -188,7 +188,7 @@ export default function TodosCursos(props) {
 
       {!removeLoadin && <Loading />}
 
-      <div className="dash_cursos">
+      {/* <div className="dash_cursos">
         {cursos
           .map((value, key) => (
             <div className="card_cursos" key={key}>
@@ -203,23 +203,10 @@ export default function TodosCursos(props) {
               </div>
               <div
                 className="textos_cursos"
-              // onClick={() => obterEtapaAtual(value.ID_CURSO)}
               >
                 <h1>{value.nome}</h1>
                 <p>{value.descricao}</p>
               </div>
-              {/* <Link to={`/cursos/${value.ID_CURSO}`}> */}
-                {/* <div className="botao_cursos" onClick={() => codigo(value.ID_CURSO)}>
-
-                  <h2>Código promocioal</h2>
-                </div> */}
-              {/* </Link> */}
-              {/* <Link to={`/cursos/${value.ID_CURSO}`}> */}
-                {/* <div className="botao_cursos" onClick={() => createCheckout(value.ID_CURSO, "50")}>
-
-                  <h2>Comprar curso</h2>
-                </div> */}
-              {/* </Link> */}
               <Link to={`/detalhe-curso/${value.ID_CURSO}`}>
                 <div className="botao_cursos">
 
@@ -228,7 +215,36 @@ export default function TodosCursos(props) {
               </Link>
             </div>
           ))}
+      </div> */}
+
+      <div className="dash_cursos">
+        {cursos.map((value, key) => (
+          <div className="card_cursos" key={key}>
+
+            {/* Imagem genérica do curso */}
+            <div className="imagem_curso">
+              <img
+                src={value.imagem || "https://wallpapers.com/images/hd/tree-resembling-cerebral-cortex-xgqhghhr3d8pr4lt.jpg"}
+                alt={value.nome}
+              />
+            </div>
+
+            <div className="textos_cursos">
+              <h1>{value.nome}</h1>
+              <p className="descricao_resumida">{value.descricao}</p>
+              <p className="preco_curso">R$ {(value.preco / 100).toFixed(2).replace('.', ',')}</p>
+              <Link to={`/detalhe-curso/${value.ID_CURSO}`}>
+              <div className="botao_cursos">
+                Detalhes curso
+              </div>
+            </Link>
+            </div>
+
+            
+          </div>
+        ))}
       </div>
+
     </div>
   );
 }

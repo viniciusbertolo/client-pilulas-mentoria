@@ -101,9 +101,9 @@ export default function Dashboard(props) {
 
       {!removeLoadin && <Loading />}
 
-      <div className="dash_cursos">
+      {/* <div className="dash_cursos">
         {cursos
-          .filter((curso) => cursosDoUsuario.includes(curso.ID_CURSO))  // Filtra os cursos que estão na lista de cursosDoUsuario
+          .filter((curso) => cursosDoUsuario.includes(curso.ID_CURSO))  
           .map((value, key) => (
             <div className="card_cursos" key={key}>
               <div className="video_preview_curso">
@@ -117,7 +117,7 @@ export default function Dashboard(props) {
               </div>
               <div
                 className="textos_cursos"
-              // onClick={() => obterEtapaAtual(value.ID_CURSO)}
+              
               >
                 <h1>{value.nome}</h1>
                 <p>{value.descricao}</p>
@@ -130,7 +130,36 @@ export default function Dashboard(props) {
               </Link>
             </div>
           ))}
-      </div>
+      </div> */}
+
+      <div className="dash_cursos">
+              {cursos
+              .filter((curso) => cursosDoUsuario.includes(curso.ID_CURSO)) 
+              .map((value, key) => (
+                <div className="card_cursos" key={key}>
+      
+                  {/* Imagem genérica do curso */}
+                  <div className="imagem_curso">
+                    <img
+                      src={value.imagem || "https://wallpapers.com/images/hd/tree-resembling-cerebral-cortex-xgqhghhr3d8pr4lt.jpg"}
+                      alt={value.nome}
+                    />
+                  </div>
+      
+                  <div className="textos_cursos">
+                    <h1>{value.nome}</h1>
+                    <Link to={`/detalhe-curso/${value.ID_CURSO}`}>
+                    <br></br>
+                    <div className="botao_cursos">
+                      Acessar curso
+                    </div>
+                  </Link>
+                  </div>
+      
+                  
+                </div>
+              ))}
+            </div>
     </div>
   );
 }

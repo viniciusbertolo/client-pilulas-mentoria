@@ -40,7 +40,7 @@ function App() {
           <Route path="/todos-cursos" element={user ? <TodosCursos/> : <Navigate to="/login"/>} />
           <Route path="/cursos" element={user ? <Dashboard/> : <Navigate to="/login"/>} />
           <Route path="/cursos/:id" element={user ? <HomeCurso/> : <Login/>} />
-          <Route path="/detalhe-curso/:id" element={user ? <DetalheCurso/> : <Login/>} />
+          <Route path="/detalhe-curso/:id" element={<DetalheCurso/>} />
           <Route path="/videoCurso/:idCurso/:id" element={user ? <VideoCurso/> : <Login/>} />
           <Route path="/pergunta/:idCurso/:id" element={user ? <Pergunta/> : <Login/>} />
           <Route path="/seja-um-membro" element={user ? <Navigate to="/"/> : <Cadastro/>} />

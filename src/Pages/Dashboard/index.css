@@ -40,7 +40,7 @@
     font-size: 42px;
 }
 
-a{
+/* a{
 
     text-decoration: none;
 }
@@ -120,7 +120,7 @@ box-shadow: 0 9px #999;
   color: #fafafa;
 
   margin-top: 20px;
-}
+} */
 
 
 
@@ -140,7 +140,7 @@ box-shadow: 0 9px #999;
     font-size: 14px;
 }
 
-.card_cursos {
+/* .card_cursos {
   width: 90%;
   left: 5%;
   border-radius: 30px;
@@ -167,7 +167,7 @@ box-shadow: 0 9px #999;
 .dash_cursos{
     row-gap: 40px;
     margin-top: 50px;
-}
+} */
 
   
   }
@@ -187,7 +187,7 @@ box-shadow: 0 9px #999;
         font-size: 16px;
     }
     
-    .card_cursos {
+    /* .card_cursos {
       width: 90%;
       left: 5%;
     }
@@ -212,7 +212,7 @@ box-shadow: 0 9px #999;
     .dash_cursos{
         row-gap: 40px;
         margin-top: 50px;
-    }
+    } */
   }
   
 

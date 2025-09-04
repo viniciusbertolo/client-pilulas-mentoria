@@ -28,7 +28,7 @@ export default function AreaDownload() {
         </Link>
       </div>
 
-      <div className="dash_cursos">
+      {/* <div className="dash_cursos">
         {files.map((file, index) => (
           <div className="card_cursos" key={index}>
             <div className="textos_cursos">
@@ -42,6 +42,34 @@ export default function AreaDownload() {
             </a>
           </div>
         ))}
+      </div> */}
+
+      <div className="dash_cursos">
+        {files
+          .map((value, key) => (
+            <div className="card_cursos" key={key}>
+
+              {/* Imagem genérica do curso */}
+              <div className="imagem_curso">
+                <img
+                  src={"https://wallpapers.com/images/featured/data-center-775ta0o0wf4nbyq3.jpg"}
+                  alt={value.name}
+                />
+              </div>
+
+              <div className="textos_cursos">
+                <h1>{value.name}</h1>
+                <br></br>
+                <a href={value.path} download>
+                  <div className="botao_cursos">
+                    Baixar
+                  </div>
+                </a>
+              </div>
+
+
+            </div>
+          ))}
       </div>
     </div>
   );

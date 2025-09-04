@@ -5,7 +5,7 @@ import Axios from "axios";
 import { Link } from 'react-router-dom';
 import logo_pilulas from "../../Assets/imgs/logo_pilulas.png";
 import Swal from 'sweetalert2'
-import React, { Component, useState }  from 'react';
+import React, { Component, useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 function Login() {
@@ -18,8 +18,17 @@ function Login() {
       const page = response.data;
 
       if (page === true) {
-        localStorage.setItem('@user',(response.config.data));
-        window.location.reload();
+        // localStorage.setItem('@user', (response.config.data));
+        // window.location.reload();
+
+        localStorage.setItem('@user', response.config.data);
+        const redirect = localStorage.getItem("redirectAfterLogin");
+        if (redirect) {
+          localStorage.removeItem("redirectAfterLogin"); // limpa pra não ficar preso
+          window.location.href = redirect;
+        } else {
+          window.location.reload();
+        }
       } else {
         Swal.fire({
           icon: 'error',
@@ -53,11 +62,11 @@ function Login() {
 
   return (
     <div className="body">
-     
+
 
       <div className="right-login">
         <div className="card-login">
-        <img src={logo_pilulas} alt="" className="logo_pilulas_login" />
+          <img src={logo_pilulas} alt="" className="logo_pilulas_login" />
           {/* <h1>LOGIN</h1> */}
           <Formik
             initialValues={{}}
@@ -79,7 +88,7 @@ function Login() {
 
               {/*Outro campo*/}
 
-                <label form="email">Senha</label>
+              <label form="email">Senha</label>
               <div className="form-group-2">
                 <Field type={passwordShown ? "text" : "password"} name="password" className="form-field" placeholder="Senha" />
                 <VisibilityIcon className="icon_eye" onClick={togglePassword}>Show Password</VisibilityIcon>
@@ -91,8 +100,9 @@ function Login() {
                   className="form-error"
                 /> */}
               </div>
-              
 
+              <br></br>
+              <Link to="/nova-senha" className="voltar_para_home">Esqueci a minha senha</Link>
               <button className="button" type="submit">
                 ENTRAR
               </button>
@@ -106,7 +116,7 @@ function Login() {
             </Form>
           </Formik>
           <br></br>
-              <Link to="/nova-senha" className="voltar_para_home">Esqueci a minha senha</Link>
+          <Link to="/seja-um-membro" className="voltar_para_home">Sou novo por aqui</Link>
         </div>
       </div>
     </div>

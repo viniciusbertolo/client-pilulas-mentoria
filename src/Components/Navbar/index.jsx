@@ -178,7 +178,7 @@ export default function Navbar({ black }) {
             <div className="item-menu"><HomeIcon className="logoutIcon"/><Link to="/todos-cursos">Todos os cursos</Link></div>
             <div className="item-menu"><SchoolIcon className="logoutIcon"/><Link to="/cursos">Meus cursos</Link></div>
             <div className="item-menu"><SourceIcon className="logoutIcon"/><Link to="/materiais">Materiais</Link></div>
-            <div className="item-menu"><TipsAndUpdatesIcon className="logoutIcon"/><Link to="/ia">IA Pílulas</Link></div>
+            {/* <div className="item-menu"><TipsAndUpdatesIcon className="logoutIcon"/><Link to="/ia">IA Pílulas</Link></div> */}
             <div className="item-menu" onClick={logout}><LogoutIcon className="logoutIcon"/><p>Logout</p></div>
           </div>
         )}
