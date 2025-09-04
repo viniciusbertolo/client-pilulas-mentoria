@@ -92,6 +92,11 @@ a{
 
 /* Responsividade */
 @media (max-width: 800px) {
+    .dash_cursos {
+  margin-left: 0%;
+  justify-content: center;
+  margin-top: 50px;
+}
   .card_cursos {
     width: 90%;
   }

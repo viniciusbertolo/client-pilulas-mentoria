@@ -148,7 +148,7 @@ export default function Dashboard(props) {
       
                   <div className="textos_cursos">
                     <h1>{value.nome}</h1>
-                    <Link to={`/detalhe-curso/${value.ID_CURSO}`}>
+                    <Link to={`/cursos/${value.ID_CURSO}`}>
                     <br></br>
                     <div className="botao_cursos">
                       Acessar curso
