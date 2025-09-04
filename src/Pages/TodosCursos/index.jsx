@@ -86,7 +86,7 @@ export default function TodosCursos(props) {
   console.log(cursos);
 
 
-  async function createCheckout(id) {
+  async function createCheckout(id, valor_curso) {
   try {
     const response = await fetch("https://backend-pilulas-mentoria.herokuapp.com/api/payments/create-checkout", {
       method: "POST",
@@ -95,6 +95,7 @@ export default function TodosCursos(props) {
         email_usuario: user.email,
         ID_CURSO: id,
         codigo: "TESTEPAGAMENTO",
+        valor: valor_curso
       }),
     });
 
@@ -214,7 +215,7 @@ export default function TodosCursos(props) {
                 </div>
               {/* </Link> */}
               {/* <Link to={`/cursos/${value.ID_CURSO}`}> */}
-                <div className="botao_cursos" onClick={() => createCheckout(value.ID_CURSO)}>
+                <div className="botao_cursos" onClick={() => createCheckout(value.ID_CURSO, "50")}>
 
                   <h2>Comprar curso</h2>
                 </div>
