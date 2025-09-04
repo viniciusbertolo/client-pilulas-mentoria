@@ -209,17 +209,23 @@ export default function TodosCursos(props) {
                 <p>{value.descricao}</p>
               </div>
               {/* <Link to={`/cursos/${value.ID_CURSO}`}> */}
-                <div className="botao_cursos" onClick={() => codigo(value.ID_CURSO)}>
+                {/* <div className="botao_cursos" onClick={() => codigo(value.ID_CURSO)}>
 
                   <h2>Código promocioal</h2>
-                </div>
+                </div> */}
               {/* </Link> */}
               {/* <Link to={`/cursos/${value.ID_CURSO}`}> */}
-                <div className="botao_cursos" onClick={() => createCheckout(value.ID_CURSO, "50")}>
+                {/* <div className="botao_cursos" onClick={() => createCheckout(value.ID_CURSO, "50")}>
 
                   <h2>Comprar curso</h2>
-                </div>
+                </div> */}
               {/* </Link> */}
+              <Link to={`/detalhe-curso/${value.ID_CURSO}`}>
+                <div className="botao_cursos">
+
+                  <h2>Detalhes curso</h2>
+                </div>
+              </Link>
             </div>
           ))}
       </div>

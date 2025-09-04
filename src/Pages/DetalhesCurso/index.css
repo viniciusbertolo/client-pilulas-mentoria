@@ -1,0 +1,59 @@
+.dash_detalhes{
+    color: #fafafa;
+    padding-left: 5%;
+    padding-right: 5%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.acoes_area{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 24px;
+    margin-top: 50px;
+    height: fit-content;
+}
+
+
+.botao_detalhes{
+  position: relative;
+  width: fit-content;
+  background-color: #FAFAFA;
+  text-align: center;
+  padding: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: #ff5400;
+
+outline: none;
+border: none;
+border-radius: 15px;
+box-shadow: 0 9px #999;
+
+}
+
+.botao_detalhes:hover {
+  background-color: #ff5400;
+  color:#FAFAFA;
+}
+.botao_detalhes:hover a{
+  color:#FAFAFA;
+}
+
+.botao_detalhes:active {
+  background-color: #ff5400;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.botao_detalhes a{
+  font-weight: bold;
+  color: #444444;
+}
+
