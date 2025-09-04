@@ -29,12 +29,12 @@ export default function HomeCurso() {
     console.log("FUNÇÂO OBTER FASES");
     setRemoveLoading(true);
 
-    
-      obterEtapaAtual();
-      
- 
-    
-    
+
+    obterEtapaAtual();
+
+
+
+
   }
 
   console.log(relacionamento);
@@ -55,14 +55,14 @@ export default function HomeCurso() {
 
     console.log("FUNÇÂO OBTER ETAPA ATUAL");
 
-   
+
 
     inserirPrimeiraEtapa()
 
   }
-  
 
-  
+
+
 
   function inserirPrimeiraEtapa() {
     const resposta = fetch(
@@ -73,20 +73,20 @@ export default function HomeCurso() {
       }
     );
     console.log("FUNÇÂO ONSERIR PRIMEIRA ETAPA");
-    
-    
+
+
   }
-  
+
   useEffect(() => {
-    obterFases();  
-    
+    obterFases();
 
 
-    
 
 
-    
-    
+
+
+
+
   }, []);
   //   console.log(relacionamento);
   //   // setTimeout(() => {
@@ -99,13 +99,13 @@ export default function HomeCurso() {
   //   //     }
   //   //   }, 1000);
 
-  
+
 
 
   var faseEspecifica;
-  if(relacionamento){
+  if (relacionamento) {
     faseEspecifica = relacionamento.NRO_FASE_ATUAL;
-  }else{
+  } else {
     faseEspecifica = 0
     setTimeout(() => {
       window.location.reload()
@@ -113,22 +113,101 @@ export default function HomeCurso() {
   }
 
 
+  const [files, setFiles] = useState([]);
 
+
+  useEffect(() => {
+    async function obterMateriais() {
+      const resposta = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/materiais`, {
+        method: "GET",
+        headers: { "Content-type": "application/json" },
+      });
+      const respostaJson = await resposta.json();
+      setFiles(respostaJson);
+      setRemoveLoading(true)
+    }
+    obterMateriais();
+  }, []);
+
+
+  const [mostrar, setMostrar] = useState(false);
 
   return (
     <div className="pag_todo_game">
-      <Navbar/>
+      <Navbar />
       <div className="boas_vindas_cursos">
+        <Link to="/cursos" className="voltar_para_home"><NavigateBeforeIcon />Voltar</Link>
+        <br></br>
+        <br></br>
         <h1>É hora de aprender!</h1>
         <p>Selecione uma pilula e siga até o final do game</p>
-        <Link to="/cursos" className="voltar_para_home"><NavigateBeforeIcon/>Voltar</Link>
+        {files.some((file) => Number(file.curso_relacionado) === Number(id)) && (
+          <div
+            className="botao_detalhes_show_hide"
+            onClick={() => setMostrar(!mostrar)}
+          >
+            {mostrar ? "Fechar" : "Materiais extras"}
+          </div>
+        )}
+
       </div>
+      {mostrar && (
+        <div className="area_baixar_especifico">
+          <div className="cabecalho_mt_ex">
+            <h2>Materiais Extras</h2>
+            <div
+              className="botao_detalhes_show_hide"
+              onClick={() => setMostrar(!mostrar)}
+            >
+              {mostrar ? "Fechar" : "Materiais extras"}
+            </div>
+          </div>
+
+          {files
+            .filter((file) => file.curso_relacionado == id) // só arquivos públicos
+            .map((value, key) => (
+              <div className="card_cursos" key={key}>
+
+                {/* Imagem genérica do curso */}
+                <div className="imagem_curso">
+                  <img
+                    src={value.foto_material || "https://wallpapers.com/images/featured/data-center-775ta0o0wf4nbyq3.jpg"}
+                    alt={value.name}
+                  />
+                </div>
+
+                <div className="textos_cursos">
+                  <h1>{value.nome}</h1>
+                  <a href={value.url_material} target="_blank" download>
+                    <div className="botao_cursos">
+                      Baixar
+                    </div>
+                  </a>
+                  <small>
+                    Ultima atualização:&ensp;
+                    {new Date(value.updated_at).toLocaleString("pt-BR", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit"
+                    })}
+                  </small>
+
+                </div>
+
+
+              </div>
+            ))}
+        </div>
+      )}
+
       {!removeLoadin && <Loading />}
       <div class="main-timeline">
         {fases.map((value, key) =>
           value.NRO <= faseEspecifica ? (
             <div class="timeline" key={key}>
-              <div  class="timeline-content">
+              <div class="timeline-content">
 
                 <span class="timeline-year">{value.NRO}</span>
                 <div class="timeline-icon">
@@ -138,17 +217,17 @@ export default function HomeCurso() {
                   <h3 class="title">{value.nome}</h3>
                   <p class="description">{value.descricao}</p>
                   <Link
-                to={`/videoCurso/${id}/${value.NRO}`}
-                class="botao-video"
-              >
+                    to={`/videoCurso/${id}/${value.NRO}`}
+                    class="botao-video"
+                  >
 
-                  <h3 class="title">Clique aqui e assista o video</h3>
-              </Link>
-              
+                    <h3 class="title">Clique aqui e assista o video</h3>
+                  </Link>
+
                 </div>
               </div>
 
-              
+
             </div>
           ) : (
             <div class="timeline-off">
@@ -167,8 +246,8 @@ export default function HomeCurso() {
         )}
       </div>
       <div className="detalhe_imagem_home_curso">
-          
-        </div>
+
+      </div>
     </div>
   );
 }

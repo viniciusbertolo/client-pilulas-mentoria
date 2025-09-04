@@ -1,3 +1,57 @@
+.area_baixar_especifico{
+background-color: #1e1e1e;
+width: fit-content;
+display: flex;
+align-items: center;
+justify-content: start;
+flex-direction: column;
+border-radius: 0 24px 24px 0;
+position:absolute;
+top: 0;
+left: 0;
+z-index: 9999;
+margin-top: 0;
+margin-left: 0;
+padding: 16px;
+padding-top: 50px;
+box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+
+}
+
+.cabecalho_mt_ex{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fafafa;
+  width: 100%;
+  margin-bottom: 50px;
+  
+}
+
+
+.botao_detalhes_show_hide {
+  width: fit-content;
+  background-color: #ff5400;
+  color: #fafafa;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.botao_detalhes_show_hide:hover {
+  background-color: #ff6b1a;
+}
+
+.botao_detalhes_show_hide:active {
+  transform: scale(0.97);
+}
+
+
 
 .detalhe_imagem_home_curso{
   background: url("https://images8.alphacoders.com/987/987256.png");
