@@ -7,9 +7,9 @@ import './index.css'
 
 export default function VideoCurso() {
 
-    const { id } = useParams();
-    const { idCurso } = useParams();
-    const user = JSON.parse(localStorage.getItem("@user"));
+  const { id } = useParams();
+  const { idCurso } = useParams();
+  const user = JSON.parse(localStorage.getItem("@user"));
   console.log(id);
   console.log("ID DO CURSO:" + idCurso);
   console.log("USUARIO:" + user.email);
@@ -18,47 +18,66 @@ export default function VideoCurso() {
 
   const [video, setVideo] = useState([])
   useEffect(() => {
-    async function obterVideo(){
-    const resposta = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/videos/${idCurso}/${id}`,
+    async function obterVideo() {
+      const resposta = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/videos/${idCurso}/${id}`,
         {
-            method: 'GET',
-            headers: { 'Content-type': 'application/json' }
+          method: 'GET',
+          headers: { 'Content-type': 'application/json' }
         });
-    const respostaJson = await resposta.json();
-    setVideo(respostaJson[0])
-    window.scrollTo(0,0);
+      const respostaJson = await resposta.json();
+      setVideo(respostaJson[0])
+      window.scrollTo(0, 0);
     }
     obterVideo()
   }
-  ,[])
+    , [])
 
 
-  console.log(video) 
+  console.log(video)
 
-    const handleClick = () => {
-        navigate(`/pergunta/${idCurso}/${id}`);
-    }
+  const handleClick = () => {
+    navigate(`/pergunta/${idCurso}/${id}`);
+  }
   return (
     <div className='pag_todo'>
-        <Navbar/>
+      <Navbar />
 
-            
-        <div className="boas_vindas_cursos videos_texto">
+
+      {/* <div className="boas_vindas_cursos videos_texto">
+        <h1>Pílula {id}</h1>
+        <p>Assista o vídeo completo e responda a questão a seguir. Aguarde, você será redirecionado!</p>
+      </div> */}
+
+
+
+
+      <div className="boas_vindas_cursos videos_texto">
+        <div>
+
           <h1>Pílula {id}</h1>
           <p>Assista o vídeo completo e responda a questão a seguir. Aguarde, você será redirecionado!</p>
+          {/* <Link to="/" className="voltar_para_home"><NavigateBeforeIcon />Voltar</Link> */}
         </div>
-        <div className="video_curso">
+        <div
+          className="botao_detalhes_show_hide"
+        >
+          <a href={video.materialExtra} target="_blank">
+            Material complementar
+          </a>
+        </div>
+      </div>
+      <div className="video_curso">
 
-        <ReactPlayer className="video_player" url={video.URL_VIDEO} controls onEnded={handleClick}  
+        <ReactPlayer className="video_player" url={video.URL_VIDEO} controls onEnded={handleClick}
           width='100%'
-          />
-          </div>
-          <div className="material_apoio">
-            <a href={video.materialExtra} target="_blank">
-              Material complementar
-            </a>            
-          </div>
-          
+        />
+      </div>
+      {/* <div className="material_apoio">
+        <a href={video.materialExtra} target="_blank">
+          Material complementar
+        </a>
+      </div> */}
+
     </div>
   )
 }
