@@ -1,11 +1,11 @@
-.dash_cursos{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10%;
-    row-gap: 100px;
+.dash_cursos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10%;
+  row-gap: 100px;
 }
 
-.detalhe_imagem_dash{
+.detalhe_imagem_dash {
   background: url("https://images8.alphacoders.com/987/987256.png");
   background-position: center;
   background-repeat: no-repeat;
@@ -17,27 +17,59 @@
 
 }
 
-.voltar_para_home{
+.voltar_para_home {
   text-decoration: none;
   color: #FAFAFA;
   transition: 0.3s;
 }
-.voltar_para_home:hover{
+
+.voltar_para_home:hover {
   color: #ff5400;
 }
 
 
 
-.boas_vindas_cursos{
-    width: 100%;
-    color: #fafafa;
-    padding:100px;
-    padding-bottom: 50px;
-    padding-top: 50px;
-    padding-left: 5%;
+.boas_vindas_cursos {
+  width: 100%;
+  color: #fafafa;
+  padding: 100px;
+  padding-bottom: 50px;
+  padding-top: 50px;
+  padding-left: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.boas_vindas_cursos h1{
-    font-size: 42px;
+
+.boas_vindas_cursos h1 {
+  font-size: 42px;
+}
+
+.boas_vindas_cursos input {
+  width: 280px;
+  padding: 10px 15px;
+  margin: 20px 0;
+  border-radius: 25px;
+  border: 1px solid #ff6600;
+  /* cor laranja que combina com os botões */
+  background-color: #1a0f1f;
+  /* mesmo tom do fundo */
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+  float: right;
+  /* joga para a direita igual no print */
+}
+
+.boas_vindas_cursos input::placeholder {
+  color: #aaa;
+}
+
+.boas_vindas_cursos input:focus {
+  border-color: #ff8533;
+  box-shadow: 0 0 10px rgba(255, 102, 0, 0.5);
+  background-color: #24142b;
 }
 
 /* a{
@@ -124,23 +156,31 @@ box-shadow: 0 9px #999;
 
 
 
-@media (max-width: 500px){
-    
-.boas_vindas_cursos{
+@media (max-width: 500px) {
+
+  .boas_vindas_cursos {
     width: 100%;
     color: #fafafa;
-    padding:10px;
+    padding: 10px;
     padding-left: 5%;
     margin-top: 50px;
-}
-.boas_vindas_cursos h1{
-    font-size: 24px;
-}
-.boas_vindas_cursos p{
-    font-size: 14px;
-}
+    flex-direction: column;
+    align-items: start;
+  }
 
-/* .card_cursos {
+  .boas_vindas_cursos h1 {
+    font-size: 24px;
+  }
+
+  .boas_vindas_cursos p {
+    font-size: 14px;
+  }
+
+  .boas_vindas_cursos input{
+    width: 95%;
+  }
+
+  /* .card_cursos {
   width: 90%;
   left: 5%;
   border-radius: 30px;
@@ -169,25 +209,33 @@ box-shadow: 0 9px #999;
     margin-top: 50px;
 } */
 
-  
+
+}
+
+@media (min-width: 500px) and (max-width: 800px) {
+  .boas_vindas_cursos {
+    width: 100%;
+    color: #fafafa;
+    padding: 10px;
+    padding-left: 5%;
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: start;
   }
-  
-  @media (min-width: 500px) and (max-width: 800px) {
-    .boas_vindas_cursos{
-        width: 100%;
-        color: #fafafa;
-        padding:10px;
-        padding-left: 5%;
-        margin-top: 50px;
-    }
-    .boas_vindas_cursos h1{
-        font-size: 26px;
-    }
-    .boas_vindas_cursos p{
-        font-size: 16px;
-    }
-    
-    /* .card_cursos {
+
+  .boas_vindas_cursos h1 {
+    font-size: 26px;
+  }
+
+  .boas_vindas_cursos p {
+    font-size: 16px;
+  }
+
+  .boas_vindas_cursos input{
+    width: 95%;
+  }
+
+  /* .card_cursos {
       width: 90%;
       left: 5%;
     }
@@ -213,7 +261,4 @@ box-shadow: 0 9px #999;
         row-gap: 40px;
         margin-top: 50px;
     } */
-  }
-  
-
-
+}

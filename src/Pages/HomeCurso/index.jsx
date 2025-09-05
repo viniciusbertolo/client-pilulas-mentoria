@@ -136,11 +136,12 @@ export default function HomeCurso() {
     <div className="pag_todo_game">
       <Navbar />
       <div className="boas_vindas_cursos">
-        <Link to="/cursos" className="voltar_para_home"><NavigateBeforeIcon />Voltar</Link>
-        <br></br>
-        <br></br>
+        <div>
+
         <h1>É hora de aprender!</h1>
         <p>Selecione uma pilula e siga até o final do game</p>
+        <Link to="/" className="voltar_para_home"><NavigateBeforeIcon />Voltar</Link>
+        </div>
         {files.some((file) => Number(file.curso_relacionado) === Number(id)) && (
           <div
             className="botao_detalhes_show_hide"
@@ -149,8 +150,8 @@ export default function HomeCurso() {
             {mostrar ? "Fechar" : "Materiais extras"}
           </div>
         )}
-
       </div>
+      
       {mostrar && (
         <div className="area_baixar_especifico">
           <div className="cabecalho_mt_ex">

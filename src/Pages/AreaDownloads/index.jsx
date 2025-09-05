@@ -31,18 +31,32 @@ export default function AreaDownload() {
   }, []);
 
 
+  const [busca, setBusca] = useState("");
+    const filesFiltrados = files.filter((file) =>
+      file.nome.toLowerCase().includes(busca.toLowerCase())
+    );
+
+
   return (
     <div className="pag_todo">
       <Navbar />
       <div className="detalhe_imagem_dash"></div>
 
       <div className="boas_vindas_cursos">
-        <h1>Área de Downloads</h1>
-        <p>Baixe seus arquivos disponíveis abaixo</p>
-        <Link to="/" className="voltar_para_home">
-          <NavigateBeforeIcon />
-          Voltar
-        </Link>
+        <div>
+
+        <h1>Materiais Extras</h1>
+        <p>Materiais pensados especialmente para você!</p>
+        <Link to="/" className="voltar_para_home"><NavigateBeforeIcon />Voltar</Link>
+        </div>
+        {/* Campo de busca */}
+      <input
+        type="text"
+        placeholder="Buscar material..."
+        value={busca}
+        onChange={(e) => setBusca(e.target.value)}
+        className="input_busca"
+      />
       </div>
 
       {/* <div className="dash_cursos">
@@ -64,7 +78,7 @@ export default function AreaDownload() {
       {!removeLoadin && <Loading />}
 
       <div className="dash_cursos">
-        {files
+        {filesFiltrados
           .filter((file) => file.publico === 0) // só arquivos públicos
           .map((value, key) => (
             <div className="card_cursos" key={key}>

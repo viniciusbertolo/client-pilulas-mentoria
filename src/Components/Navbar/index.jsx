@@ -84,13 +84,14 @@
 
 
 import React, { useEffect, useState } from "react";
-import { Link, redirect } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import IdleTimer from "../../IdleTimer";
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu'; // Importação do ícone de hambúrguer
 import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import SchoolIcon from '@mui/icons-material/School';
 import SourceIcon from '@mui/icons-material/Source';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import HomeIcon from '@mui/icons-material/Home';
 import logo from "../../Assets/imgs/logo_pilulas.png";
 import Swal from 'sweetalert2';
@@ -98,56 +99,66 @@ import './index.css';
 
 export default function Navbar({ black }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Controle do menu de hambúrguer
+  const [isLogged, setIsLogged] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen); // Alterna o estado do menu
   };
 
   const [isTimeout, setIsTimeout] = useState(false);
-    useEffect(() => {
-      const timer = new IdleTimer({
-        timeout: 3600, //expire after 10 seconds
-        onTimeout: () => {
-          localStorage.clear();
-          window.location.reload();
-          console.log("SAINDO");
-          redirect("/login")
-  
-          setIsTimeout(true);
-        },
-        onExpired: () => {
-          localStorage.clear();
-          window.location.reload();
-          console.log("SAINDO");
-          redirect("/login")
-          // do something if expired on load
-          setIsTimeout(true);
-        },
-      });
-  
-      return () => {
-        timer.cleanUp();
-      };
-    }, []);
-  
-    const logout = () => {
-  
-      Swal.fire({
-        title: 'Você realmente quer sair?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, volto mais tarde!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          localStorage.clear();
-          window.location.reload();
-          console.log("SAINDO");
-        }
-      })
-  
+  useEffect(() => {
+
+    // Checa se tem algum dado no localStorage
+    const userData = localStorage.getItem("@user");
+    setIsLogged(!!userData);
+
+
+    const timer = new IdleTimer({
+      timeout: 3600, //expire after 10 seconds
+      onTimeout: () => {
+        localStorage.clear();
+        window.location.reload();
+        console.log("SAINDO");
+        redirect("/login")
+
+        setIsTimeout(true);
+      },
+      onExpired: () => {
+        localStorage.clear();
+        window.location.reload();
+        console.log("SAINDO");
+        redirect("/login")
+        // do something if expired on load
+        setIsTimeout(true);
+      },
+    });
+
+    return () => {
+      timer.cleanUp();
     };
+  }, []);
+
+  const logout = () => {
+
+    Swal.fire({
+      title: 'Você realmente quer sair?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, volto mais tarde!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        window.location.reload();
+        console.log("SAINDO");
+        setIsLogged(false); // 🔥 força a navbar a atualizar
+        setIsMenuOpen(false); // fecha menu se estiver aberto
+      }
+    })
+
+  };
 
   return (
     <header className={black ? 'black' : ''}>
@@ -162,24 +173,52 @@ export default function Navbar({ black }) {
         </Link> */}
 
         <div className="header--user">
-          <img
+          {/* <img
             src="https://i.pinimg.com/564x/b6/77/cd/b677cd1cde292f261166533d6fe75872.jpg"
             alt="Usuário"
-          />
+          /> */}
           {/* <LogoutIcon className="logoutIcon" onClick={logout} /> */}
-          <MenuIcon className="hamburger-menu" onClick={toggleMenu}/>
+          {/* <MenuIcon className="hamburger-menu" onClick={toggleMenu}/> */}
+          <div className="item-menu">
+            <a
+              href="https://wa.me/5516982559460" // número já no formato internacional
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whatsapp-link"
+            >
+              <WhatsAppIcon className="whatsapp-icon" />
+            </a>
+          </div>
+          {isLogged ? (
+            <>
+              <img
+                src="https://i.pinimg.com/564x/b6/77/cd/b677cd1cde292f261166533d6fe75872.jpg"
+                alt="Usuário"
+              />
+              <MenuIcon className="hamburger-menu" onClick={toggleMenu} />
+            </>
+          ) : (
+            <button
+              className="button"
+              style={{ marginTop: 0, padding: "10px", fontSize: "14px" }}
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </button>
+          )}
+
         </div>
-        
-          
+
+
 
         {/* Menu Lateral */}
         {isMenuOpen && (
           <div className="menu-lateral open">
-            <div className="item-menu"><HomeIcon className="logoutIcon"/><Link to="/todos-cursos">Todos os cursos</Link></div>
-            <div className="item-menu"><SchoolIcon className="logoutIcon"/><Link to="/cursos">Meus cursos</Link></div>
-            <div className="item-menu"><SourceIcon className="logoutIcon"/><Link to="/materiais">Materiais</Link></div>
+            <div className="item-menu"><HomeIcon className="logoutIcon" /><Link to="/todos-cursos">Todos os cursos</Link></div>
+            <div className="item-menu"><SchoolIcon className="logoutIcon" /><Link to="/cursos">Meus cursos</Link></div>
+            <div className="item-menu"><SourceIcon className="logoutIcon" /><Link to="/materiais">Materiais</Link></div>
             {/* <div className="item-menu"><TipsAndUpdatesIcon className="logoutIcon"/><Link to="/ia">IA Pílulas</Link></div> */}
-            <div className="item-menu" onClick={logout}><LogoutIcon className="logoutIcon"/><p>Logout</p></div>
+            <div className="item-menu" onClick={logout}><LogoutIcon className="logoutIcon" /><p>Logout</p></div>
           </div>
         )}
       </div>

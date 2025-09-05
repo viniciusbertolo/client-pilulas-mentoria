@@ -84,6 +84,11 @@ export default function Dashboard(props) {
 
   console.log(cursos);
 
+  const [busca, setBusca] = useState("");
+    const cursosFiltrados = cursos.filter((curso) =>
+      curso.nome.toLowerCase().includes(busca.toLowerCase())
+    );
+
   return (
     <div className="pag_todo">
       <Navbar />
@@ -92,9 +97,20 @@ export default function Dashboard(props) {
       </div>
 
       <div className="boas_vindas_cursos">
-        <h1>Olá, Bem-Vindo aos Meus cursos</h1>
-        <p>Selecione o curso e continue a sua evolução</p>
+        <div>
+
+        <h1>Meus Cursos</h1>
+        <p>Selecione um curso e continue o aprendizado</p>
         <Link to="/" className="voltar_para_home"><NavigateBeforeIcon />Voltar</Link>
+        </div>
+        {/* Campo de busca */}
+      <input
+        type="text"
+        placeholder="Buscar cursos..."
+        value={busca}
+        onChange={(e) => setBusca(e.target.value)}
+        className="input_busca"
+      />
       </div>
 
 
@@ -133,7 +149,7 @@ export default function Dashboard(props) {
       </div> */}
 
       <div className="dash_cursos">
-              {cursos
+              {cursosFiltrados
               .filter((curso) => cursosDoUsuario.includes(curso.ID_CURSO)) 
               .map((value, key) => (
                 <div className="card_cursos" key={key}>

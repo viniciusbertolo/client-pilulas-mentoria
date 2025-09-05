@@ -35,25 +35,23 @@ export default function TodosCursos(props) {
 
 
 
-  useEffect(() => {
-    // Obter cursos do usuário específico
-    async function obterCursosDoUsuario() {
-      const resposta = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/usuario-curso/${user.email}`, {
-        method: "GET",
-        headers: { "Content-type": "application/json" },
-      });
-      const respostaJson = await resposta.json();
-      const cursosUsuario = respostaJson.map((curso) => curso.ID_CURSO);
-      setCursosDoUsuario(cursosUsuario);
+  // useEffect(() => {
+  //   // Obter cursos do usuário específico
+  //   async function obterCursosDoUsuario() {
+  //     const resposta = await fetch(`https://backend-pilulas-mentoria.herokuapp.com/usuario-curso/${user.email}`, {
+  //       method: "GET",
+  //       headers: { "Content-type": "application/json" },
+  //     });
+  //     const respostaJson = await resposta.json();
+  //     const cursosUsuario = respostaJson.map((curso) => curso.ID_CURSO);
+  //     setCursosDoUsuario(cursosUsuario);
 
-      // setCursosDoUsuario(respostaJson.ID_CURSO);
-    }
-    obterCursosDoUsuario();
-  }, []);
+  //     // setCursosDoUsuario(respostaJson.ID_CURSO);
+  //   }
+  //   obterCursosDoUsuario();
+  // }, []);
 
-  console.log(user.email);
   console.log("Cursos:", cursos);
-  console.log("Cursos do usuário:", cursosDoUsuario); // Verificar os cursos do usuário
 
   // function obterEtapaAtual(id) {
   //   const response = fetch(
@@ -170,6 +168,10 @@ export default function TodosCursos(props) {
   //     });
   //   };
 
+  const [busca, setBusca] = useState("");
+  const cursosFiltrados = cursos.filter((curso) =>
+    curso.nome.toLowerCase().includes(busca.toLowerCase())
+  );
 
   return (
     <div className="pag_todo">
@@ -179,10 +181,24 @@ export default function TodosCursos(props) {
       </div>
 
       <div className="boas_vindas_cursos">
+        <div>
+
         <h1>Olá, Bem-Vindo aos cursos do Pilulas de Mentoria</h1>
         <p>Selecione um curso e comece o aprendizado</p>
-        <Link to="/" className="voltar_para_home"><NavigateBeforeIcon />Voltar</Link>
+        {/* <Link to="/" className="voltar_para_home"><NavigateBeforeIcon />Voltar</Link> */}
+        </div>
+        {/* Campo de busca */}
+      <input
+        type="text"
+        placeholder="Buscar cursos..."
+        value={busca}
+        onChange={(e) => setBusca(e.target.value)}
+        className="input_busca"
+      />
       </div>
+
+        
+        
 
 
 
@@ -216,9 +232,9 @@ export default function TodosCursos(props) {
             </div>
           ))}
       </div> */}
-
+ 
       <div className="dash_cursos">
-        {cursos.map((value, key) => (
+        {cursosFiltrados.map((value, key) => (
           <div className="card_cursos" key={key}>
 
             {/* Imagem genérica do curso */}
