@@ -1,4 +1,4 @@
-.area_baixar_especifico {
+/* .area_baixar_especifico {
   background-color: #1e1e1e;
   width: fit-content;
   display: flex;
@@ -442,7 +442,6 @@ body {
 }
 
 
-/* ----------------------------------------------- */
 
 
 .main-timeline .timeline:nth-child(11)::before {
@@ -660,7 +659,6 @@ body {
 
 
 
-/* ----------------------------------------------------- */
 
 
 .main-timeline .timeline:nth-child(21)::before {
@@ -877,7 +875,6 @@ body {
 }
 
 
-/* ------------------------------------------------ */
 
 
 .main-timeline .timeline:nth-child(31)::before {
@@ -1425,10 +1422,7 @@ body {
 
 
 
-/* ------------------------------------------  */
 
-
-/* OFF VERSION */
 
 .main-timeline {
   padding: 100px;
@@ -1602,7 +1596,7 @@ body {
     border-radius: 0 88px 88px 0;
   }
 
-  /* PARTE OFF */
+ 
   .main-timeline .timeline-off:after {
     border-radius: 88px 0 0 88px;
   }
@@ -1655,7 +1649,7 @@ body {
 
 
 
-  /* PARTE OFF */
+
 
 
   .main-timeline .timeline-off {
@@ -1742,7 +1736,7 @@ body {
 
 
 
-  /* PARTE OFF */
+
 
   .main-timeline .timeline-icon-off {
     font-size: 50px;
@@ -1794,4 +1788,459 @@ body {
 
 
 
+} */
+
+
+
+
+/* =================================================================
+   ESTILOS GERAIS DA PÁGINA E MATERIAIS EXTRAS
+   ================================================================= */
+ .area_baixar_especifico {
+  background-color: #1e1e1e;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  border-radius: 0 24px 24px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  margin-top: 0;
+  margin-left: 0;
+  padding: 16px;
+  padding-top: 50px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  min-height: 100vh;
+
+}
+
+.cabecalho_mt_ex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fafafa;
+  width: 100%;
+  margin-bottom: 50px;
+
+}
+
+
+.botao_detalhes_show_hide {
+  width: fit-content;
+  background-color: #ff5400;
+  color: #fafafa;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.botao_detalhes_show_hide:hover {
+  background-color: #ff6b1a;
+}
+
+.botao_detalhes_show_hide:active {
+  transform: scale(0.97);
+}
+
+
+
+.detalhe_imagem_home_curso {
+  background: url("https://images8.alphacoders.com/987/987256.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 200px;
+  top: 70px;
+  border-radius: 800px 0 0 0;
+
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.pag_todo_game {
+  padding-bottom: 0px;
+  background-color: var(--page-background-color, #140717);
+  padding-top: 70px;
+  min-width: 100vw;
+
+  min-height: 100vh;
+}
+
+/* =================================================================
+   ESTRUTURA PRINCIPAL DA TIMELINE
+   ================================================================= */
+.main-timeline {
+  padding: 100px;
+  position: relative;
+}
+
+.main-timeline::before,
+.main-timeline::after {
+  content: "";
+  height: 40px;
+  width: 40px;
+  background-color: #e7e7e7;
+  border-radius: 50%;
+  border: 10px solid #303334;
+  transform: translatex(-50%);
+  position: absolute;
+  left: 50%;
+  top: 65px;
+  z-index: 2;
+}
+
+.main-timeline::after {
+  top: auto;
+  bottom: 95px;
+}
+
+/* =================================================================
+   TIMELINE ATIVA (CORES VINDAS DO REACT)
+   ================================================================= */
+
+.main-timeline .timeline {
+  padding: 35px 0;
+  margin-top: -30px;
+  position: relative;
+  z-index: 1;
+}
+
+/* A MÁGICA ACONTECE AQUI: Usamos as variáveis CSS que o React fornece */
+.main-timeline .timeline::before {
+  content: "";
+  height: 100%;
+  width: 50%;
+  border-radius: 110px 0 0 110px;
+  border: 15px solid var(--main-color, #46b2bc); /* Cor principal com um fallback */
+  border-right: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.main-timeline .timeline::after {
+  content: "";
+  height: calc(100% - 30px);
+  width: calc(50% - 12px);
+  border-radius: 110px 0 0 110px;
+  border: 15px solid var(--light-color, #65c7d0); /* Cor clara com um fallback */
+  border-right: none;
+  position: absolute;
+  left: 12px;
+  top: 15px;
+  z-index: -1;
+}
+
+.main-timeline .timeline-content {
+  display: inline-block;
+}
+
+.main-timeline .timeline-content:hover {
+  text-decoration: none;
+}
+
+.main-timeline .timeline-year,
+.main-timeline .timeline-icon,
+.main-timeline .title {
+  color: var(--light-color, #65c7d0); /* A cor dos textos e ícones também é dinâmica */
+}
+
+.main-timeline .timeline-year {
+  font-size: 50px;
+  font-weight: 600;
+  display: inline-block;
+  transform: translatey(-50%);
+  position: absolute;
+  top: 50%;
+  left: 10%;
+}
+
+.main-timeline .timeline-icon {
+  font-size: 70px;
+  display: inline-block;
+  transform: translateY(-50%);
+  position: absolute;
+  left: 34%;
+  top: 50%;
+}
+
+.main-timeline .content {
+  color: #909090;
+  width: 50%;
+  padding: 20px;
+  display: inline-block;
+  float: right;
+}
+
+.main-timeline .title {
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0 0 5px 0;
+}
+
+.main-timeline .description {
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Regras de layout para itens pares (sem cores) */
+.main-timeline .timeline:nth-child(even)::before {
+  left: auto;
+  right: 0;
+  border-radius: 0 110px 110px 0;
+  border-left: none;
+  border-right: 15px solid var(--main-color, #46b2bc); /* A cor continua vindo da variável */
+}
+
+.main-timeline .timeline:nth-child(even)::after {
+  left: auto;
+  right: 12px;
+  border-radius: 0 100px 100px 0;
+  border-left: none;
+  border-right: 15px solid var(--light-color, #65c7d0); /* A cor continua vindo da variável */
+}
+
+.main-timeline .timeline:nth-child(even) .content {
+  float: left;
+}
+
+.main-timeline .timeline:nth-child(even) .timeline-year {
+  left: auto;
+  right: 10%;
+}
+
+.main-timeline .timeline:nth-child(even) .timeline-icon {
+  left: auto;
+  right: 32%;
+}
+
+/*
+  !!! IMPORTANTE !!!
+  TODO O BLOCO GIGANTE DE REGRAS .timeline:nth-child(1) até .timeline:nth-child(55)
+  FOI REMOVIDO DAQUI, POIS FOI SUBSTITUÍDO PELAS REGRAS ACIMA.
+*/
+
+/* =================================================================
+   TIMELINE DESATIVADA / BLOQUEADA (OFF VERSION)
+   ================================================================= */
+
+.main-timeline .timeline-off {
+  padding: 35px 0;
+  margin-top: -30px;
+  position: relative;
+  z-index: 1;
+}
+
+.main-timeline .timeline-off::before,
+.main-timeline .timeline-off::after {
+  content: "";
+  height: 100%;
+  width: 50%;
+  border-radius: 110px 0 0 110px;
+  border: 15px solid gray; /* Cor fixa para itens bloqueados */
+  border-right: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.main-timeline .timeline-off::after {
+  height: calc(100% - 30px);
+  width: calc(50% - 12px);
+  border-color: gray;
+  left: 12px;
+  top: 15px;
+}
+
+.main-timeline .timeline-content-off {
+  display: inline-block;
+  cursor: not-allowed;
+}
+
+.main-timeline .timeline-year-off,
+.main-timeline .timeline-icon-off,
+.main-timeline .title-off {
+  color: gray;
+}
+
+.main-timeline .timeline-year-off {
+  font-size: 50px;
+  font-weight: 600;
+  display: inline-block;
+  transform: translatey(-50%);
+  position: absolute;
+  top: 50%;
+  left: 10%;
+}
+
+.main-timeline .timeline-icon-off {
+  font-size: 70px;
+  display: inline-block;
+  transform: translateY(-50%);
+  position: absolute;
+  left: 34%;
+  top: 50%;
+}
+
+.main-timeline .content-off {
+  color: #909090;
+  width: 50%;
+  padding: 20px;
+  display: inline-block;
+  float: right;
+}
+
+.main-timeline .title-off {
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0 0 5px 0;
+}
+
+.main-timeline .description-off {
+  font-size: 16px;
+  margin: 0;
+}
+
+.main-timeline .timeline-off:nth-child(even)::before {
+  left: auto;
+  right: 0;
+  border-radius: 0 110px 110px 0;
+  border: 15px solid gray;
+  border-left: none;
+}
+
+.main-timeline .timeline-off:nth-child(even)::after {
+  left: auto;
+  right: 12px;
+  border-radius: 0 100px 100px 0;
+  border: 15px solid gray;
+  border-left: none;
+}
+
+.main-timeline .timeline-off:nth-child(even) .content-off {
+  float: left;
+}
+
+.main-timeline .timeline-off:nth-child(even) .timeline-year-off {
+  left: auto;
+  right: 10%;
+}
+
+.main-timeline .timeline-off:nth-child(even) .timeline-icon-off {
+  left: auto;
+  right: 32%;
+}
+
+/* =================================================================
+   MEDIA QUERIES (RESPONSIVIDADE)
+   ================================================================= */
+@media screen and (max-width: 1200px) {
+  .main-timeline .timeline::after,
+  .main-timeline .timeline-off::after {
+    border-radius: 88px 0 0 88px;
+  }
+  .main-timeline .timeline:nth-child(even)::after,
+  .main-timeline .timeline-off:nth-child(even)::after {
+    border-radius: 0 88px 88px 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .main-timeline .timeline,
+  .main-timeline .timeline-off {
+    margin-top: -19px;
+  }
+  .main-timeline .timeline::before,
+  .main-timeline .timeline-off::before {
+    border-radius: 50px 0 0 50px;
+    border-width: 10px;
+  }
+  .main-timeline .timeline::after,
+  .main-timeline .timeline-off::after {
+    height: calc(100% - 18px);
+    width: calc(50% - 9px);
+    border-radius: 43px 0 0 43px;
+    border-width: 10px;
+    top: 9px;
+    left: 9px;
+  }
+  .main-timeline .timeline:nth-child(even)::before,
+  .main-timeline .timeline-off:nth-child(even)::before {
+    border-radius: 0 50px 50px 0;
+    border-width: 10px;
+  }
+  .main-timeline .timeline:nth-child(even)::after,
+  .main-timeline .timeline-off:nth-child(even)::after {
+    height: calc(100% - 18px);
+    width: calc(50% - 9px);
+    border-radius: 0 43px 43px 0;
+    border-width: 10px;
+    top: 9px;
+    right: 9px;
+  }
+  .main-timeline .timeline-icon,
+  .main-timeline .timeline-icon-off {
+    font-size: 60px;
+  }
+  .main-timeline .timeline-year,
+  .main-timeline .timeline-year-off {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .main-timeline {
+    padding: 100px 10px;
+  }
+  .boas_vindas_cursos {
+    padding: 0 24px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .botao_detalhes_show_hide {
+    margin-top: 24px;
+  }
+  .main-timeline .timeline-icon,
+  .main-timeline .timeline-icon-off {
+    font-size: 50px;
+    transform: translateY(0);
+    top: 25%;
+    left: 10%;
+  }
+  .main-timeline .timeline-year,
+  .main-timeline .timeline-year-off {
+    font-size: 25px;
+    transform: translateY(0px);
+    top: 65%;
+    left: 9%;
+    display: none; /* O design original esconde o número em telas muito pequenas */
+  }
+  .main-timeline .content,
+  .main-timeline .content-off {
+    width: 90%;
+    padding: 10px;
+  }
+  .main-timeline .title,
+  .main-timeline .title-off {
+    font-size: 18px;
+  }
+  .main-timeline .timeline:nth-child(even) .timeline-icon,
+  .main-timeline .timeline-off:nth-child(even) .timeline-icon-off {
+    right: 10%;
+  }
 }
