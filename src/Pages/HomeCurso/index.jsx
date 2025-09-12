@@ -304,29 +304,48 @@ export default function HomeCurso() {
 
   // --- FUNÇÕES DE SUPORTE (VERSÕES LIMPAS) ---
 
-  const checarDisponibilidade = (horarioAgendado) => {
-    if (!horarioAgendado) return false;
-    try {
-      const horarioLocalString = horarioAgendado.slice(0, -1);
-      const dataAgendada = new Date(horarioLocalString);
-      if (isNaN(dataAgendada.getTime())) return false;
+  // VERSÃO CORRIGIDA E PRECISA (considera os minutos)
+const checarDisponibilidade = (horarioAgendado) => {
+  if (!horarioAgendado) return false;
 
-      const diaAgendado = dataAgendada.getDay();
-      const horaInicioAgendada = dataAgendada.getHours();
-      const horaFimAgendada = horaInicioAgendada + 1;
+  try {
+    // Pega a string do banco e remove o 'Z' para tratar como horário local
+    const horarioLocalString = horarioAgendado.slice(0, -1);
+    const dataBase = new Date(horarioLocalString);
 
-      const agora = new Date();
-      const diaAtual = agora.getDay();
-      const horaAtual = agora.getHours();
+    if (isNaN(dataBase.getTime())) return false;
 
-      const isMesmoDiaDaSemana = diaAtual === diaAgendado;
-      const isDentroDaJanelaDeHorario = horaAtual >= horaInicioAgendada && horaAtual < horaFimAgendada;
+    const agora = new Date();
 
-      return isMesmoDiaDaSemana && isDentroDaJanelaDeHorario;
-    } catch (error) {
+    // 1. Primeiro, checa se hoje é o dia correto da semana. Se não for, já para por aqui.
+    if (agora.getDay() !== dataBase.getDay()) {
       return false;
     }
-  };
+
+    // 2. Extrai a hora e os minutos do horário agendado
+    const targetHour = dataBase.getHours();   // Ex: 16
+    const targetMinute = dataBase.getMinutes(); // Ex: 50
+
+    // 3. Cria um objeto de data para o INÍCIO da janela de hoje
+    const inicioJanela = new Date(); // Começa com a data de hoje
+    inicioJanela.setHours(targetHour, targetMinute, 0, 0); // Define a hora para 16:50:00 de hoje
+
+    // 4. Cria um objeto de data para o FIM da janela de hoje (1 hora depois)
+    const fimJanela = new Date(inicioJanela.getTime()); // Clona a data de início
+    fimJanela.setHours(inicioJanela.getHours() + 1);    // Adiciona 1 hora, resultando em 17:50:00 de hoje
+
+    // 5. Compara a hora ATUAL com a janela de início e fim.
+    // getTime() converte tudo para milissegundos, tornando a comparação exata.
+    const agoraTimestamp = agora.getTime();
+    const inicioTimestamp = inicioJanela.getTime();
+    const fimTimestamp = fimJanela.getTime();
+
+    return agoraTimestamp >= inicioTimestamp && agoraTimestamp < fimTimestamp;
+
+  } catch (error) {
+    return false;
+  }
+};
 
   const calcularProximaAbertura = (horarioAgendado) => {
     if (!horarioAgendado) return null;
