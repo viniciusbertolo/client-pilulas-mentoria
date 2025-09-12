@@ -1796,6 +1796,31 @@ body {
 /* =================================================================
    ESTILOS GERAIS DA PÁGINA E MATERIAIS EXTRAS
    ================================================================= */
+/* Estilos para o Countdown Timer */
+.countdown-container {
+  background-color: #2a2a2a; /* Um fundo escuro, mas diferente do botão */
+  color: #fafafa;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  width: 280px; /* Largura fixa para não ficar mudando de tamanho */
+}
+
+.countdown-timer {
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.countdown-schedule {
+  font-size: 0.9rem;
+  color: #c0c0c0;
+  text-transform: capitalize;
+}
+
  .area_baixar_especifico {
   background-color: #1e1e1e;
   width: fit-content;
@@ -2161,6 +2186,9 @@ body {
 }
 
 @media screen and (max-width: 767px) {
+  .countdown-container{
+    margin-top: 50px;
+  }
   .main-timeline .timeline,
   .main-timeline .timeline-off {
     margin-top: -19px;
@@ -2204,6 +2232,10 @@ body {
 }
 
 @media screen and (max-width: 500px) {
+
+  .countdown-container{
+    margin-top: 50px;
+  }
   .main-timeline {
     padding: 100px 10px;
   }

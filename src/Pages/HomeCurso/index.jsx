@@ -26,7 +26,6 @@ export default function HomeCurso() {
 
     const respostaJson = await responseFase.json();
     setFases(respostaJson);
-    console.log("FUNÇÂO OBTER FASES");
     setRemoveLoading(true);
 
 
@@ -37,7 +36,6 @@ export default function HomeCurso() {
 
   }
 
-  console.log(relacionamento);
 
   async function obterEtapaAtual() {
     const response = await fetch(
@@ -53,7 +51,6 @@ export default function HomeCurso() {
     setResponseFaseAtual(response)
     setRemoveLoading(true)
 
-    console.log("FUNÇÂO OBTER ETAPA ATUAL");
 
 
 
@@ -72,7 +69,6 @@ export default function HomeCurso() {
         headers: { "Content-type": "application/json" },
       }
     );
-    console.log("FUNÇÂO ONSERIR PRIMEIRA ETAPA");
 
 
   }
@@ -138,20 +134,19 @@ export default function HomeCurso() {
 
   const curso = cursos.find((c) => c.ID_CURSO === Number(id));
 
-  console.log("Cursos: ", cursos)
-  console.log("Curso: ", curso)
+
 
 
 
 
   // Paleta de "fallback" caso NENHUMA cor venha do backend
-const defaultPalette = [
-  { main: '#46b2bc', light: '#65c7d0' },
-  { main: '#ea3c14', light: '#EF5720' },
-  { main: '#8CC63E', light: '#6CAF29' },
-  { main: '#F99324', light: '#FBB03B' },
-  { main: '#0071BD', light: '#0050A3' },
-];
+  const defaultPalette = [
+    { main: '#46b2bc', light: '#65c7d0' },
+    { main: '#ea3c14', light: '#EF5720' },
+    { main: '#8CC63E', light: '#6CAF29' },
+    { main: '#F99324', light: '#FBB03B' },
+    { main: '#0071BD', light: '#0050A3' },
+  ];
 
   // Esta função já espera receber um código HEX (ex: "#8CC63E")
   const lightenColor = (hex, percent) => {
@@ -170,15 +165,13 @@ const defaultPalette = [
   };
 
 
-   let activePalette = defaultPalette;
+  let activePalette = defaultPalette;
 
   if (curso) {
 
-    // DEBUG 3: Confirme que o código entrou nesta condição
-    console.log("DEBUG 3: O objeto 'curso' existe. Tentando criar paleta dinâmica...", curso);
-    
+
     const dynamicPalette = [];
-    
+
     // Este 'if' garante que só adicionamos a cor se ela NÃO FOR NULA ou vazia.
     if (curso.corFase1) dynamicPalette.push({ main: curso.corFase1, light: lightenColor(curso.corFase1, 15) });
     if (curso.corFase2) dynamicPalette.push({ main: curso.corFase2, light: lightenColor(curso.corFase2, 15) });
@@ -186,36 +179,223 @@ const defaultPalette = [
     if (curso.corFase4) dynamicPalette.push({ main: curso.corFase4, light: lightenColor(curso.corFase4, 15) });
     if (curso.corFase5) dynamicPalette.push({ main: curso.corFase5, light: lightenColor(curso.corFase5, 15) });
 
-     // DEBUG 4: Veja o resultado da criação da paleta
-    console.log("DEBUG 4: Paleta dinâmica criada:", dynamicPalette);
 
     if (dynamicPalette.length > 0) {
       activePalette = dynamicPalette;
-    } else {
-      console.warn("AVISO: Nenhuma cor válida foi encontrada no objeto 'curso'. Usando a paleta padrão.");
-    }
+    } 
   }
 
 
   // --- INÍCIO DA LÓGICA DA COR DE FUNDO (COM DEBUG) ---
   const pageStyle = {};
 
-  // DEBUG 1: VAMOS INSPECIONAR O OBJETO 'CURSO' INTEIRO AQUI
-  console.log("DEBUG FUNDO: Objeto 'curso' completo:", curso);
 
   // Assumindo que o nome da propriedade é 'corFundo'. Verifique no log acima qual é o nome correto!
   const nomeDaPropriedadeCorFundo = 'corFundo'; // <-- Altere esta linha se o nome for diferente
 
   if (curso && curso[nomeDaPropriedadeCorFundo]) {
     // DEBUG 2: Se encontrou a cor, vamos logar aqui
-    console.log(`DEBUG FUNDO: Cor de fundo encontrada (${nomeDaPropriedadeCorFundo}):`, curso[nomeDaPropriedadeCorFundo]);
     pageStyle['--page-background-color'] = curso[nomeDaPropriedadeCorFundo];
-  } else {
-    // DEBUG 3: Se não encontrou, avisará no console
-    console.warn(`AVISO FUNDO: Propriedade '${nomeDaPropriedadeCorFundo}' não encontrada no objeto 'curso'. Usando cor padrão.`);
-  }
+  } 
   // --- FIM DA LÓGICA DA COR DE FUNDO ---
-  
+
+
+
+
+
+  // const checarDisponibilidade = (horarioAgendado) => {
+  //   console.log(`\n--- INICIANDO VERIFICAÇÃO DE HORÁRIO (MODO LOCAL) ---`);
+
+  //   if (!horarioAgendado) {
+  //     console.error("DEBUG: Horário agendado não foi fornecido.");
+  //     return false;
+  //   }
+  //   console.log(`DEBUG 1: Horário Agendado (string do Banco): "${horarioAgendado}"`);
+
+  //   try {
+  //     const horarioLocalString = horarioAgendado.slice(0, -1);
+  //     const dataAgendada = new Date(horarioLocalString);
+
+  //     // AQUI ESTAVA O ERRO DE DIGITAÇÃO, AGORA CORRIGIDO
+  //     console.log(`DEBUG 2: String de horário ajustada para LOCAL: "${horarioLocalString}"`);
+  //     console.log("DEBUG 3: Objeto 'Date' criado (interpretado como LOCAL):", dataAgendada.toString());
+
+  //     if (isNaN(dataAgendada.getTime())) {
+  //       console.error("DEBUG 3.1: ERRO! A data criada é inválida.");
+  //       return false;
+  //     }
+
+  //     const diaAgendado = dataAgendada.getDay();
+  //     const horaInicioAgendada = dataAgendada.getHours();
+  //     const horaFimAgendada = horaInicioAgendada + 1;
+
+  //     console.log(`DEBUG 4: Dia agendado extraído (LOCAL, 0-Dom...): ${diaAgendado}`);
+  //     console.log(`DEBUG 5: Hora de início agendada extraída (LOCAL): ${horaInicioAgendada}`);
+  //     console.log(`DEBUG 6: Janela de horário (LOCAL): das ${horaInicioAgendada}:00 até ${horaFimAgendada}:00`);
+
+  //     const agora = new Date();
+  //     const diaAtual = agora.getDay();
+  //     const horaAtual = agora.getHours();
+
+  //     console.log("-------------------------------------------------");
+  //     console.log("DEBUG 7: Horário Atual (do seu computador):", agora.toString());
+  //     console.log(`DEBUG 8: Dia atual extraído (LOCAL, 0-Dom...): ${diaAtual}`);
+  //     console.log(`DEBUG 9: Hora atual extraída (LOCAL): ${horaAtual}`);
+  //     console.log("-------------------------------------------------");
+
+  //     const isMesmoDiaDaSemana = diaAtual === diaAgendado;
+  //     console.log(`DEBUG 10: Comparando Dia da Semana (${diaAtual} === ${diaAgendado}): ${isMesmoDiaDaSemana}`);
+
+  //     const isDentroDaJanelaDeHorario = horaAtual >= horaInicioAgendada && horaAtual < horaFimAgendada;
+  //     console.log(`DEBUG 11: Comparando Hora (${horaAtual} >= ${horaInicioAgendada} && ${horaAtual} < ${horaFimAgendada}): ${isDentroDaJanelaDeHorario}`);
+
+  //     const resultadoFinal = isMesmoDiaDaSemana && isDentroDaJanelaDeHorario;
+  //     console.log(`DEBUG 12: Resultado Final da Função: ${resultadoFinal}`);
+
+  //     return resultadoFinal;
+
+  //   } catch (error) {
+  //     console.error("ERRO GERAL na função checarDisponibilidade:", error);
+  //     return false;
+  //   }
+  // };
+
+  // NOVO: Estado para controlar a visibilidade do botão de materiais
+  const [isBotaoDisponivel, setIsBotaoDisponivel] = useState(false);
+
+
+  // NOVO: useEffect para controlar o agendamento do botão
+  // useEffect(() => {
+  //   // Assumindo que a data/hora vem de 'curso.horarioLiberacao'.
+  //   // **Altere 'curso.horarioLiberacao' se o nome da propriedade for outro!**
+  //   if (curso && curso.dataHoraLive) {
+
+  //     // Define um intervalo para verificar a hora a cada minuto
+  //     const intervalId = setInterval(() => {
+  //       const estaDisponivel = checarDisponibilidade(curso.dataHoraLive);
+  //       setIsBotaoDisponivel(estaDisponivel);
+  //     }, 60000); // 60000 ms = 1 minuto
+
+  //     // Roda a verificação uma vez imediatamente ao carregar
+  //     const estaDisponivelAgora = checarDisponibilidade(curso.dataHoraLive);
+  //     setIsBotaoDisponivel(estaDisponivelAgora);
+
+  //     // Função de limpeza: remove o intervalo quando o componente for desmontado
+  //     // Isso evita vazamentos de memória.
+  //     return () => clearInterval(intervalId);
+  //   }
+  // }, [curso]); // Este efeito depende do 'curso' ter sido carregado
+
+
+
+
+
+
+
+
+
+
+
+  // --- ESTADOS PARA O CONTADOR ---
+  const [agora, setAgora] = useState(new Date());
+  const [proximaAbertura, setProximaAbertura] = useState(null);
+  const [textoAgendamento, setTextoAgendamento] = useState("");
+  const [tempoRestante, setTempoRestante] = useState(null);
+
+  // --- FUNÇÕES DE SUPORTE (VERSÕES LIMPAS) ---
+
+  const checarDisponibilidade = (horarioAgendado) => {
+    if (!horarioAgendado) return false;
+    try {
+      const horarioLocalString = horarioAgendado.slice(0, -1);
+      const dataAgendada = new Date(horarioLocalString);
+      if (isNaN(dataAgendada.getTime())) return false;
+
+      const diaAgendado = dataAgendada.getDay();
+      const horaInicioAgendada = dataAgendada.getHours();
+      const horaFimAgendada = horaInicioAgendada + 1;
+
+      const agora = new Date();
+      const diaAtual = agora.getDay();
+      const horaAtual = agora.getHours();
+
+      const isMesmoDiaDaSemana = diaAtual === diaAgendado;
+      const isDentroDaJanelaDeHorario = horaAtual >= horaInicioAgendada && horaAtual < horaFimAgendada;
+
+      return isMesmoDiaDaSemana && isDentroDaJanelaDeHorario;
+    } catch (error) {
+      return false;
+    }
+  };
+
+  const calcularProximaAbertura = (horarioAgendado) => {
+    if (!horarioAgendado) return null;
+
+    const dataBase = new Date(horarioAgendado.slice(0, -1));
+    const targetDay = dataBase.getDay();
+    const targetHour = dataBase.getHours();
+
+    const agora = new Date();
+    let proximaData = new Date();
+
+    let diffDias = targetDay - agora.getDay();
+
+    if (diffDias < 0 || (diffDias === 0 && agora.getHours() >= targetHour + 1)) {
+      diffDias += 7;
+    }
+
+    proximaData.setDate(agora.getDate() + diffDias);
+    proximaData.setHours(targetHour, 0, 0, 0);
+
+    return proximaData;
+  };
+
+
+  // --- EFEITOS (COM A LÓGICA FINAL) ---
+
+  // EFEITO 1: O "Relógio"
+  useEffect(() => {
+    const intervalId = setInterval(() => setAgora(new Date()), 1000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  // EFEITO 2: O "Setup"
+  useEffect(() => {
+    const horarioDoBanco = curso ? curso.dataHoraLive : null;
+    if (horarioDoBanco) {
+      const proximaData = calcularProximaAbertura(horarioDoBanco);
+      setProximaAbertura(proximaData);
+
+      const dataBase = new Date(horarioDoBanco.slice(0, -1));
+      const diaSemana = dataBase.toLocaleDateString('pt-BR', { weekday: 'long' });
+      const hora = dataBase.getHours();
+      const min = dataBase.getMinutes();
+      setTextoAgendamento(`Toda ${diaSemana} às ${hora}:${min}`);
+    }
+  }, [curso]);
+
+  // EFEITO 3: O "Calculador"
+  useEffect(() => {
+    const horarioDoBanco = curso ? curso.dataHoraLive : null;
+    if (!horarioDoBanco || !proximaAbertura) return;
+
+    const estaNaHora = checarDisponibilidade(horarioDoBanco);
+    setIsBotaoDisponivel(estaNaHora);
+
+    if (estaNaHora) {
+      setTempoRestante(null);
+    } else {
+      const diferenca = proximaAbertura.getTime() - agora.getTime();
+      if (diferenca > 0) {
+        setTempoRestante({
+          dias: Math.floor(diferenca / (1000 * 60 * 60 * 24)),
+          horas: Math.floor((diferenca / (1000 * 60 * 60)) % 24),
+          minutos: Math.floor((diferenca / 1000 / 60) % 60),
+          segundos: Math.floor((diferenca / 1000) % 60),
+        });
+      }
+    }
+  }, [agora, proximaAbertura, curso]);
 
 
 
@@ -339,7 +519,7 @@ const defaultPalette = [
   //   </div>
   // );
 
-return (
+  return (
     <div className="pag_todo_game" style={pageStyle}>
       <Navbar />
       <div className="boas_vindas_cursos">
@@ -356,6 +536,50 @@ return (
             {mostrar ? "Fechar" : "Materiais extras"}
           </div>
         )}
+
+
+
+
+
+
+
+        {/* =============================================== */}
+        {/* LÓGICA DO BOTÃO E COUNTDOWN ATUALIZADA AQUI     */}
+        {/* =============================================== */}
+
+        {curso && curso.dataHoraLive && (
+          isBotaoDisponivel ? (
+            // Se estiver disponível, mostra o BOTÃO
+            <a
+              href={curso.linkLive} // Certifique-se que o nome da prop é 'linkLive'
+              target="_blank"
+              rel="noopener noreferrer"
+              className="botao_detalhes_show_hide"
+              style={{ "color": "#fafafa" }}
+            >
+              Acessar aula ao vivo
+            </a>
+          ) : (
+            // Se NÃO estiver disponível, mostra o COUNTDOWN
+            tempoRestante && (
+              <div className="countdown-container">
+                <div className="countdown-timer">
+                  Aula ao vivo!<br></br>
+                  {`${tempoRestante.dias}d ${tempoRestante.horas}h ${tempoRestante.minutos}m ${tempoRestante.segundos}s`}
+                </div>
+                <div className="countdown-schedule">
+                  {textoAgendamento}
+                </div>
+              </div>
+            )
+          )
+        )}
+
+
+
+
+
+
       </div>
 
       {mostrar && (
@@ -412,7 +636,7 @@ return (
           // --- INÍCIO DA LÓGICA ADICIONADA ---
           // 1. Pega a cor correta da paleta ativa (dinâmica ou padrão)
           const currentColor = activePalette[key % activePalette.length];
-          
+
           // 2. Cria o objeto de estilo com as variáveis CSS
           const timelineStyle = {
             '--main-color': currentColor.main,
