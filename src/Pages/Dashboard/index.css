@@ -72,6 +72,95 @@
   background-color: #24142b;
 }
 
+
+
+/* Adicione ou modifique estas classes no seu arquivo ./index.css */
+
+/* NOVO: Container para os botões do card (acessar e certificado) */
+.botoes_card_container {
+  display: flex;
+  justify-content: flex-start; /* Alinha os botões à esquerda */
+  align-items: center;
+  gap: 10px; /* Espaçamento entre os botões */
+  margin-top: 15px; /* Espaço acima dos botões */
+  width: 100%;
+}
+
+
+
+/* Estilo base do botão (você já deve ter algo parecido) */
+.botao_cursos {
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none; /* Garante que botões não tenham borda padrão */
+  color: white; /* Garante que o texto seja branco */
+  width: 100%;
+  text-decoration: none;
+}
+
+.botao_cursos div{
+  color: #FAFAFA;
+}
+
+
+
+
+
+
+
+/* Adicione este CSS ao seu arquivo ./index.css */
+
+/* Estilos para a seção de progresso dentro do card */
+.progress_section {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  width: 90%;
+  padding: 0;
+}
+
+.progress-info {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+
+/* NOVO: Container que usa flexbox para alinhar a barra e o texto lado a lado */
+.progress-bar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaçamento entre a barra e o texto */
+}
+
+/* AJUSTADO: A barra agora é flexível para ocupar o espaço disponível */
+.progress-bar-container {
+  flex-grow: 1; /* Faz a barra crescer para ocupar o espaço restante */
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  height: 12px;
+  overflow: hidden; 
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* A barra de preenchimento que mostra o progresso (sem alterações) */
+.progress-bar-fill {
+  height: 100%;
+  background: #ff5400;
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+}
+
+/* NOVO: Estilo para o texto da porcentagem */
+.progress-percentage-text {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #333;
+}
 /* a{
 
     text-decoration: none;
