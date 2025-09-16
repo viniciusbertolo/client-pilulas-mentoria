@@ -514,8 +514,8 @@ const handleDownloadCertificado = (cursoNome) => {
   // --- 4. Adicionar a Logo (SEM DISTORÇÃO) ---
   
   // <-- ATENÇÃO AQUI: Coloque a largura e altura REAIS da sua logo em pixels
-  const logoOriginalWidth = 512; 
-  const logoOriginalHeight = 256; 
+  const logoOriginalWidth = 500; 
+  const logoOriginalHeight = 158; 
   
   // Caixa máxima para a logo (baseado no seu código)
   const logoMaxWidth = 50;
@@ -529,7 +529,7 @@ const handleDownloadCertificado = (cursoNome) => {
   );
 
   const logoX = (pageWidth / 2) - (logoDims.width / 2);
-  doc.addImage(logo, 'PNG', logoX, 20, logoDims.width, logoDims.height);
+  doc.addImage(logo, 'PNG', logoX, 30, logoDims.width, logoDims.height);
 
   // --- Textos do certificado (Seu layout) ---
   doc.setFontSize(22);
