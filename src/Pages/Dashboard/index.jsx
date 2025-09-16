@@ -278,9 +278,13 @@ import Navbar from "../../Components/Navbar";
 import "./index.css";
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import Loading from "../../Components/Loading";
+import jsPDF from 'jspdf'; // <--- 1. IMPORTAR A BIBLIOTECA
+import logo from '../../Assets/imgs/logo_pilulas.png'; 
+import assinatura from '../../Assets/imgs/assinatura_branco.png';
 
 export default function Dashboard(props) {
   const [cursos, setCursos] = useState([]);
+  const [detalhesUsuario, setDetalhesUsuario] = useState([]);
   const [cursosDoUsuario, setCursosDoUsuario] = useState([]);
   const [removeLoading, setRemoveLoading] = useState(false);
   const [busca, setBusca] = useState("");
@@ -297,17 +301,20 @@ export default function Dashboard(props) {
         return;
       }
       try {
-        const [cursosResponse, userCursosResponse] = await Promise.all([
+        const [cursosResponse, userCursosResponse, detalhesUsuariosResponse] = await Promise.all([
           fetch(`https://backend-pilulas-mentoria.herokuapp.com/cursos`),
-          fetch(`https://backend-pilulas-mentoria.herokuapp.com/usuario-curso/${user.email}`)
+          fetch(`https://backend-pilulas-mentoria.herokuapp.com/usuario-curso/${user.email}`),
+          fetch(`https://backend-pilulas-mentoria.herokuapp.com/detalhes-usuario/${user.email}`)
         ]);
 
         const cursosJson = await cursosResponse.json();
+        const usuariosJson = await detalhesUsuariosResponse.json();
         const userCursosJson = await userCursosResponse.json();
         const cursosUsuarioIds = userCursosJson.map((rel) => rel.ID_CURSO);
         
         setCursos(cursosJson);
         setCursosDoUsuario(cursosUsuarioIds);
+        setDetalhesUsuario(usuariosJson)
       } catch (error) {
         console.error("Erro ao buscar dados iniciais:", error);
       } finally {
@@ -316,6 +323,8 @@ export default function Dashboard(props) {
     }
     fetchInitialData();
   }, [user.email]);
+
+
 
   useEffect(() => {
     if (cursosDoUsuario.length === 0) {
@@ -384,11 +393,196 @@ export default function Dashboard(props) {
 
 
 
-      // Função placeholder para o download do certificado
-  const handleDownloadCertificado = (cursoNome) => {
-    alert(`Iniciando download do certificado para o curso: ${cursoNome}`);
-    // Aqui você adicionaria a lógica real de download/geração do PDF
-  };
+  // ==================================================================
+// 2. FUNÇÃO PARA GERAR O PDF DO CERTIFICADO (VERSÃO ATUALIZADA)
+// ==================================================================
+// const handleDownloadCertificado = (cursoNome) => {
+//   const doc = new jsPDF({
+//     orientation: 'landscape',
+//     unit: 'mm',
+//     format: 'a4'
+//   });
+
+//   const pageWidth = doc.internal.pageSize.getWidth();
+//   const pageHeight = doc.internal.pageSize.getHeight();
+
+//   // --- 1. Adicionar Fundo Preto ---
+//   doc.setFillColor(20, 20, 20); // Cor preta (RGB)
+//   doc.rect(0, 0, pageWidth, pageHeight, 'F'); // 'F' significa 'Fill' (Preencher)
+
+//   // --- 2. Adicionar Borda Laranja ---
+//   doc.setDrawColor(255, 84, 0); // Cor laranja (RGB)
+//   doc.setLineWidth(4); // Define a espessura da borda
+//   doc.rect(5, 5, pageWidth - 10, pageHeight - 10, 'S'); // 'S' significa 'Stroke' (Contorno)
+
+//   // --- 3. Definir a cor do texto para branco ---
+//   doc.setTextColor(255, 255, 255); // Cor branca (RGB)
+
+//   // --- 4. Adicionar a Logo ---
+//   // Adiciona a imagem importada. (logo, formato, x, y, largura, altura)
+//   // Centralizando a logo: (larguraDaPagina / 2) - (larguraDaLogo / 2)
+//   doc.addImage(logo, 'PNG', (pageWidth / 2) - 25, 20, 50, 25);
+
+//   // Adiciona um título centralizado (abaixo da logo)
+//   doc.setFontSize(22);
+//   doc.setFont(undefined, 'bold');
+//   doc.text("CERTIFICADO DE CONCLUSÃO", pageWidth / 2, 60, { align: 'center' });
+
+//   // Adiciona o texto principal do certificado
+//   doc.setFontSize(16);
+//   doc.setFont(undefined, 'normal');
+//   const textoCertificado = `Certificamos que ${detalhesUsuario[0].nome || 'Nome do Aluno'} concluiu com sucesso o curso de`;
+//   doc.text(textoCertificado, pageWidth / 2, 90, { align: 'center' });
+
+//   // Adiciona o nome do curso com destaque
+//   doc.setFontSize(24);
+//   doc.setFont(undefined, 'bold');
+//   doc.text(cursoNome, pageWidth / 2, 110, { align: 'center' });
+  
+//   // Adiciona a data de conclusão
+//   const data = new Date();
+//   const dia = String(data.getDate()).padStart(2, '0');
+//   const mes = String(data.getMonth() + 1).padStart(2, '0');
+//   const ano = data.getFullYear();
+//   const dataFormatada = `${dia}/${mes}/${ano}`;
+  
+//   doc.setFontSize(12);
+//   doc.setFont(undefined, 'normal');
+//   doc.text(`Certificado emitido em: ${dataFormatada}`, pageWidth / 2, 135, { align: 'center' });
+
+//   // --- 5. Adicionar a Imagem da Assinatura ---
+//   // Centralizando a assinatura
+//   doc.addImage(assinatura, 'PNG', (pageWidth / 2) - 30, 150, 60, 30);
+  
+//   // Linha acima da assinatura (opcional, pode remover se a imagem já tiver)
+//   doc.setDrawColor(255, 255, 255); // Linha branca
+//   doc.setLineWidth(0.5);
+//   doc.line(110, 180, pageWidth - 110, 180); // (x1, y1, x2, y2)
+  
+//   doc.text("Assinatura do Responsável", pageWidth / 2, 188, { align: 'center' });
+
+//   // Salva o PDF com um nome dinâmico
+//   doc.save(`Certificado-${cursoNome.replace(/\s+/g, '_')}.pdf`);
+// };
+
+
+
+// ==================================================================
+// FUNÇÃO AUXILIAR (NÃO PRECISA ALTERAR)
+// ==================================================================
+const calculateImageDimensions = (imgOriginalWidth, imgOriginalHeight, maxWidth, maxHeight) => {
+  const originalRatio = imgOriginalWidth / imgOriginalHeight;
+  const maxRatio = maxWidth / maxHeight;
+  let newWidth, newHeight;
+
+  if (originalRatio > maxRatio) {
+    newWidth = maxWidth;
+    newHeight = newWidth / originalRatio;
+  } else {
+    newHeight = maxHeight;
+    newWidth = newHeight * originalRatio;
+  }
+  return { width: newWidth, height: newHeight };
+};
+
+
+// ==================================================================
+// SUA FUNÇÃO DE GERAR O PDF (AJUSTADA COM SEUS ESTILOS)
+// ==================================================================
+const handleDownloadCertificado = (cursoNome) => {
+  const doc = new jsPDF({
+    orientation: 'landscape',
+    unit: 'mm',
+    format: 'a4'
+  });
+
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+
+  // --- 1. Fundo (Sua cor) ---
+  doc.setFillColor(20, 20, 20); 
+  doc.rect(0, 0, pageWidth, pageHeight, 'F'); 
+
+  // --- 2. Borda (Sua cor e espessura) ---
+  doc.setDrawColor(255, 84, 0); 
+  doc.setLineWidth(4); 
+  doc.rect(5, 5, pageWidth - 10, pageHeight - 10, 'S'); 
+
+  // --- 3. Cor do texto ---
+  doc.setTextColor(255, 255, 255); 
+
+  // --- 4. Adicionar a Logo (SEM DISTORÇÃO) ---
+  
+  // <-- ATENÇÃO AQUI: Coloque a largura e altura REAIS da sua logo em pixels
+  const logoOriginalWidth = 512; 
+  const logoOriginalHeight = 256; 
+  
+  // Caixa máxima para a logo (baseado no seu código)
+  const logoMaxWidth = 50;
+  const logoMaxHeight = 25;
+
+  const logoDims = calculateImageDimensions(
+    logoOriginalWidth, 
+    logoOriginalHeight, 
+    logoMaxWidth, 
+    logoMaxHeight
+  );
+
+  const logoX = (pageWidth / 2) - (logoDims.width / 2);
+  doc.addImage(logo, 'PNG', logoX, 20, logoDims.width, logoDims.height);
+
+  // --- Textos do certificado (Seu layout) ---
+  doc.setFontSize(22);
+  doc.setFont(undefined, 'bold');
+  doc.text("CERTIFICADO DE CONCLUSÃO", pageWidth / 2, 60, { align: 'center' });
+
+  doc.setFontSize(16);
+  doc.setFont(undefined, 'normal');
+  const textoCertificado = `Certificamos que ${detalhesUsuario[0].nome || 'Nome do Aluno'} concluiu com sucesso o curso`;
+  doc.text(textoCertificado, pageWidth / 2, 90, { align: 'center' });
+
+  doc.setFontSize(24);
+  doc.setFont(undefined, 'bold');
+  doc.text(cursoNome, pageWidth / 2, 110, { align: 'center' });
+  
+  const data = new Date();
+  const dia = String(data.getDate()).padStart(2, '0');
+  const mes = String(data.getMonth() + 1).padStart(2, '0');
+  const ano = data.getFullYear();
+  const dataFormatada = `${dia}/${mes}/${ano}`;
+  
+  doc.setFontSize(12);
+  doc.setFont(undefined, 'normal');
+  doc.text(`Certificado emitido em: ${dataFormatada}`, pageWidth / 2, 135, { align: 'center' });
+
+  // --- 5. Adicionar a Imagem da Assinatura (SEM DISTORÇÃO) ---
+  
+  // <-- ATENÇÃO AQUI: Coloque a largura e altura REAIS da sua assinatura em pixels
+  const assinaturaOriginalWidth = 1068;
+  const assinaturaOriginalHeight = 313;
+
+  // Caixa máxima para a assinatura (baseado no seu código)
+  const assinaturaMaxWidth = 60;
+  const assinaturaMaxHeight = 60;
+
+  const assinaturaDims = calculateImageDimensions(
+    assinaturaOriginalWidth,
+    assinaturaOriginalHeight,
+    assinaturaMaxWidth,
+    assinaturaMaxHeight
+  );
+  
+  const assinaturaX = (pageWidth / 2) - (assinaturaDims.width / 2);
+  doc.addImage(assinatura, 'PNG', assinaturaX, 160, assinaturaDims.width, assinaturaDims.height);
+  
+  doc.setDrawColor(255, 255, 255); 
+  doc.setLineWidth(0.5);
+  doc.line(110, 180, pageWidth - 110, 180);
+  
+  doc.text("Assinatura do Responsável", pageWidth / 2, 188, { align: 'center' });
+
+  doc.save(`Certificado-${cursoNome.replace(/\s+/g, '_')}.pdf`);
+};
 
   return (
     <div className="pag_todo">
