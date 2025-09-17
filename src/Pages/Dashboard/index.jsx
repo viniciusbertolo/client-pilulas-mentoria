@@ -558,12 +558,12 @@ const handleDownloadCertificado = (cursoNome) => {
   // --- 5. Adicionar a Imagem da Assinatura (SEM DISTORÇÃO) ---
   
   // <-- ATENÇÃO AQUI: Coloque a largura e altura REAIS da sua assinatura em pixels
-  const assinaturaOriginalWidth = 1068;
-  const assinaturaOriginalHeight = 313;
+  const assinaturaOriginalWidth = 311;
+  const assinaturaOriginalHeight = 257;
 
   // Caixa máxima para a assinatura (baseado no seu código)
-  const assinaturaMaxWidth = 60;
-  const assinaturaMaxHeight = 60;
+  const assinaturaMaxWidth = 40;
+  const assinaturaMaxHeight = 40;
 
   const assinaturaDims = calculateImageDimensions(
     assinaturaOriginalWidth,
@@ -573,7 +573,7 @@ const handleDownloadCertificado = (cursoNome) => {
   );
   
   const assinaturaX = (pageWidth / 2) - (assinaturaDims.width / 2);
-  doc.addImage(assinatura, 'PNG', assinaturaX, 160, assinaturaDims.width, assinaturaDims.height);
+  doc.addImage(assinatura, 'PNG', assinaturaX, 145, assinaturaDims.width, assinaturaDims.height);
   
   doc.setDrawColor(255, 255, 255); 
   doc.setLineWidth(0.5);
