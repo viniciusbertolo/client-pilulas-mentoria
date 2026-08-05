@@ -828,6 +828,7 @@
 //NOVO FRONT CHATS LATERAL
 import React, { useState, useEffect, useRef } from 'react';
 import "./index.css";
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
 export default function Chat() {
@@ -935,20 +936,36 @@ export default function Chat() {
     }, [messages, isLoading]);
 
     // 3. Deleta um chat
+    // Deletar Chat com SweetAlert2
     const handleDeleteChat = async (id, e) => {
-        e.stopPropagation(); // Evita que clicar na lixeira abra o chat
-        if (!window.confirm("Deseja mesmo apagar essa sessão com a Tenebris?")) return;
+        e.stopPropagation(); 
+        
+        const result = await Swal.fire({
+            title: 'Excluir sessão?',
+            text: "Esta ação apagará permanentemente esta conversa com a escuridão.",
+            icon: 'warning',
+            iconColor: '#ef4444',
+            background: '#130f1e',
+            color: '#e2e8f0',
+            showCancelButton: true,
+            confirmButtonColor: '#8b5cf6',
+            cancelButtonColor: 'transparent',
+            confirmButtonText: 'Sim, apagar',
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                cancelButton: 'swal-cancel-btn-custom'
+            }
+        });
+
+        if (!result.isConfirmed) return;
 
         try {
             await fetch(`https://backend-pilulas-mentoria.herokuapp.com/api/chats/${id}`, { method: 'DELETE' });
-            
-            // Se apagou o chat que estava aberto, limpa a tela
             if (currentChatId === id) {
                 setCurrentChatId(null);
                 setMessages([]);
             }
-            
-            loadChats(); // Recarrega a lista lateral
+            loadChats(); 
         } catch (error) {
             console.error("Erro ao deletar chat:", error);
         }
