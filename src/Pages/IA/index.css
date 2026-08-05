@@ -1,4 +1,4 @@
-.fundo_da_pagina{
+/* .fundo_da_pagina{
     background-color: #140717;
     width: 100vw;
 }
@@ -272,4 +272,575 @@
     }
 
 
+} */
+
+
+
+
+
+
+
+/* =========================================
+   RESET E FUNDO DA TELA INTEIRA
+========================================= */
+.fundo_da_pagina {
+  background-color: #050509; 
+  width: 100vw; 
+  min-height: 100vh;
+  position: absolute; 
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* =========================================
+   CABEÇALHO FIXO TENEBRIS
+========================================= */
+.tenebris-fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: rgba(5, 5, 9, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  z-index: 100;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.tenebris-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tenebris-logo h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #c084fc, #22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mini-orb {
+  width: 12px;
+  height: 12px;
+  background: #22d3ee;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22d3ee, 0 0 20px #8b5cf6;
+  animation: pulseCore 3s infinite;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10b981;
+  animation: blink 2s infinite;
+}
+
+@keyframes pulseCore {
+  0%, 100% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* =========================================
+   EFEITOS DE FUNDO E MORCEGOS ANIMADOS
+========================================= */
+/* .ambient-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+  opacity: 0.35;
+  animation: floatOrb 10s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.glow-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(107,33,168,0.5) 0%, rgba(0,0,0,0) 70%);
+  top: -100px;
+  left: -100px;
+}
+
+.glow-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(14,116,144,0.4) 0%, rgba(0,0,0,0) 70%);
+  bottom: 10%;
+  right: -100px;
+  animation-delay: -5s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, 50px) scale(1.1); }
+}
+
+.bats-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; 
+  z-index: 0; 
+  overflow: hidden;
+}
+
+.bat {
+  position: absolute;
+  color: #3b0764; 
+  opacity: 0.4;
+  filter: drop-shadow(0 0 8px rgba(107, 33, 168, 0.5));
+}
+
+.bat svg {
+  width: 100%;
+  height: 100%;
+  animation: flapWings 0.4s ease-in-out infinite alternate;
+}
+
+.bat-1 {
+  width: 60px;
+  top: 15%;
+  left: -10%;
+  animation: flyRight 25s linear infinite;
+}
+
+.bat-2 {
+  width: 35px;
+  top: 60%;
+  right: -10%;
+  opacity: 0.2;
+  animation: flyLeft 18s linear infinite 5s; 
+}
+
+.bat-3 {
+  width: 45px;
+  top: 35%;
+  left: -10%;
+  opacity: 0.3;
+  animation: flyRight 35s linear infinite 12s;
+}
+
+@keyframes flyRight {
+  0% { transform: translateX(-10vw) translateY(0) scale(1); }
+  50% { transform: translateX(50vw) translateY(-30px) scale(1.2); }
+  100% { transform: translateX(110vw) translateY(10px) scale(1); }
+}
+
+@keyframes flyLeft {
+  0% { transform: translateX(10vw) translateY(0) scale(1) scaleX(-1); }
+  50% { transform: translateX(-50vw) translateY(40px) scale(0.8) scaleX(-1); }
+  100% { transform: translateX(-110vw) translateY(-20px) scale(1) scaleX(-1); }
+}
+
+@keyframes flapWings {
+  0% { transform: scaleY(1); }
+  100% { transform: scaleY(0.4); }
+} */
+
+
+
+
+
+
+/* =========================================
+   ELEMENTOS FLUTUANTES (12 MORCEGOS E 12 POEIRAS)
+========================================= */
+.floating-elements-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; 
+  z-index: 0; 
+  overflow: hidden;
+}
+
+/* --- Base dos Morcegos --- */
+.bat {
+  position: absolute;
+  opacity: 0.15; 
+  filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.9)); 
+}
+
+.bat img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: flapImage 0.3s ease-in-out infinite alternate;
+  filter: invert(1); 
+}
+
+/* --- 12 Morcegos (Tamanhos, Posições e Velocidades) --- */
+.bat-1 { width: 80px; top: 10%; left: -15%; animation: flyRight 22s linear infinite; }
+.bat-2 { width: 40px; top: 65%; right: -10%; opacity: 0.3; animation: flyLeft 16s linear infinite 3s; }
+.bat-3 { width: 60px; top: 30%; left: -15%; opacity: 0.4; animation: flyRight 30s linear infinite 8s; }
+.bat-4 { width: 30px; top: 85%; left: -10%; opacity: 0.2; animation: flyRight 25s linear infinite 15s; }
+.bat-5 { width: 110px; top: 45%; right: -25%; opacity: 0.15; filter: blur(4px) drop-shadow(0 0 12px rgba(168, 85, 247, 0.9)); animation: flyLeft 20s linear infinite 12s; }
+.bat-6 { width: 50px; top: 20%; right: -15%; opacity: 0.25; animation: flyLeft 28s linear infinite 2s; }
+.bat-7 { width: 35px; top: 75%; left: -10%; opacity: 0.3; animation: flyRight 19s linear infinite 5s; }
+.bat-8 { width: 70px; top: 5%; right: -15%; opacity: 0.2; filter: blur(1px) drop-shadow(0 0 12px rgba(168, 85, 247, 0.9)); animation: flyLeft 24s linear infinite 10s; }
+.bat-9 { width: 45px; top: 55%; left: -20%; opacity: 0.35; animation: flyRight 21s linear infinite 18s; }
+.bat-10 { width: 25px; top: 90%; right: -10%; opacity: 0.15; animation: flyLeft 15s linear infinite 1s; }
+.bat-11 { width: 65px; top: 40%; left: -15%; opacity: 0.25; animation: flyRight 33s linear infinite 7s; }
+.bat-12 { width: 130px; top: 80%; right: -30%; opacity: 0.1; filter: blur(6px) drop-shadow(0 0 12px rgba(168, 85, 247, 0.9)); animation: flyLeft 26s linear infinite 14s; }
+
+/* Animações de Trajetória (Morcegos) */
+@keyframes flyRight {
+  0% { transform: translateX(-15vw) translateY(0) scale(1) rotate(5deg); }
+  25% { transform: translateX(25vw) translateY(-40px) scale(1.1) rotate(-5deg); }
+  75% { transform: translateX(75vw) translateY(30px) scale(0.9) rotate(5deg); }
+  100% { transform: translateX(115vw) translateY(-10px) scale(1) rotate(-5deg); }
+}
+
+@keyframes flyLeft {
+  0% { transform: translateX(15vw) translateY(0) scale(1) scaleX(-1) rotate(5deg); }
+  25% { transform: translateX(-25vw) translateY(40px) scale(1.1) scaleX(-1) rotate(-5deg); }
+  75% { transform: translateX(-75vw) translateY(-30px) scale(0.9) scaleX(-1) rotate(5deg); }
+  100% { transform: translateX(-115vw) translateY(10px) scale(1) scaleX(-1) rotate(-5deg); }
+}
+
+@keyframes flapImage {
+  0% { transform: scaleY(1); }
+  100% { transform: scaleY(0.75); }
+}
+
+/* --- Base da Poeira / Atmosfera --- */
+.dust {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(139, 92, 246, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.8), 0 0 20px rgba(34, 211, 238, 0.8);
+  animation: floatDust 15s ease-in-out infinite alternate;
+}
+
+/* --- 12 Partículas de Poeira (Posições e Delays) --- */
+.dust-1 { top: 20%; left: 10%; animation-delay: 0s; width: 6px; height: 6px; }
+.dust-2 { top: 70%; left: 80%; animation-delay: -3s; }
+.dust-3 { top: 40%; left: 50%; animation-delay: -7s; width: 3px; height: 3px; }
+.dust-4 { top: 80%; left: 20%; animation-delay: -2s; }
+.dust-5 { top: 15%; left: 75%; animation-delay: -10s; width: 5px; height: 5px; }
+.dust-6 { top: 55%; left: 15%; animation-delay: -5s; }
+.dust-7 { top: 30%; left: 90%; animation-delay: -1s; width: 7px; height: 7px; }
+.dust-8 { top: 85%; left: 60%; animation-delay: -8s; width: 4px; height: 4px; }
+.dust-9 { top: 10%; left: 40%; animation-delay: -12s; width: 3px; height: 3px; }
+.dust-10 { top: 65%; left: 35%; animation-delay: -4s; width: 5px; height: 5px; }
+.dust-11 { top: 45%; left: 5%; animation-delay: -9s; width: 6px; height: 6px; }
+.dust-12 { top: 95%; left: 85%; animation-delay: -6s; width: 4px; height: 4px; }
+
+@keyframes floatDust {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+  50% { opacity: 0.8; }
+  100% { transform: translate(40px, -60px) scale(1.5); opacity: 0.1; }
+}
+
+
+/* =========================================
+   CONTAINER DO CHAT E HISTÓRICO
+========================================= */
+.chat-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 100%; 
+  display: flex;
+  flex-direction: column;
+  color: #e2e8f0;
+}
+
+.chat-history {
+  /* O 100px compensa o cabeçalho fixo, o 5% dá respiro lateral */
+  padding: 100px 5% 140px 5%; 
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.message-wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+}
+
+.message-wrapper.user {
+  justify-content: flex-end;
+}
+
+.message-wrapper.system {
+  justify-content: center;
+}
+
+.mini-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #8b5cf6, #2dd4bf);
+  box-shadow: 0 0 10px rgba(139, 92, 246);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.message {
+  max-width: 85%;
+  padding: 1.1rem 1.4rem;
+  border-radius: 20px;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.message.user {
+  background: linear-gradient(135deg, #6b21a8, #3b0764);
+  color: #fff;
+  border-top-right-radius: 4px;
+  box-shadow: 0 4px 15px rgba(107, 33, 168, 0.2);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.message.assistant {
+  background: rgba(25, 25, 35, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-top-left-radius: 4px;
+  color: #cbd5e1;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-message {
+  border-color: rgba(45, 212, 191, 0.3) !important;
+  box-shadow: 0 0 20px rgba(45, 212, 191, 0.1) !important;
+}
+
+/* =========================================
+   TEXTO E MARKDOWN DA IA
+========================================= */
+.ai-title {
+  color: #2dd4bf;
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(45, 212, 191, 0.2);
+  padding-bottom: 4px;
+}
+
+.ai-title:first-child {
+  margin-top: 0;
+}
+
+.ai-message-content p {
+  margin-bottom: 1rem;
+}
+
+.ai-message-content strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.ai-list {
+  padding-left: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.ai-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* =========================================
+   DIGITAÇÃO E ANIMAÇÕES GERAIS
+========================================= */
+.thinking-box {
+  padding: 14px 20px !important;
+}
+
+.cyber-typing {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  height: 24px;
+}
+
+.cyber-typing .dot {
+  width: 6px;
+  height: 6px;
+  background: #2dd4bf;
+  border-radius: 50%;
+  animation: cyberBounce 1.4s infinite ease-in-out both;
+}
+
+.cyber-typing .dot:nth-child(1) { animation-delay: -0.32s; }
+.cyber-typing .dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes cyberBounce {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+  40% { transform: scale(1); opacity: 1; box-shadow: 0 0 8px #2dd4bf; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   ÁREA DE INPUT FIXA 
+========================================= */
+.input-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 0 2rem 0; 
+  background: linear-gradient(to top, rgba(5, 5, 9, 1) 50%, rgba(5, 5, 9, 0));
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  pointer-events: none; 
+}
+
+.input-area {
+  width: 95%; 
+  max-width: 100%;
+  display: flex;
+  gap: 12px;
+  background: rgba(30, 30, 40, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 24px;
+  padding: 8px 16px;
+  align-items: flex-end;
+  transition: all 0.3s ease;
+  pointer-events: auto; 
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.input-area:focus-within {
+  border-color: #a855f7;
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.2);
+  background: rgba(35, 35, 50, 0.95);
+}
+
+.input-area textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.05rem;
+  font-family: inherit;
+  resize: none;
+  outline: none;
+  padding: 12px 0;
+  max-height: 150px;
+  line-height: 1.5;
+}
+
+.input-area textarea::placeholder {
+  color: #64748b;
+}
+
+.send-btn {
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  color: white;
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-bottom: 2px;
+}
+
+.send-btn:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+}
+
+.send-btn:disabled {
+  background: #334155;
+  color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* =========================================
+   RESPONSIVIDADE (MOBILE / TABLET)
+========================================= */
+@media screen and (max-width: 768px) {
+  .tenebris-fixed-header {
+    padding: 0 1rem;
+    height: 60px;
+  }
+  
+  .tenebris-logo h2 {
+    font-size: 1.1rem;
+  }
+
+  .chat-history {
+    padding: 85px 1rem 120px 1rem;
+    gap: 1rem;
+  }
+
+  .message {
+    max-width: 95%;
+    padding: 0.9rem 1.1rem;
+    font-size: 0.95rem;
+  }
+
+  .mini-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .input-container {
+    padding: 0.5rem 0 1rem 0;
+  }
+  
+  .input-area {
+    width: 95%;
+    padding: 6px 12px;
+    border-radius: 20px;
+  }
+
+  .send-btn {
+    width: 40px;
+    height: 40px;
+  }
 }
