@@ -825,8 +825,7 @@
   }
 
   .mini-avatar {
-    width: 32px;
-    height: 32px;
+    display: none;
   }
 
   .input-container {
