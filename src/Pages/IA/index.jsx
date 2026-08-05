@@ -873,6 +873,7 @@ export default function Chat() {
     };
 
     // 1. Carrega a lista de chats do usuário na barra lateral
+   // 1. Carrega a lista de chats do usuário na barra lateral
     const loadChats = async () => {
         if (!email) return;
         try {
