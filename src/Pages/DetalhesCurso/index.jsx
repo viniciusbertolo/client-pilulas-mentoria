@@ -282,7 +282,7 @@ export default function DetalheCurso() {
                         <div className="botao_detalhes" onClick={() => {
                             if (!user) {
                                 localStorage.setItem("redirectAfterLogin", window.location.pathname);
-                                window.location.href = "/login";
+                                window.location.href = "/seja-um-membro";
                                 return;
                             }
                             createCheckout(curso.ID_CURSO, curso.preco)
@@ -293,7 +293,7 @@ export default function DetalheCurso() {
                         <div className="botao_detalhes" onClick={() => {
                             if (!user) {
                                 localStorage.setItem("redirectAfterLogin", window.location.pathname);
-                                window.location.href = "/login";
+                                window.location.href = "/seja-um-membro";
                                 return;
                             }
                             codigo(curso.ID_CURSO);
