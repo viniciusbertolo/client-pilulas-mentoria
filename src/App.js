@@ -24,6 +24,9 @@ import AreaDownload from "./Pages/AreaDownloads";
 import UpdateSenha from "./Pages/UpdateSenha/updateSenha";
 import Chat from "./Pages/IA";
 import DetalheCurso from "./Pages/DetalhesCurso";
+import LandingPageEventos from "./Pages/LandingPageEventos";
+import LandingPageEventosConfirmacao from "./Pages/LandingPageEventosConfirmacao";
+
 
 const user = localStorage.getItem('@user');
 
@@ -31,31 +34,35 @@ function App() {
   return (
     <Router>
       <Routes>
-          <Route path="/" element={user ? <Home/>: <Navigate to="/login"/>} />
-          <Route path="/politicas" element={<PoliticasPrivacidade/>} />
-          <Route path="/nova-senha" element={<UpdateSenha/>} />
-          <Route path="/login" element={user ? <Navigate to="/"/> : <Login/>} />
-          <Route path="/materiais" element={user ? <AreaDownload/> : <Navigate to="/login"/>} />
-          <Route path="/ia" element={user ? <Chat/> : <Navigate to="/login"/>} />
-          <Route path="/todos-cursos" element={<TodosCursos/>} />
-          <Route path="/cursos" element={user ? <Dashboard/> : <Navigate to="/login"/>} />
-          <Route path="/cursos/:id" element={user ? <HomeCurso/> : <Login/>} />
-          <Route path="/detalhe-curso/:id" element={<DetalheCurso/>} />
-          <Route path="/videoCurso/:idCurso/:id" element={user ? <VideoCurso/> : <Login/>} />
-          <Route path="/pergunta/:idCurso/:id" element={user ? <Pergunta/> : <Login/>} />
-          <Route path="/seja-um-membro" element={user ? <Navigate to="/"/> : <Cadastro/>} />
-          <Route path="/seja-um-membro-internacional" element={user ? <Navigate to="/"/> : <CadastroInternacional/>} />
-          <Route path="/girando-a-chave" element={<LpGirandoChave/>} />
-          <Route path="/relatorios" element={user ? <Relatorios/> : <Navigate to="/login"/>} />
-          <Route path="/controlePessoas/:id" element={user ? <Controle/> : <Navigate to="/login"/>} />
-          <Route path="/usuarios-sistema/:email" element={user ? <UsuariosSistema/> : <Navigate to="/login"/>} />
-          <Route path="/controle-empresa/:empresa" element={user ? <ControleEmpresa/> : <Navigate to="/login"/>} />
-          <Route path="/upload-curso" element={user ? <UploadCurso/> : <Navigate to="/login"/>} />
-          <Route path="/upload-aula" element={user ? <UploadAula/> : <Navigate to="/login"/>} />
-          <Route path="*" element={<Error/>} />
-          <Route path="/upload-resposta" element={user ? <UploadRespostas/> : <Navigate to="/login"/>} />
-          <Route path="/uploads" element={user ? <Uploads/> : <Navigate to="/login"/>} />
-          <Route path="*" element={<Error/>} />
+        <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
+        <Route path="/politicas" element={<PoliticasPrivacidade />} />
+        <Route path="/nova-senha" element={<UpdateSenha />} />
+        <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+        <Route path="/materiais" element={user ? <AreaDownload /> : <Navigate to="/login" />} />
+        <Route path="/ia" element={user ? <Chat /> : <Navigate to="/login" />} />
+        <Route path="/todos-cursos" element={<TodosCursos />} />
+        <Route path="/cursos" element={user ? <Dashboard /> : <Navigate to="/login" />} />
+        <Route path="/cursos/:id" element={user ? <HomeCurso /> : <Login />} />
+        <Route path="/detalhe-curso/:id" element={<DetalheCurso />} />
+        <Route path="/videoCurso/:idCurso/:id" element={user ? <VideoCurso /> : <Login />} />
+        <Route path="/pergunta/:idCurso/:id" element={user ? <Pergunta /> : <Login />} />
+        <Route path="/seja-um-membro" element={user ? <Navigate to="/" /> : <Cadastro />} />
+        <Route path="/seja-um-membro-internacional" element={user ? <Navigate to="/" /> : <CadastroInternacional />} />
+        <Route path="/girando-a-chave" element={<LpGirandoChave />} />
+        <Route path="/relatorios" element={user ? <Relatorios /> : <Navigate to="/login" />} />
+        <Route path="/controlePessoas/:id" element={user ? <Controle /> : <Navigate to="/login" />} />
+        <Route path="/usuarios-sistema/:email" element={user ? <UsuariosSistema /> : <Navigate to="/login" />} />
+        <Route path="/controle-empresa/:empresa" element={user ? <ControleEmpresa /> : <Navigate to="/login" />} />
+        <Route path="/upload-curso" element={user ? <UploadCurso /> : <Navigate to="/login" />} />
+        <Route path="/upload-aula" element={user ? <UploadAula /> : <Navigate to="/login" />} />
+        <Route path="*" element={<Error />} />
+        <Route path="/upload-resposta" element={user ? <UploadRespostas /> : <Navigate to="/login" />} />
+        <Route path="/uploads" element={user ? <Uploads /> : <Navigate to="/login" />} />
+        <Route path="/eventos" element={<LandingPageEventos />} />
+        <Route path="/eventos/confirmacao" element={<LandingPageEventosConfirmacao />}
+        />
+
+        <Route path="*" element={<Error />} />
       </Routes>
     </Router>
 
