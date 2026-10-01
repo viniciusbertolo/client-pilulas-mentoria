@@ -77,7 +77,15 @@ export default function LandingPageEventos() {
         throw new Error(data.message || "Não foi possível iniciar o checkout.");
       }
 
-      window.location.href = data.url;
+      const checkoutWindow = window.open(
+        data.url,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+      if (!checkoutWindow) {
+        window.location.href = data.url;
+      }
     } catch (err) {
       console.error("Erro ao criar checkout:", err);
       setError(err.message || "Ocorreu um erro. Tente novamente.");
