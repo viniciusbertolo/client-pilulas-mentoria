@@ -1,5 +1,9 @@
-import React, { useState } from "react";
 import "./index.css";
+import React, {
+  useEffect,
+  useRef,
+  useState
+} from "react";
 
 const API_URL = "https://backend-pilulas-mentoria.herokuapp.com";
 
@@ -29,6 +33,13 @@ export default function LandingPageEventos() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const checkoutWindowRef = useRef(null);
+  const pollTimerRef = useRef(null);
+
+
+
+
+
   function openCheckout() {
     setError("");
     setShowModal(true);
@@ -41,26 +52,119 @@ export default function LandingPageEventos() {
     }
   }
 
+  // async function createCheckout(event) {
+  //   event.preventDefault();
+  //   setError("");
+
+  //   const normalizedEmail = email.trim().toLowerCase();
+
+  //   if (!normalizedEmail) {
+  //     setError("Digite seu e-mail para continuar.");
+  //     return;
+  //   }
+
+  //   if (!/^\S+@\S+\.\S+$/.test(normalizedEmail)) {
+  //     setError("Digite um e-mail válido.");
+  //     return;
+  //   }
+
+  //   try {
+  //     setLoading(true);
+
+  //     const response = await fetch(`${API_URL}/api/events/create-checkout`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         email: normalizedEmail,
+  //         eventId: EVENTO.id,
+  //       }),
+  //     });
+
+  //     const data = await response.json().catch(() => ({}));
+
+  //     if (!response.ok || !data.url) {
+  //       throw new Error(data.message || "Não foi possível iniciar o checkout.");
+  //     }
+
+  //     const checkoutWindow = window.open(
+  //       data.url,
+  //       "_blank",
+  //       "noopener,noreferrer"
+  //     );
+
+  //     if (!checkoutWindow) {
+  //       window.location.href = data.url;
+  //     }
+  //   } catch (err) {
+  //     console.error("Erro ao criar checkout:", err);
+  //     setError(err.message || "Ocorreu um erro. Tente novamente.");
+  //     setLoading(false);
+  //   }
+  // }
+
   async function createCheckout(event) {
-    event.preventDefault();
-    setError("");
+  event.preventDefault();
 
-    const normalizedEmail = email.trim().toLowerCase();
+  setError("");
 
-    if (!normalizedEmail) {
-      setError("Digite seu e-mail para continuar.");
-      return;
-    }
+  const normalizedEmail = email
+    .trim()
+    .toLowerCase();
 
-    if (!/^\S+@\S+\.\S+$/.test(normalizedEmail)) {
-      setError("Digite um e-mail válido.");
-      return;
-    }
+  if (!normalizedEmail) {
+    setError("Digite seu e-mail para continuar.");
+    return;
+  }
 
-    try {
-      setLoading(true);
+  if (!/^\S+@\S+\.\S+$/.test(normalizedEmail)) {
+    setError("Digite um e-mail válido.");
+    return;
+  }
 
-      const response = await fetch(`${API_URL}/api/events/create-checkout`, {
+  // Abre a janela imediatamente, enquanto ainda estamos
+  // dentro do clique/submissão do usuário.
+  const checkoutWindow = window.open(
+    "",
+    "_blank"
+  );
+
+  if (!checkoutWindow) {
+    setError(
+      "Seu navegador bloqueou a abertura do checkout. Permita pop-ups para continuar."
+    );
+
+    return;
+  }
+
+  checkoutWindowRef.current = checkoutWindow;
+
+  // Mostra algo enquanto o Mercado Pago é preparado
+  checkoutWindow.document.write(`
+    <html>
+      <head>
+        <title>Pagamento</title>
+      </head>
+      <body style="
+        margin:0;
+        height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-family:Arial,sans-serif;
+      ">
+        <p>Preparando pagamento...</p>
+      </body>
+    </html>
+  `);
+
+  try {
+    setLoading(true);
+
+    const response = await fetch(
+      `${API_URL}/api/events/create-checkout`,
+      {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,29 +173,158 @@ export default function LandingPageEventos() {
           email: normalizedEmail,
           eventId: EVENTO.id,
         }),
-      });
-
-      const data = await response.json().catch(() => ({}));
-
-      if (!response.ok || !data.url) {
-        throw new Error(data.message || "Não foi possível iniciar o checkout.");
       }
+    );
 
-      const checkoutWindow = window.open(
-        data.url,
-        "_blank",
-        "noopener,noreferrer"
+    const data = await response
+      .json()
+      .catch(() => ({}));
+
+    if (!response.ok || !data.url) {
+      throw new Error(
+        data.message ||
+          "Não foi possível iniciar o checkout."
+      );
+    }
+
+    if (!data.externalReference) {
+      throw new Error(
+        "A referência do pagamento não foi criada."
+      );
+    }
+
+    // Agora envia a aba para o Mercado Pago
+    checkoutWindow.location.href = data.url;
+
+    // Começa a acompanhar o pagamento
+    startPaymentPolling(
+      data.externalReference
+    );
+
+    setLoading(false);
+
+  } catch (err) {
+    console.error(
+      "Erro ao criar checkout:",
+      err
+    );
+
+    checkoutWindow.close();
+
+    checkoutWindowRef.current = null;
+
+    setLoading(false);
+
+    setError(
+      err.message ||
+        "Ocorreu um erro. Tente novamente."
+    );
+  }
+}
+
+
+  function startPaymentPolling(reference) {
+  let attempts = 0;
+
+  const maxAttempts = 300; // 10 minutos
+  const intervalMs = 2000; // 2 segundos
+
+  pollTimerRef.current = setInterval(async () => {
+    attempts += 1;
+
+    try {
+      const response = await fetch(
+        `${API_URL}/api/events/status/${encodeURIComponent(
+          reference
+        )}`
       );
 
-      if (!checkoutWindow) {
-        window.location.href = data.url;
+      if (!response.ok) {
+        return;
       }
-    } catch (err) {
-      console.error("Erro ao criar checkout:", err);
-      setError(err.message || "Ocorreu um erro. Tente novamente.");
-      setLoading(false);
+
+      const data = await response.json();
+
+      console.log("Status do pagamento:", data);
+
+      // -----------------------------
+      // PAGAMENTO APROVADO
+      // -----------------------------
+
+      if (data.approved && data.paymentId) {
+        clearInterval(pollTimerRef.current);
+
+        if (
+          checkoutWindowRef.current &&
+          !checkoutWindowRef.current.closed
+        ) {
+          checkoutWindowRef.current.close();
+        }
+
+        window.location.href =
+          `/eventos/confirmacao?payment_id=${encodeURIComponent(
+            data.paymentId
+          )}`;
+
+        return;
+      }
+
+      // -----------------------------
+      // PAGAMENTO RECUSADO/CANCELADO
+      // -----------------------------
+
+      if (
+        data.status === "rejected" ||
+        data.status === "cancelled"
+      ) {
+        clearInterval(pollTimerRef.current);
+
+        if (
+          checkoutWindowRef.current &&
+          !checkoutWindowRef.current.closed
+        ) {
+          checkoutWindowRef.current.close();
+        }
+
+        window.location.href =
+          "/eventos?checkout=failure";
+
+        return;
+      }
+
+      // -----------------------------
+      // TIMEOUT
+      // -----------------------------
+
+      if (attempts >= maxAttempts) {
+        clearInterval(pollTimerRef.current);
+
+        checkoutWindowRef.current = null;
+
+        setLoading(false);
+
+        setError(
+          "Não conseguimos confirmar o pagamento automaticamente. Verifique seu e-mail ou tente novamente."
+        );
+      }
+
+    } catch (error) {
+      console.error(
+        "Erro ao verificar pagamento:",
+        error
+      );
     }
-  }
+  }, intervalMs);
+}
+
+
+useEffect(() => {
+  return () => {
+    if (pollTimerRef.current) {
+      clearInterval(pollTimerRef.current);
+    }
+  };
+}, []);
 
   return (
     <main className="event-page">
