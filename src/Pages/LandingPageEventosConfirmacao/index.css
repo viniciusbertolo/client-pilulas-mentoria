@@ -1,4 +1,4 @@
-.event-confirm-page {
+/* .event-confirm-page {
   min-height: 100vh;
   padding: 30px 18px;
   display: grid;
@@ -241,4 +241,1852 @@
   .confirm-qr-wrap {
     width: fit-content;
   }
+} */
+
+:root {
+  --ndx-blue: #08afe6;
+  --ndx-dark: #031d29;
+  --ndx-dark-2: #082f40;
+
+  --ndx-offwhite: #f3f3ed;
+  --ndx-white: #ffffff;
+
+  --ndx-text: #10202a;
+  --ndx-muted: #68767d;
+
+  --ndx-border: #dce2e4;
+
+  --ndx-success: #20b878;
+  --ndx-warning: #dca742;
+  --ndx-error: #df6868;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  background:
+    var(--ndx-offwhite);
+
+  color:
+    var(--ndx-text);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.ndx-confirm-page {
+  position: relative;
+
+  min-width: 100vw;
+  min-height: 100vh;
+
+  background:
+    linear-gradient(
+      180deg,
+      #eef3f0 0%,
+      #ffffff 44%,
+      #eef2ef 100%
+    );
+
+}
+
+
+
+/* =========================================================
+   HERO
+   MESMO PADRÃO DA LANDING
+   REDUZIDO
+========================================================= */
+
+.ndx-confirm-hero {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      #021a25 0%,
+      #0b3a4c 100%
+    );
+}
+
+.ndx-confirm-hero-top {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 300px;
+
+  padding:
+    28px 0 32px;
+
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 25% 30%,
+      rgba(
+        8,
+        175,
+        230,
+        0.12
+      ),
+      transparent 22%
+    ),
+    linear-gradient(
+      180deg,
+      #021a25 0%,
+      #0b3a4c 100%
+    );
+}
+
+
+/* =========================================================
+   LOGO — MESMO SISTEMA DA LANDING
+========================================================= */
+
+.ndx-confirm-logo-wrap {
+  position: relative;
+
+  z-index: 2;
+
+  width: max-content;
+
+  max-width:
+    calc(
+      100vw - 40px
+    );
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: stretch;
+
+  text-align: left;
+}
+
+
+/* IMERSÃO */
+
+.ndx-confirm-logo-small {
+  width: 100%;
+
+  margin:
+    0 10px 5px;
+
+  color:
+    var(--ndx-blue);
+
+  font-size:
+    clamp(
+      19px,
+      2vw,
+      32px
+    );
+
+  line-height:
+    0.9;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    -0.065em;
+
+  text-align:
+    left;
+
+  white-space:
+    nowrap;
+
+  text-shadow:
+    0 0 1px #0ea9e0,
+    0 5px 12px
+      rgba(
+        0,
+        0,
+        0,
+        0.25
+      );
+}
+
+
+/* NDX */
+
+.ndx-confirm-logo-main {
+  width:
+    max-content;
+
+  margin: 0;
+
+  color:
+    var(--ndx-blue);
+
+  font-size:
+    clamp(
+      78px,
+      11vw,
+      165px
+    );
+
+  line-height:
+    0.72;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    -0.115em;
+
+  text-align:
+    left;
+
+  white-space:
+    nowrap;
+
+  text-shadow:
+    4px 4px 0
+      rgba(
+        3,
+        63,
+        80,
+        0.5
+      ),
+    8px 8px 17px
+      rgba(
+        0,
+        0,
+        0,
+        0.25
+      );
+}
+
+
+/* + A NOVA PNL */
+
+.ndx-confirm-logo-sub {
+  width:
+    100%;
+
+  margin-top:
+    12px;
+
+  margin-left:
+    32px;
+
+  color:
+    #fff;
+
+  font-size:
+    clamp(
+      16px,
+      2.2vw,
+      32px
+    );
+
+  line-height:
+    0.95;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    -0.04em;
+
+  text-align:
+    right;
+
+  white-space:
+    nowrap;
+}
+
+
+/* =========================================================
+   TITLE STRIP
+========================================================= */
+
+.ndx-confirm-title-strip {
+  width: 100%;
+
+  padding:
+    11px 20px;
+
+  background:
+    #082f40;
+
+  color:
+    #fff;
+
+  text-align:
+    center;
+
+  font-size:
+    clamp(
+      16px,
+      2vw,
+      30px
+    );
+
+  line-height:
+    1;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    -0.035em;
+
+  text-shadow:
+    0 2px 0
+      rgba(
+        0,
+        0,
+        0,
+        0.2
+      );
+}
+
+
+/* =========================================================
+   CONFIRMATION SECTION
+   FLUXO NORMAL DA PÁGINA
+========================================================= */
+
+.ndx-confirm-section {
+  position: relative;
+
+  width: 100%;
+
+  padding:
+    34px
+    34px
+    50px;
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.ndx-confirm-success {
+  width: 100%;
+
+  padding:
+    clamp(
+      28px,
+      3.5vw,
+      48px
+    );
+
+  border:
+    1px solid
+    var(--ndx-border);
+
+  border-radius:
+    28px;
+
+  background:
+    #fff;
+
+  box-shadow:
+    0 24px 70px
+      rgba(
+        8,
+        31,
+        41,
+        0.08
+      );
+}
+
+
+/* =========================================================
+   SUCCESS HEADER
+========================================================= */
+
+.ndx-confirm-success-header {
+  display:
+    grid;
+
+  grid-template-columns:
+    64px
+    minmax(
+      0,
+      1fr
+    );
+
+  gap:
+    20px;
+
+  align-items:
+    start;
+}
+
+.ndx-success-icon {
+  width:
+    60px;
+
+  height:
+    60px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(
+      32,
+      184,
+      120,
+      0.10
+    );
+
+  border:
+    1px solid
+    rgba(
+      32,
+      184,
+      120,
+      0.24
+    );
+
+  color:
+    var(--ndx-success);
+
+  font-size:
+    26px;
+
+  font-weight:
+    900;
+}
+
+.ndx-state-label {
+  display:
+    block;
+
+  margin-bottom:
+    9px;
+
+  color:
+    var(--ndx-blue);
+
+  font-size:
+    10px;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    0.16em;
+
+  font-weight:
+    900;
+}
+
+.ndx-confirm-success-header h1 {
+  margin:
+    0 0 13px;
+
+  color:
+    var(--ndx-dark);
+
+  font-size:
+    clamp(
+      38px,
+      4.5vw,
+      64px
+    );
+
+  line-height:
+    0.98;
+
+  letter-spacing:
+    -0.055em;
+}
+
+.ndx-confirm-success-header p {
+  max-width:
+    800px;
+
+  margin:
+    0;
+
+  color:
+    var(--ndx-muted);
+
+  font-size:
+    15px;
+
+  line-height:
+    1.65;
+}
+
+.ndx-confirm-success-header strong {
+  color:
+    var(--ndx-dark);
+}
+
+
+/* =========================================================
+   EVENT SUMMARY
+========================================================= */
+
+.ndx-event-summary {
+  margin-top:
+    30px;
+
+  padding:
+    18px 20px;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1fr
+    )
+    auto;
+
+  gap:
+    30px;
+
+  border:
+    1px solid
+    var(--ndx-border);
+
+  border-radius:
+    16px;
+
+  background:
+    #f7f8f5;
+}
+
+.ndx-event-summary span {
+  display:
+    block;
+
+  margin-bottom:
+    5px;
+
+  color:
+    #7b878d;
+
+  font-size:
+    8px;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    0.14em;
+
+  font-weight:
+    900;
+}
+
+.ndx-event-summary strong {
+  color:
+    var(--ndx-dark);
+
+  font-size:
+    13px;
+}
+
+.ndx-status-approved {
+  color:
+    var(--ndx-success) !important;
+}
+
+
+/* =========================================================
+   TICKET
+========================================================= */
+
+.ndx-ticket {
+  position:
+    relative;
+
+  width: 100%;
+
+  margin-top:
+    22px;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1fr
+    )
+    300px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #062331 0%,
+      #0a4054 100%
+    );
+
+  color:
+    #fff;
+}
+
+.ndx-ticket-information {
+  padding:
+    38px 42px;
+}
+
+.ndx-ticket-eyebrow {
+  display:
+    block;
+
+  margin-bottom:
+    9px;
+
+  color:
+    #6edaf8;
+
+  font-size:
+    10px;
+
+  letter-spacing:
+    0.16em;
+
+  font-weight:
+    900;
+}
+
+.ndx-ticket-information h2 {
+  margin:
+    0;
+
+  max-width:
+    800px;
+
+  font-size:
+    clamp(
+      28px,
+      3vw,
+      43px
+    );
+
+  line-height:
+    1.04;
+
+  letter-spacing:
+    -0.045em;
+}
+
+.ndx-ticket-divider {
+  margin:
+    24px 0;
+
+  border-top:
+    1px dashed
+    rgba(
+      255,
+      255,
+      255,
+      0.18
+    );
+}
+
+.ndx-ticket-meta {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:
+    20px;
+}
+
+.ndx-ticket-meta span,
+.ndx-ticket-code span,
+.ndx-ticket-payment span {
+  display:
+    block;
+
+  margin-bottom:
+    5px;
+
+  color:
+    #82a1ad;
+
+  font-size:
+    9px;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    0.13em;
+
+  font-weight:
+    900;
+}
+
+.ndx-ticket-meta strong,
+.ndx-ticket-code strong,
+.ndx-ticket-payment strong {
+  display:
+    block;
+
+  color:
+    #fff;
+
+  font-size:
+    13px;
+
+  line-height:
+    1.45;
+}
+
+.ndx-ticket-code {
+  margin-top:
+    28px;
+}
+
+.ndx-ticket-code strong {
+  max-width:
+    750px;
+
+  word-break:
+    break-word;
+}
+
+.ndx-ticket-payment {
+  margin-top:
+    18px;
+}
+
+.ndx-ticket-payment strong {
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.52
+    );
+
+  font-size:
+    10px;
+
+  word-break:
+    break-all;
+}
+
+
+/* =========================================================
+   QR
+========================================================= */
+
+.ndx-ticket-qr {
+  padding:
+    28px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  background:
+    #f4f5f1;
+
+  color:
+    var(--ndx-dark);
+
+  text-align:
+    center;
+}
+
+.ndx-qr-box {
+  padding:
+    13px;
+
+  border-radius:
+    18px;
+
+  background:
+    #fff;
+
+  box-shadow:
+    0 12px 35px
+      rgba(
+        0,
+        0,
+        0,
+        0.10
+      );
+}
+
+.ndx-ticket-qr strong {
+  max-width:
+    220px;
+
+  margin-top:
+    14px;
+
+  font-size:
+    13px;
+
+  line-height:
+    1.4;
+}
+
+.ndx-ticket-qr > span {
+  max-width:
+    220px;
+
+  margin-top:
+    6px;
+
+  color:
+    #77838a;
+
+  font-size:
+    10px;
+
+  line-height:
+    1.45;
+}
+
+
+/* =========================================================
+   EMAIL
+========================================================= */
+
+.ndx-email-confirmation {
+  margin-top:
+    15px;
+
+  padding:
+    17px 19px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  border:
+    1px solid
+    var(--ndx-border);
+
+  border-radius:
+    15px;
+
+  background:
+    #f7f8f5;
+}
+
+.ndx-email-check {
+  flex:
+    0 0 auto;
+
+  width:
+    28px;
+
+  height:
+    28px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(
+      32,
+      184,
+      120,
+      0.10
+    );
+
+  color:
+    var(--ndx-success);
+
+  font-size:
+    12px;
+
+  font-weight:
+    900;
+}
+
+.ndx-email-confirmation span {
+  display:
+    block;
+
+  margin-bottom:
+    4px;
+
+  color:
+    #7d898f;
+
+  font-size:
+    8px;
+
+  letter-spacing:
+    0.12em;
+
+  font-weight:
+    900;
+}
+
+.ndx-email-confirmation strong {
+  display:
+    block;
+
+  color:
+    var(--ndx-dark);
+
+  font-size:
+    12px;
+
+  word-break:
+    break-word;
+}
+
+.ndx-email-confirmation p {
+  margin:
+    4px 0 0;
+
+  color:
+    #7d898f;
+
+  font-size:
+    10px;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.ndx-confirm-actions {
+  margin-top:
+    22px;
+
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    10px;
+}
+
+.ndx-main-button,
+.ndx-secondary-button {
+  min-height:
+    48px;
+
+  padding:
+    12px 20px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    12px;
+
+  border-radius:
+    999px;
+
+  text-decoration:
+    none;
+
+  font-size:
+    12px;
+
+  font-weight:
+    800;
+}
+
+.ndx-main-button {
+  border:
+    0;
+
+  background:
+    var(--ndx-blue);
+
+  color:
+    #fff;
+
+  box-shadow:
+    0 10px 28px
+      rgba(
+        8,
+        175,
+        230,
+        0.18
+      );
+}
+
+.ndx-main-button:hover {
+  background:
+    #079fce;
+}
+
+.ndx-main-button span {
+  font-size:
+    16px;
+}
+
+.ndx-secondary-button {
+  border:
+    1px solid
+    var(--ndx-border);
+
+  background:
+    #f7f8f5;
+
+  color:
+    var(--ndx-dark);
+
+  cursor:
+    pointer;
+}
+
+.ndx-secondary-button:hover {
+  background:
+    #edf1ee;
+}
+
+.ndx-confirm-bottom-note {
+  margin-top:
+    25px;
+
+  padding-top:
+    18px;
+
+  border-top:
+    1px solid
+    #e3e7e7;
+
+  color:
+    #7d898e;
+
+  font-size:
+    9px;
+
+  letter-spacing:
+    0.08em;
+}
+
+
+/* =========================================================
+   STATE CARDS
+========================================================= */
+
+.ndx-confirm-state-card {
+  width: 100%;
+
+  min-height:
+    460px;
+
+  padding:
+    55px 30px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  justify-content:
+    center;
+
+  align-items:
+    center;
+
+  text-align:
+    center;
+
+  border:
+    1px solid
+    var(--ndx-border);
+
+  border-radius:
+    28px;
+
+  background:
+    #fff;
+
+  box-shadow:
+    0 24px 70px
+      rgba(
+        8,
+        31,
+        41,
+        0.08
+      );
+}
+
+.ndx-state-icon {
+  width:
+    68px;
+
+  height:
+    68px;
+
+  margin-bottom:
+    24px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    50%;
+
+  font-size:
+    28px;
+
+  font-weight:
+    900;
+}
+
+.ndx-loading-icon {
+  background:
+    rgba(
+      8,
+      175,
+      230,
+      0.08
+    );
+
+  border:
+    1px solid
+    rgba(
+      8,
+      175,
+      230,
+      0.22
+    );
+}
+
+.ndx-pending-icon {
+  background:
+    rgba(
+      220,
+      167,
+      66,
+      0.09
+    );
+
+  border:
+    1px solid
+    rgba(
+      220,
+      167,
+      66,
+      0.22
+    );
+
+  color:
+    var(--ndx-warning);
+}
+
+.ndx-error-icon {
+  background:
+    rgba(
+      223,
+      104,
+      104,
+      0.08
+    );
+
+  border:
+    1px solid
+    rgba(
+      223,
+      104,
+      104,
+      0.23
+    );
+
+  color:
+    var(--ndx-error);
+}
+
+.ndx-confirm-state-card h1 {
+  margin:
+    10px 0 12px;
+
+  max-width:
+    1000px;
+
+  color:
+    var(--ndx-dark);
+
+  font-size:
+    clamp(
+      40px,
+      5.8vw,
+      72px
+    );
+
+  line-height:
+    0.97;
+
+  letter-spacing:
+    -0.055em;
+}
+
+.ndx-confirm-state-card > p {
+  max-width:
+    650px;
+
+  margin:
+    0;
+
+  color:
+    var(--ndx-muted);
+
+  font-size:
+    16px;
+
+  line-height:
+    1.7;
+}
+
+.ndx-pending-label {
+  color:
+    var(--ndx-warning);
+}
+
+.ndx-error-label {
+  color:
+    var(--ndx-error);
+}
+
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+.ndx-spinner {
+  width:
+    29px;
+
+  height:
+    29px;
+
+  border:
+    3px solid
+    rgba(
+      8,
+      175,
+      230,
+      0.15
+    );
+
+  border-top-color:
+    var(--ndx-blue);
+
+  border-radius:
+    50%;
+
+  animation:
+    ndx-spin
+    700ms linear infinite;
+}
+
+@keyframes ndx-spin {
+  to {
+    transform:
+      rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.ndx-confirm-footer {
+  width:
+    100%;
+
+  padding:
+    18px 34px 30px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    20px;
+
+  color:
+    #7c888e;
+
+  font-size:
+    9px;
+
+  letter-spacing:
+    0.08em;
+}
+
+.ndx-confirm-footer span:first-child {
+  font-weight:
+    900;
+}
+
+.ndx-confirm-footer span:last-child {
+  letter-spacing:
+    0;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .ndx-ticket {
+    grid-template-columns:
+      1fr;
+  }
+
+  .ndx-ticket-qr {
+    padding:
+      30px;
+  }
+
+  .ndx-ticket-meta {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          0,
+          1fr
+        )
+      );
+  }
+
+  .ndx-event-summary {
+    grid-template-columns:
+      1fr;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+
+  .ndx-confirm-hero-top {
+    min-height:
+      190px;
+
+    padding:
+      18px 0 22px;
+  }
+
+  .ndx-confirm-logo-wrap {
+    max-width:
+      calc(
+        100vw - 24px
+      );
+  }
+
+  .ndx-confirm-logo-small {
+    font-size:
+      16px;
+
+    margin-left:
+      8px;
+  }
+
+  .ndx-confirm-logo-main {
+    font-size:
+      72px;
+  }
+
+  .ndx-confirm-logo-sub {
+    margin-top:
+      9px;
+
+    margin-left:
+      20px;
+
+    font-size:
+      17px;
+  }
+
+  .ndx-confirm-title-strip {
+    padding:
+      8px 10px;
+
+    font-size:
+      14px;
+
+    line-height:
+      1.1;
+  }
+
+  .ndx-confirm-section {
+    padding:
+      10px 8px 35px;
+  }
+
+  .ndx-confirm-success,
+  .ndx-confirm-state-card {
+    border-radius:
+      20px;
+  }
+
+  .ndx-confirm-success {
+    padding:
+      24px 17px;
+  }
+
+  .ndx-confirm-success-header {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      14px;
+  }
+
+  .ndx-success-icon {
+    width:
+      55px;
+
+    height:
+      55px;
+  }
+
+  .ndx-confirm-success-header h1 {
+    font-size:
+      39px;
+  }
+
+  .ndx-confirm-success-header p {
+    font-size:
+      14px;
+  }
+
+  .ndx-event-summary {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      14px;
+
+    margin-top:
+      24px;
+  }
+
+  .ndx-ticket {
+    margin-top:
+      20px;
+
+    border-radius:
+      18px;
+  }
+
+  .ndx-ticket-information {
+    padding:
+      27px 20px;
+  }
+
+  .ndx-ticket-information h2 {
+    font-size:
+      27px;
+  }
+
+  .ndx-ticket-meta {
+    grid-template-columns:
+      1fr;
+  }
+
+  .ndx-ticket-qr {
+    padding:
+      24px 18px 30px;
+  }
+
+  .ndx-qr-box {
+    padding:
+      11px;
+  }
+
+  .ndx-email-confirmation {
+    align-items:
+      flex-start;
+  }
+
+  .ndx-confirm-actions {
+    flex-direction:
+      column;
+  }
+
+  .ndx-main-button,
+  .ndx-secondary-button {
+    width:
+      100%;
+  }
+
+  .ndx-confirm-state-card {
+    min-height:
+      430px;
+
+    padding:
+      30px 20px;
+  }
+
+  .ndx-confirm-state-card h1 {
+    font-size:
+      40px;
+  }
+
+  .ndx-confirm-footer {
+    padding:
+      12px 12px 24px;
+
+    flex-direction:
+      column;
+
+    align-items:
+      flex-start;
+
+    font-size:
+      8px;
+  }
+}
+
+
+
+
+/* =========================================================
+   LOGO NDX — ALINHAMENTO EXATO DA REFERÊNCIA
+========================================================= */
+
+.ndx-logo-wrap-conf {
+  position: relative;
+  z-index: 2;
+
+  /* A largura é determinada pelo NDX */
+  width: max-content;
+  max-width: calc(100vw - 40px);
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: stretch;
+
+  text-align: left;
+}
+
+
+/* =========================================================
+   IMERSÃO
+   alinhado à esquerda do NDX
+========================================================= */
+
+.ndx-logo-small-conf {
+  width: 100%;
+
+  margin: 0 10px 8px;
+
+  color: var(--ndx-blue);
+
+  font-size: 24px;
+
+  line-height: 0.9;
+
+  font-weight: 500;
+
+  letter-spacing: -0.065em;
+
+  text-align: left;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0 0 1px #0ea9e0,
+    0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   NDX
+   define a largura real do bloco
+========================================================= */
+
+.ndx-logo-main-conf {
+  width: max-content;
+
+  margin: 0;
+
+  color: var(--ndx-blue);
+
+  font-size: 100px;
+
+  line-height: 0.72;
+
+  font-weight: 900;
+
+  letter-spacing: -0.115em;
+
+  text-align: left;
+
+  white-space: nowrap;
+
+  text-shadow:
+    8px 8px 0 rgba(3, 63, 80, 0.5),
+    15px 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   + A NOVA PNL
+   alinhado à direita do NDX
+========================================================= */
+
+.ndx-logo-sub-conf {
+  width: 100%;
+
+  margin-top: 22px;
+  margin-left: 20px;
+
+  padding: 0;
+
+  color: #fff;
+
+  font-size: 24px;
+
+  line-height: 0.95;
+
+  font-weight: 800;
+
+  letter-spacing: -0.04em;
+
+  text-align: right;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   ÁREA DO LOGO
+========================================================= */
+
+.ndx-hero-top-conf {
+  position: relative;
+
+  min-height: 190px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  padding:
+    24px 0 24px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 25% 30%,
+      rgba(8, 175, 230, 0.12),
+      transparent 22%
+    ),
+    linear-gradient(
+      180deg,
+      #021a25 0%,
+      #0b3a4c 100%
+    );
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .ndx-logo-wrap-conf {
+    max-width:
+      calc(100vw - 30px);
+  }
+
+  .ndx-logo-small-conf {
+    font-size:
+      clamp(
+        30px,
+        6vw,
+        46px
+      );
+  }
+
+  .ndx-logo-main-conf {
+    font-size:
+      clamp(
+        95px,
+        22vw,
+        180px
+      );
+  }
+
+  .ndx-logo-sub-conf {
+    font-size:
+      clamp(
+        23px,
+        5vw,
+        38px
+      );
+
+    margin-top:
+      16px;
+  }
+
+  .ndx-hero-top-conf {
+    min-height:
+      330px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+
+  .ndx-logo-wrap-conf {
+    max-width:
+      calc(100vw - 24px);
+  }
+
+  .ndx-hero-top-conf {
+    min-height:
+      255px;
+
+      min-height: 50px;
+
+    padding:
+      25px 0 30px;
+  }
+
+  .ndx-logo-small-conf {
+    font-size:
+      31px;
+
+    margin-bottom:
+      6px;
+  }
+
+  .ndx-logo-main-conf {
+    font-size:
+      94px;
+
+    line-height:
+      0.72;
+  }
+
+  .ndx-logo-sub-conf {
+    margin-top:
+      14px;
+
+    font-size:
+      22px;
+  }
+}
+
+
+
+
