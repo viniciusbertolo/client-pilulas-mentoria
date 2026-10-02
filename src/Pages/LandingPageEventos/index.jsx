@@ -622,7 +622,7 @@ export default function LandingPageEventos() {
       if (!response.ok || !data.url) {
         throw new Error(
           data.message ||
-            "Não foi possível iniciar o checkout."
+          "Não foi possível iniciar o checkout."
         );
       }
 
@@ -653,7 +653,7 @@ export default function LandingPageEventos() {
 
       setError(
         err.message ||
-          "Ocorreu um erro. Tente novamente."
+        "Ocorreu um erro. Tente novamente."
       );
     }
   }
@@ -1376,70 +1376,70 @@ export default function LandingPageEventos() {
 
       <section className="ndx-testimonials">
 
-  <div className="ndx-content">
+        <div className="ndx-content">
 
-    <div className="ndx-social-proof-header">
-      <span>
-        APROVAÇÃO NOTA MÁXIMA
-      </span>
+          <div className="ndx-social-proof-header">
+            <span>
+              APROVAÇÃO NOTA MÁXIMA
+            </span>
 
-      <h2>
-        Os nossos clientes aprovam
-      </h2>
+            <h2>
+              Os nossos clientes aprovam
+            </h2>
 
-      <p>
-        Uma experiência que transforma conhecimento
-        em novas formas de pensar, decidir e agir.
-      </p>
-    </div>
+            <p>
+              Uma experiência que transforma conhecimento
+              em novas formas de pensar, decidir e agir.
+            </p>
+          </div>
 
-    <div className="ndx-social-proof-grid">
+          <div className="ndx-social-proof-grid">
 
-      <div className="ndx-social-proof-item">
-        <img
-          src={prova1Image}
-          alt="Depoimento de cliente"
-        />
-      </div>
+            <div className="ndx-social-proof-item">
+              <img
+                src={prova1Image}
+                alt="Depoimento de cliente"
+              />
+            </div>
 
-      <div className="ndx-social-proof-item">
-        <img
-          src={prova2Image}
-          alt="Depoimento de cliente"
-        />
-      </div>
+            <div className="ndx-social-proof-item">
+              <img
+                src={prova2Image}
+                alt="Depoimento de cliente"
+              />
+            </div>
 
-      <div className="ndx-social-proof-item">
-        <img
-          src={prova3Image}
-          alt="Depoimento de cliente"
-        />
-      </div>
+            <div className="ndx-social-proof-item">
+              <img
+                src={prova3Image}
+                alt="Depoimento de cliente"
+              />
+            </div>
 
-      <div className="ndx-social-proof-item">
-        <img
-          src={prova4Image}
-          alt="Depoimento de cliente"
-        />
-      </div>
+            <div className="ndx-social-proof-item">
+              <img
+                src={prova4Image}
+                alt="Depoimento de cliente"
+              />
+            </div>
 
-    </div>
+          </div>
 
-    <div className="ndx-social-proof-cta">
+          <div className="ndx-social-proof-cta">
 
-      <button
-        className="ndx-cta ndx-cta-primary"
-        onClick={openCheckout}
-      >
-        Quero viver essa experiência
-        <span>↗</span>
-      </button>
+            <button
+              className="ndx-cta ndx-cta-primary"
+              onClick={openCheckout}
+            >
+              Quero viver essa experiência
+              <span>↗</span>
+            </button>
 
-    </div>
+          </div>
 
-  </div>
+        </div>
 
-</section>
+      </section>
 
 
       {/* =====================================================
