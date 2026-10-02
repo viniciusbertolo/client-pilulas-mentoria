@@ -1262,8 +1262,7 @@ export default function LandingPageEventos() {
               "Entrega métodos validados que convertem
               conhecimento técnico em comportamento do
               consumidor e alto desempenho corporativo,
-              voltados diretamente para profissionais do
-              agronegócio."
+              direcionado para profissionais e empresas"
             </blockquote>
 
             {/* <button
