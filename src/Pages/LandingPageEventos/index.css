@@ -3202,7 +3202,6 @@ button {
 
 
 
-
 /* =========================================================
    LOGO NDX — ALINHAMENTO EXATO DA REFERÊNCIA
 ========================================================= */
@@ -3234,15 +3233,11 @@ button {
 .ndx-logo-small {
   width: 100%;
 
-  margin: 0 20px 8px;
+  margin: 0 10px 8px;
 
   color: var(--ndx-blue);
 
-  font-size: clamp(
-    38px,
-    4vw,
-    62px
-  );
+  font-size: 50px;
 
   line-height: 0.9;
 
@@ -3272,11 +3267,7 @@ button {
 
   color: var(--ndx-blue);
 
-  font-size: clamp(
-    145px,
-    21vw,
-    320px
-  );
+  font-size: 200px;
 
   line-height: 0.72;
 
@@ -3303,17 +3294,13 @@ button {
   width: 100%;
 
   margin-top: 22px;
-  margin-left: 60px;
+  margin-left: 40px;
 
   padding: 0;
 
   color: #fff;
 
-  font-size: clamp(
-    30px,
-    4.2vw,
-    64px
-  );
+  font-size: 50px;
 
   line-height: 0.95;
 
@@ -3334,7 +3321,7 @@ button {
 .ndx-hero-top {
   position: relative;
 
-  min-height: 490px;
+  min-height: 190px;
 
   display: flex;
 
@@ -3343,7 +3330,7 @@ button {
   align-items: flex-start;
 
   padding:
-    42px 0 45px;
+    24px 0 24px;
 
   overflow: hidden;
 
@@ -3424,6 +3411,8 @@ button {
     min-height:
       255px;
 
+      min-height: 50px;
+
     padding:
       25px 0 30px;
   }
@@ -3434,6 +3423,8 @@ button {
 
     margin-bottom:
       6px;
+
+      margin-left: 5px;
   }
 
   .ndx-logo-main {
@@ -3447,6 +3438,8 @@ button {
   .ndx-logo-sub {
     margin-top:
       14px;
+
+      margin-left: 15px;
 
     font-size:
       22px;
