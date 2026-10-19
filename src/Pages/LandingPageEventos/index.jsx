@@ -371,7 +371,8 @@ export default function LandingPageEventos() {
       <span>INVESTIMENTO EM VOCÊ</span>
 
       <h2>
-        Uma grande imersão. Um investimento acessível em São Carlos.
+        Uma grande imersão. <br></br>
+        Um presente para São Carlos e região.
       </h2>
 
       <p>
@@ -467,7 +468,7 @@ export default function LandingPageEventos() {
 
         <div>
           <span>QUINTA-FEIRA</span>
-          <strong>20h30 às 22h30</strong>
+          <strong>18h30 às 22h30</strong>
         </div>
       </article>
 
@@ -857,7 +858,7 @@ export default function LandingPageEventos() {
       </div>
 
       <div className="ndx-investment-mini-schedule">
-        <span>Quinta-feira: 20h30 às 22h30</span>
+        <span>Quinta-feira: 18h30 às 22h30</span>
         <span>Sábado: 8h30 às 17h</span>
       </div>
     </div>
@@ -1177,7 +1178,7 @@ export default function LandingPageEventos() {
       </div>
 
       <div className="ndx-investment-mini-schedule">
-        <span>Quinta-feira: 20h30 às 22h30</span>
+        <span>Quinta-feira: 18h30 às 22h30</span>
         <span>Sábado: 8h30 às 17h</span>
       </div>
     </div>
